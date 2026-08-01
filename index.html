@@ -20,92 +20,8 @@
       box-sizing: border-box;
     }
 
-    /* ===== GOLD CUSTOM CURSOR ===== */
-    * {
-      cursor: none !important;
-    }
-
-    .custom-cursor {
-      position: fixed;
-      pointer-events: none;
-      z-index: 99999;
-      mix-blend-mode: normal;
-    }
-
-    .cursor-dot {
-      width: 10px;
-      height: 10px;
-      background: radial-gradient(circle, #ffbb33, #ff7a00);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 99999;
-      box-shadow: 0 0 30px rgba(255, 122, 0, 0.6), 0 0 60px rgba(255, 122, 0, 0.3), 0 0 100px rgba(255, 122, 0, 0.1);
-      transition: transform 0.08s ease, width 0.3s ease, height 0.3s ease;
-      transform: translate(-50%, -50%);
-    }
-
-    .cursor-ring {
-      width: 50px;
-      height: 50px;
-      border: 2px solid rgba(255, 187, 51, 0.6);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 99998;
-      box-shadow: 0 0 40px rgba(255, 187, 51, 0.2), inset 0 0 40px rgba(255, 187, 51, 0.05);
-      transition: transform 0.15s ease, width 0.4s ease, height 0.4s ease, border-color 0.3s ease;
-      transform: translate(-50%, -50%);
-      animation: ringPulse 2s ease-in-out infinite;
-    }
-
-    .cursor-ring.hover {
-      width: 70px;
-      height: 70px;
-      border-color: #ffbb33;
-      box-shadow: 0 0 60px rgba(255, 187, 51, 0.4), inset 0 0 60px rgba(255, 187, 51, 0.1);
-    }
-
-    .cursor-ring.click {
-      width: 30px;
-      height: 30px;
-      border-color: #ff7a00;
-      box-shadow: 0 0 80px rgba(255, 122, 0, 0.6);
-    }
-
-    @keyframes ringPulse {
-      0%,
-      100% {
-        border-color: rgba(255, 187, 51, 0.4);
-      }
-      50% {
-        border-color: rgba(255, 187, 51, 0.8);
-      }
-    }
-
-    .cursor-trail {
-      position: fixed;
-      pointer-events: none;
-      z-index: 99997;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #ffbb33, #ff7a00);
-      opacity: 0.6;
-      transform: translate(-50%, -50%);
-      animation: trailFade 0.8s ease forwards;
-    }
-
-    @keyframes trailFade {
-      0% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.1);
-      }
-    }
+    /* ===== STANDARD MOUSE CURSOR RESTORED ===== */
+    /* Custom golden cursor has been completely removed */
 
     /* ===== BODY ===== */
     body {
@@ -115,6 +31,7 @@
       overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
+      cursor: auto; /* Ensures standard white arrow */
     }
 
     /* ===== 3D BACKGROUND CANVAS ===== */
@@ -182,7 +99,7 @@
       transition: width 0.1s ease;
     }
 
-    /* ===== SCROLL INDICATOR - RIGHT SIDE - ULTRA VISIBLE ===== */
+    /* ===== SCROLL INDICATOR - RIGHT SIDE - BOLDER & COLORFUL ===== */
     .scroll-indicator-right {
       position: fixed;
       right: 24px;
@@ -192,68 +109,114 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
-      opacity: 0.9;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      animation: indicatorPulse 2.5s ease-in-out infinite;
+      gap: 10px;
+      opacity: 1;
+      transition: all 0.3s ease;
     }
 
     .scroll-indicator-right .line {
-      width: 3px;
-      height: 80px;
-      background: linear-gradient(180deg, #ff7a00, #ffbb33, transparent);
+      width: 4px;
+      height: 100px;
+      background: linear-gradient(180deg, #ff7a00, #ffbb33, #ff6b6b, #ffd93d, #6bcb77, #4d96ff);
       border-radius: 4px;
-      animation: scrollLineAnim 2s ease-in-out infinite;
-      box-shadow: 0 0 15px rgba(255, 122, 0, 0.3);
+      animation: scrollLineAnim 1.8s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(255, 122, 0, 0.5), 0 0 60px rgba(255, 122, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-indicator-right .line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shimmerLine 1.5s ease-in-out infinite;
+    }
+
+    @keyframes shimmerLine {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
     }
 
     .scroll-indicator-right .dot {
-      width: 12px;
-      height: 12px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: radial-gradient(circle, #ffbb33, #ff7a00);
-      animation: scrollDotAnim 2s ease-in-out infinite;
-      box-shadow: 0 0 25px rgba(255, 122, 0, 0.5);
-      border: 2px solid rgba(255, 255, 255, 0.2);
+      animation: scrollDotAnim 1.8s ease-in-out infinite;
+      box-shadow: 0 0 30px rgba(255, 122, 0, 0.7), 0 0 60px rgba(255, 122, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
     }
 
     .scroll-indicator-right .label {
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.8);
       writing-mode: vertical-rl;
-      letter-spacing: 4px;
+      letter-spacing: 6px;
       text-transform: uppercase;
-      font-weight: 600;
-      text-shadow: 0 0 20px rgba(255, 122, 0, 0.2);
+      font-weight: 800;
+      text-shadow: 0 0 30px rgba(255, 122, 0, 0.3), 0 0 60px rgba(255, 122, 0, 0.1);
+      background: linear-gradient(180deg, #ff7a00, #ffbb33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 4px 0;
     }
 
     .scroll-indicator-right .mouse-icon {
-      width: 20px;
-      height: 32px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
+      width: 24px;
+      height: 38px;
+      border: 2.5px solid rgba(255, 255, 255, 0.4);
+      border-radius: 14px;
       position: relative;
       animation: mouseBounce 2s ease-in-out infinite;
-      box-shadow: 0 0 20px rgba(255, 122, 0, 0.1);
+      box-shadow: 0 0 30px rgba(255, 122, 0, 0.2);
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .scroll-indicator-right .mouse-icon .wheel {
-      width: 4px;
-      height: 8px;
-      background: linear-gradient(180deg, #ff7a00, #ffbb33);
+      width: 5px;
+      height: 10px;
+      background: linear-gradient(180deg, #ff7a00, #ffbb33, #ff6b6b);
       border-radius: 4px;
       position: absolute;
       top: 6px;
       left: 50%;
       transform: translateX(-50%);
       animation: wheelScroll 1.5s ease-in-out infinite;
+      box-shadow: 0 0 15px rgba(255, 122, 0, 0.4);
     }
 
+    /* SCROLL PROGRESS FILL - SIDE */
+    .scroll-indicator-right .scroll-progress-fill {
+      width: 4px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-indicator-right .scroll-progress-fill .fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, #ff7a00, #ffbb33, #ff6b6b, #ffd93d);
+      border-radius: 4px;
+      transition: height 0.1s ease;
+      box-shadow: 0 0 25px rgba(255, 122, 0, 0.4);
+    }
+
+    /* ANIMATIONS - ENHANCED */
     @keyframes scrollLineAnim {
-      0%,
-      100% {
-        transform: scaleY(0.3);
-        opacity: 0.3;
+      0%, 100% {
+        transform: scaleY(0.4);
+        opacity: 0.4;
       }
       50% {
         transform: scaleY(1);
@@ -262,53 +225,53 @@
     }
 
     @keyframes scrollDotAnim {
-      0%,
-      100% {
-        transform: translateY(-15px);
-        opacity: 0.3;
+      0%, 100% {
+        transform: translateY(-20px);
+        opacity: 0.2;
+        box-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
       }
       50% {
-        transform: translateY(15px);
+        transform: translateY(20px);
         opacity: 1;
-      }
-    }
-
-    @keyframes indicatorPulse {
-      0%,
-      100% {
-        opacity: 0.7;
-      }
-      50% {
-        opacity: 1;
+        box-shadow: 0 0 50px rgba(255, 122, 0, 0.8), 0 0 80px rgba(255, 122, 0, 0.4);
       }
     }
 
     @keyframes mouseBounce {
-      0%,
-      100% {
+      0%, 100% {
         transform: translateY(0);
       }
       50% {
-        transform: translateY(5px);
+        transform: translateY(8px);
       }
     }
 
     @keyframes wheelScroll {
-      0%,
-      100% {
+      0%, 100% {
         transform: translateX(-50%) translateY(0);
         opacity: 0.3;
+        height: 8px;
       }
       50% {
-        transform: translateX(-50%) translateY(6px);
+        transform: translateX(-50%) translateY(10px);
         opacity: 1;
+        height: 14px;
       }
     }
 
     .scroll-indicator-right:hover {
       opacity: 1 !important;
-      transform: translateY(-50%) scale(1.1);
-      transition: all 0.3s ease;
+      transform: translateY(-50%) scale(1.15);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .scroll-indicator-right:hover .dot {
+      box-shadow: 0 0 50px rgba(255, 122, 0, 0.9), 0 0 100px rgba(255, 122, 0, 0.5);
+      transform: scale(1.2);
+    }
+
+    .scroll-indicator-right:hover .line {
+      box-shadow: 0 0 40px rgba(255, 122, 0, 0.7), 0 0 80px rgba(255, 122, 0, 0.3);
     }
 
     /* ===== 3D FLIP CARDS ===== */
@@ -1448,18 +1411,21 @@
         right: 16px;
       }
       .scroll-indicator-right .line {
-        height: 60px;
+        height: 80px;
+      }
+      .scroll-indicator-right .scroll-progress-fill {
+        height: 80px;
       }
       .scroll-indicator-right .dot {
-        width: 10px;
-        height: 10px;
+        width: 14px;
+        height: 14px;
       }
       .scroll-indicator-right .label {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
       }
       .scroll-indicator-right .mouse-icon {
-        width: 18px;
-        height: 28px;
+        width: 20px;
+        height: 32px;
       }
     }
 
@@ -1625,25 +1591,29 @@
         gap: 8px;
       }
       .scroll-indicator-right .line {
-        height: 45px;
-        width: 2px;
+        height: 60px;
+        width: 3px;
+      }
+      .scroll-indicator-right .scroll-progress-fill {
+        height: 60px;
+        width: 3px;
       }
       .scroll-indicator-right .dot {
-        width: 8px;
-        height: 8px;
+        width: 12px;
+        height: 12px;
       }
       .scroll-indicator-right .label {
-        font-size: 0.5rem;
-        letter-spacing: 2px;
+        font-size: 0.6rem;
+        letter-spacing: 4px;
       }
       .scroll-indicator-right .mouse-icon {
-        width: 16px;
-        height: 24px;
-        border-width: 1.5px;
+        width: 18px;
+        height: 28px;
+        border-width: 2px;
       }
       .scroll-indicator-right .mouse-icon .wheel {
-        width: 3px;
-        height: 6px;
+        width: 4px;
+        height: 8px;
       }
     }
 
@@ -1696,25 +1666,29 @@
         gap: 6px;
       }
       .scroll-indicator-right .line {
-        height: 30px;
-        width: 2px;
+        height: 40px;
+        width: 3px;
+      }
+      .scroll-indicator-right .scroll-progress-fill {
+        height: 40px;
+        width: 3px;
       }
       .scroll-indicator-right .dot {
-        width: 6px;
-        height: 6px;
+        width: 10px;
+        height: 10px;
       }
       .scroll-indicator-right .label {
-        font-size: 0.4rem;
-        letter-spacing: 1px;
+        font-size: 0.5rem;
+        letter-spacing: 2px;
       }
       .scroll-indicator-right .mouse-icon {
-        width: 14px;
-        height: 20px;
-        border-width: 1px;
+        width: 16px;
+        height: 24px;
+        border-width: 1.5px;
       }
       .scroll-indicator-right .mouse-icon .wheel {
-        width: 2px;
-        height: 4px;
+        width: 3px;
+        height: 6px;
         top: 4px;
       }
     }
@@ -1722,16 +1696,32 @@
     html {
       scroll-behavior: smooth;
     }
+
+    /* ============================================================
+       FIX: MAKE THE SCROLL INDICATOR MOUSE ICON PURE GOLD
+    ============================================================ */
+    
+    /* 1. Make the outer border of the mouse icon Golden */
+    .scroll-indicator-right .mouse-icon {
+        border-color: #D4AF37 !important; /* Gold color */
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.3) !important; /* Adds a subtle gold glow */
+    }
+
+    /* 2. Make the scrolling wheel inside the mouse Golden */
+    .scroll-indicator-right .mouse-icon .wheel {
+        background: #D4AF37 !important; /* Gold color */
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.5) !important;
+    }
+
+    /* 3. Keep the Dot Golden (Already is, but ensuring it matches perfectly) */
+    .scroll-indicator-right .dot {
+        background: radial-gradient(circle, #ffbb33, #D4AF37) !important;
+        border-color: #D4AF37 !important;
+    }
   </style>
 </head>
 
 <body>
-
-  <!-- ===== GOLD CUSTOM CURSOR ===== -->
-  <div class="custom-cursor">
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-  </div>
 
   <!-- ===== 3D BACKGROUND CANVAS ===== -->
   <canvas id="bg-canvas"></canvas>
@@ -1742,7 +1732,9 @@
       <div class="wheel"></div>
     </div>
     <div class="dot"></div>
-    <div class="line"></div>
+    <div class="scroll-progress-fill">
+      <div class="fill" id="scrollFill"></div>
+    </div>
     <span class="label">SCROLL</span>
   </div>
 
@@ -2277,93 +2269,8 @@
   ============================================================ -->
   <script>
     // ============================================================
-    //   GOLD CUSTOM CURSOR
+    //   GOLD CUSTOM CURSOR - REMOVED (Standard mouse restored)
     // ============================================================
-    (function goldCursor() {
-      var dot = document.getElementById('cursorDot');
-      var ring = document.getElementById('cursorRing');
-      if (!dot || !ring) return;
-
-      var mouseX = 0,
-        mouseY = 0;
-      var ringX = 0,
-        ringY = 0;
-
-      document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        dot.style.left = mouseX + 'px';
-        dot.style.top = mouseY + 'px';
-        createTrail(mouseX, mouseY);
-      });
-
-      function animateRing() {
-        ringX += (mouseX - ringX) * 0.12;
-        ringY += (mouseY - ringY) * 0.12;
-        ring.style.left = ringX + 'px';
-        ring.style.top = ringY + 'px';
-        requestAnimationFrame(animateRing);
-      }
-      animateRing();
-
-      var interactives = document.querySelectorAll('a, button, .btn, .nav-link, .flip-card, .project-card, .skill, .quick-link, .tilt-card, .experience-card, .education-card, .internship-card');
-      interactives.forEach(function(el) {
-        el.addEventListener('mouseenter', function() {
-          ring.classList.add('hover');
-          dot.style.width = '14px';
-          dot.style.height = '14px';
-        });
-        el.addEventListener('mouseleave', function() {
-          ring.classList.remove('hover');
-          dot.style.width = '10px';
-          dot.style.height = '10px';
-        });
-        el.addEventListener('mousedown', function() {
-          ring.classList.add('click');
-          dot.style.width = '6px';
-          dot.style.height = '6px';
-        });
-        el.addEventListener('mouseup', function() {
-          ring.classList.remove('click');
-          dot.style.width = '14px';
-          dot.style.height = '14px';
-          setTimeout(function() {
-            dot.style.width = '10px';
-            dot.style.height = '10px';
-          }, 200);
-        });
-      });
-
-      if ('ontouchstart' in window) {
-        dot.style.display = 'none';
-        ring.style.display = 'none';
-      }
-
-      function createTrail(x, y) {
-        var trail = document.createElement('div');
-        trail.className = 'cursor-trail';
-        trail.style.left = x + 'px';
-        trail.style.top = y + 'px';
-        trail.style.width = (2 + Math.random() * 4) + 'px';
-        trail.style.height = trail.style.width;
-        document.body.appendChild(trail);
-        setTimeout(function() {
-          trail.remove();
-        }, 800);
-      }
-
-      var trailThrottle = false;
-      var originalCreateTrail = createTrail;
-      createTrail = function(x, y) {
-        if (!trailThrottle) {
-          trailThrottle = true;
-          originalCreateTrail(x, y);
-          setTimeout(function() {
-            trailThrottle = false;
-          }, 30);
-        }
-      };
-    })();
 
     // ============================================================
     //   3D BACKGROUND - PARTICLES + SHAPES
@@ -3023,7 +2930,7 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // ============================================================
-    //   SCROLL PROGRESS
+    //   SCROLL PROGRESS - TOP BAR
     // ============================================================
     window.addEventListener('scroll', function() {
       var bar = document.getElementById('scrollProgressBar');
@@ -3035,6 +2942,27 @@
     }, {
       passive: true
     });
+
+    // ============================================================
+    //   SCROLL PROGRESS - SIDE INDICATOR
+    // ============================================================
+    (function() {
+      var fill = document.getElementById('scrollFill');
+      if (!fill) return;
+      
+      window.addEventListener('scroll', function() {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = (scrollTop / docHeight) * 100;
+        fill.style.height = progress + '%';
+        
+        if (progress > 0 && progress < 100) {
+          fill.style.boxShadow = '0 0 30px rgba(255, 122, 0, 0.6), 0 0 60px rgba(255, 122, 0, 0.3)';
+        } else {
+          fill.style.boxShadow = '0 0 25px rgba(255, 122, 0, 0.4)';
+        }
+      }, { passive: true });
+    })();
 
     // ============================================================
     //   HEADER SCROLL
@@ -3192,7 +3120,7 @@
       scrollToSection('contact');
     });
 
-    console.log('🚀 Ultimate 3D Portfolio with Gold Cursor Loaded!');
+    console.log('🚀 Ultimate 3D Portfolio with Standard Mouse and Golden Scroll Indicator!');
   </script>
 
 </body>
