@@ -15,7 +15,22 @@
   
   <!-- Defer non-critical scripts -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script defer src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  
+  <!-- Load EmailJS - NO DEFER, load it properly -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  
+  <!-- Initialize EmailJS immediately -->
+  <script>
+    // Initialize EmailJS with your Public Key
+    (function() {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init("5muRzVJinIh6V4qiL");
+        console.log("✅ EmailJS initialized successfully!");
+      } else {
+        console.error("❌ EmailJS library not loaded!");
+      }
+    })();
+  </script>
 
   <style>
     /* ============================================================
@@ -176,25 +191,25 @@
     .scroll-indicator-right .mouse-icon {
       width: 24px;
       height: 38px;
-      border: 2.5px solid rgba(255, 255, 255, 0.4);
+      border: 2.5px solid #D4AF37 !important;
       border-radius: 14px;
       position: relative;
       animation: mouseBounce 2s ease-in-out infinite;
-      box-shadow: 0 0 30px rgba(255, 122, 0, 0.2);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.3) !important;
       background: rgba(255, 255, 255, 0.03);
     }
 
     .scroll-indicator-right .mouse-icon .wheel {
       width: 5px;
       height: 10px;
-      background: linear-gradient(180deg, #ff7a00, #ffbb33, #ff6b6b);
+      background: #D4AF37 !important;
       border-radius: 4px;
       position: absolute;
       top: 6px;
       left: 50%;
       transform: translateX(-50%);
       animation: wheelScroll 1.5s ease-in-out infinite;
-      box-shadow: 0 0 15px rgba(255, 122, 0, 0.4);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.5) !important;
     }
 
     /* SCROLL PROGRESS FILL - SIDE */
@@ -699,8 +714,8 @@
       transition: all 0.3s ease;
     }
     .profile-image-wrap {
-      width: 130px;  /* ✅ INCREASED from 70px to 130px */
-      height: 130px; /* ✅ INCREASED from 70px to 130px */
+      width: 130px;
+      height: 130px;
       border-radius: 14px;
       overflow: hidden;
       flex-shrink: 0;
@@ -717,7 +732,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem; /* Increased to match bigger size */
+      font-size: 3rem;
       color: rgba(255, 255, 255, 0.3);
     }
     .profile-name {
@@ -1480,7 +1495,6 @@
         max-width: 100%;
       }
 
-      /* ✅ FIX: Mobile buttons in ONE LINE */
       .hero-cta {
         flex-wrap: nowrap;
         gap: 6px;
@@ -1524,8 +1538,8 @@
         padding: 16px;
       }
       .profile-image-wrap {
-        width: 140px;  /* ✅ INCREASED from 100px to 140px on mobile */
-        height: 140px; /* ✅ INCREASED from 100px to 140px on mobile */
+        width: 140px;
+        height: 140px;
       }
 
       .section {
@@ -1679,7 +1693,6 @@
         padding: 6px 12px;
       }
 
-      /* Even tighter for very small screens */
       .hero-cta {
         gap: 4px;
       }
@@ -1724,34 +1737,12 @@
     html {
       scroll-behavior: smooth;
     }
-
-    /* ============================================================
-       FIX: MAKE THE SCROLL INDICATOR MOUSE ICON PURE GOLD
-    ============================================================ */
-    
-    /* 1. Make the outer border of the mouse icon Golden */
-    .scroll-indicator-right .mouse-icon {
-        border-color: #D4AF37 !important; /* Gold color */
-        box-shadow: 0 0 20px rgba(212, 175, 55, 0.3) !important; /* Adds a subtle gold glow */
-    }
-
-    /* 2. Make the scrolling wheel inside the mouse Golden */
-    .scroll-indicator-right .mouse-icon .wheel {
-        background: #D4AF37 !important; /* Gold color */
-        box-shadow: 0 0 10px rgba(212, 175, 55, 0.5) !important;
-    }
-
-    /* 3. Keep the Dot Golden (Already is, but ensuring it matches perfectly) */
-    .scroll-indicator-right .dot {
-        background: radial-gradient(circle, #ffbb33, #D4AF37) !important;
-        border-color: #D4AF37 !important;
-    }
   </style>
 </head>
 
 <body>
 
-  <!-- ===== LOADING SCREEN (MOVED TO THE VERY TOP) ===== -->
+  <!-- ===== LOADING SCREEN ===== -->
   <div id="loading-screen">
     <div class="spinner"></div>
     <p>Loading Portfolio...</p>
@@ -2319,8 +2310,68 @@
     })();
 
     // ============================================================
-    //   GOLD CUSTOM CURSOR - REMOVED (Standard mouse restored)
+    //   CONTACT FORM - FIXED VERSION
     // ============================================================
+    // Service and Template IDs
+    const SERVICE_ID = "service_3n7lhrd";
+    const TEMPLATE_ID = "template_0f74wlr";
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const status = document.getElementById('formStatus');
+      if (!status) return;
+      
+      // Show sending status
+      status.textContent = "Sending message...";
+      status.style.color = "#ff7a00";
+      
+      // Get form data
+      const formData = new FormData(form);
+      const data = {
+        first_name: formData.get('first_name'),
+        last_name: formData.get('last_name'),
+        email: formData.get('email'),
+        subject: formData.get('subject'),
+        message: formData.get('message'),
+      };
+      
+      // Check if EmailJS is available
+      if (typeof emailjs === 'undefined') {
+        status.textContent = "❌ Email service not available. Please try again later.";
+        status.style.color = "#ef4444";
+        console.error("EmailJS is not loaded!");
+        return;
+      }
+      
+      // Send using EmailJS
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, data)
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+          status.textContent = "✅ Message sent successfully!";
+          status.style.color = "#22c55e";
+          form.reset(); // Clear the form
+          
+          // Clear status after 5 seconds
+          setTimeout(function() {
+            status.textContent = "";
+          }, 5000);
+        })
+        .catch(function(error) {
+          console.error('FAILED...', error);
+          status.textContent = "❌ Failed to send. Error: " + (error.text || "Please try again.");
+          status.style.color = "#ef4444";
+          
+          // Clear status after 5 seconds
+          setTimeout(function() {
+            status.textContent = "";
+          }, 5000);
+        });
+    }
+
+    // Make the function globally accessible
+    window.handleFormSubmit = handleFormSubmit;
 
     // ============================================================
     //   3D BACKGROUND - PARTICLES + SHAPES
@@ -3125,34 +3176,6 @@
     })();
 
     // ============================================================
-    //   CONTACT FORM
-    // ============================================================
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      var status = document.getElementById('formStatus');
-      if (!status) return;
-      status.textContent = "Sending...";
-      status.style.color = "#ff7a00";
-      emailjs.sendForm("service_3n7lhrd", "template_0f74wlr", e.target)
-        .then(function() {
-          status.textContent = "✅ Message sent successfully!";
-          status.style.color = "#22c55e";
-          e.target.reset();
-          setTimeout(function() {
-            status.textContent = "";
-          }, 5000);
-        })
-        .catch(function() {
-          status.textContent = "❌ Failed to send. Try again.";
-          status.style.color = "#ef4444";
-          setTimeout(function() {
-            status.textContent = "";
-          }, 5000);
-        });
-    }
-    window.handleFormSubmit = handleFormSubmit;
-
-    // ============================================================
     //   FLOATING HIRE ME
     // ============================================================
     document.querySelector('.floating-hireme').addEventListener('click', function(e) {
@@ -3160,7 +3183,7 @@
       scrollToSection('contact');
     });
 
-    console.log('🚀 Ultimate 3D Portfolio with Standard Mouse and Golden Scroll Indicator!');
+    console.log('🚀 Ultimate 3D Portfolio with EmailJS and Golden Scroll Indicator!');
   </script>
 
 </body>
