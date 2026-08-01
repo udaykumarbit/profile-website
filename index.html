@@ -4,11 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>UdayKumar Borale | Mechanical Design Engineer | R&D Engineer | Portfolio</title>
+
+  <!-- Preconnect to critical third-party origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  
+  <!-- Defer non-critical scripts -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
   <style>
     /* ============================================================
@@ -62,7 +69,7 @@
       justify-content: center;
       flex-direction: column;
       gap: 20px;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.6s ease;
     }
     #loading-screen.hidden {
       opacity: 0;
@@ -692,8 +699,8 @@
       transition: all 0.3s ease;
     }
     .profile-image-wrap {
-      width: 70px;
-      height: 70px;
+      width: 130px;  /* ✅ INCREASED from 70px to 130px */
+      height: 130px; /* ✅ INCREASED from 70px to 130px */
       border-radius: 14px;
       overflow: hidden;
       flex-shrink: 0;
@@ -710,7 +717,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
+      font-size: 3rem; /* Increased to match bigger size */
       color: rgba(255, 255, 255, 0.3);
     }
     .profile-name {
@@ -1506,8 +1513,8 @@
         padding: 16px;
       }
       .profile-image-wrap {
-        width: 100px;
-        height: 100px;
+        width: 140px;  /* ✅ INCREASED from 100px to 140px on mobile */
+        height: 140px; /* ✅ INCREASED from 100px to 140px on mobile */
       }
 
       .section {
@@ -1723,6 +1730,12 @@
 
 <body>
 
+  <!-- ===== LOADING SCREEN (MOVED TO THE VERY TOP) ===== -->
+  <div id="loading-screen">
+    <div class="spinner"></div>
+    <p>Loading Portfolio...</p>
+  </div>
+
   <!-- ===== 3D BACKGROUND CANVAS ===== -->
   <canvas id="bg-canvas"></canvas>
 
@@ -1740,12 +1753,6 @@
 
   <!-- ===== CONTENT ===== -->
   <div class="content">
-
-    <!-- ===== LOADING SCREEN ===== -->
-    <div id="loading-screen">
-      <div class="spinner"></div>
-      <p>Loading Portfolio...</p>
-    </div>
 
     <!-- ===== SCROLL PROGRESS ===== -->
     <div class="scroll-progress">
@@ -2268,6 +2275,28 @@
   JAVASCRIPT
   ============================================================ -->
   <script>
+    // ============================================================
+    //   LOADING SCREEN - HIDE AS SOON AS THE PAGE IS READY
+    // ============================================================
+    (function() {
+      var loadingScreen = document.getElementById('loading-screen');
+      if (!loadingScreen) return;
+
+      // Hide on load (or after a maximum of 800ms)
+      function hideLoading() {
+        loadingScreen.classList.add('hidden');
+      }
+
+      // If the page is already loaded, hide immediately
+      if (document.readyState === 'complete') {
+        hideLoading();
+      } else {
+        window.addEventListener('load', hideLoading);
+        // Fallback: hide after 800ms even if load hasn't fired (e.g., slow assets)
+        setTimeout(hideLoading, 800);
+      }
+    })();
+
     // ============================================================
     //   GOLD CUSTOM CURSOR - REMOVED (Standard mouse restored)
     // ============================================================
@@ -2913,16 +2942,6 @@
         observer.observe(el);
       });
     })();
-
-    // ============================================================
-    //   LOADING SCREEN
-    // ============================================================
-    setTimeout(function() {
-      var load = document.getElementById('loading-screen');
-      if (load) {
-        load.classList.add('hidden');
-      }
-    }, 1500);
 
     // ============================================================
     //   YEAR
