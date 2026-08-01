@@ -16,16 +16,18 @@
   <!-- Defer non-critical scripts -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   
-  <!-- Load EmailJS - NO DEFER, load it properly -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <!-- Load EmailJS v4 - UPDATED VERSION -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
   
-  <!-- Initialize EmailJS immediately -->
+  <!-- Initialize EmailJS v4 -->
   <script>
-    // Initialize EmailJS with your Public Key
     (function() {
       if (typeof emailjs !== 'undefined') {
-        emailjs.init("5muRzVJinIh6V4qiL");
-        console.log("✅ EmailJS initialized successfully!");
+        emailjs.init({
+          publicKey: "5muRzVJinIh6V4qiL",
+        });
+        console.log("✅ EmailJS v4 initialized successfully!");
       } else {
         console.error("❌ EmailJS library not loaded!");
       }
@@ -2310,7 +2312,7 @@
     })();
 
     // ============================================================
-    //   CONTACT FORM - FIXED VERSION
+    //   CONTACT FORM - FIXED VERSION WITH EMAILJS v4
     // ============================================================
     // Service and Template IDs
     const SERVICE_ID = "service_3n7lhrd";
@@ -2345,7 +2347,7 @@
         return;
       }
       
-      // Send using EmailJS
+      // Send using EmailJS v4
       emailjs.send(SERVICE_ID, TEMPLATE_ID, data)
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
@@ -3183,7 +3185,7 @@
       scrollToSection('contact');
     });
 
-    console.log('🚀 Ultimate 3D Portfolio with EmailJS and Golden Scroll Indicator!');
+    console.log('🚀 Ultimate 3D Portfolio with EmailJS v4 and Golden Scroll Indicator!');
   </script>
 
 </body>
