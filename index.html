@@ -16,7 +16,7 @@
   <!-- Defer non-critical scripts -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   
-  <!-- Load EmailJS v4 - UPDATED VERSION -->
+  <!-- Load EmailJS v4 -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
   </script>
   
@@ -749,7 +749,7 @@
       color: #6b7280;
     }
 
-    /* ===== ABOUT HERO SECTION ===== */
+    /* ===== ABOUT HERO SECTION - UPDATED ===== */
     .about-hero-section {
       padding: 60px 16px;
       background: linear-gradient(135deg, #020314, #0a1a3a);
@@ -826,7 +826,7 @@
     /* ===== ROBOTIC DEBURRING STATION ===== */
     .robot-visual {
       position: relative;
-      height: 400px;
+      height: 450px;
       border-radius: 16px;
       overflow: hidden;
       background: linear-gradient(180deg, #02031a, #0a1a3a);
@@ -840,55 +840,57 @@
     }
     .robot-visual .robot-overlay {
       position: absolute;
-      bottom: 12px;
-      left: 12px;
-      right: 12px;
-      padding: 10px 14px;
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px);
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.06);
     }
     .robot-visual .robot-overlay .title {
-      font-size: 0.6rem;
+      font-size: 0.7rem;
       font-weight: 700;
       color: #ff7a00;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      margin-bottom: 2px;
     }
     .robot-visual .robot-overlay .sub {
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: 700;
       color: #fff;
       margin-top: 2px;
     }
     .robot-visual .robot-overlay .customer {
-      font-size: 0.6rem;
-      color: #6b7280;
-      margin-top: 2px;
+      font-size: 0.7rem;
+      color: #9ca3af;
+      margin-top: 4px;
     }
     .robot-visual .robot-overlay .status {
-      font-size: 0.6rem;
+      font-size: 0.7rem;
       color: #22c55e;
       display: flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 4px;
+      gap: 8px;
+      margin-top: 6px;
     }
     .robot-visual .robot-overlay .status .dot {
-      width: 6px;
-      height: 6px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: #22c55e;
       animation: blinkDot 1.5s ease-in-out infinite;
     }
     @keyframes blinkDot {
-      0%,
-      100% {
+      0%, 100% {
         opacity: 1;
+        transform: scale(1);
       }
       50% {
         opacity: 0.2;
+        transform: scale(0.8);
       }
     }
 
@@ -1426,7 +1428,7 @@
         gap: 30px;
       }
       .robot-visual {
-        height: 300px;
+        height: 350px;
       }
       .projects-grid {
         grid-template-columns: 1fr;
@@ -1531,7 +1533,7 @@
         gap: 16px;
       }
       .robot-visual {
-        height: 240px;
+        height: 300px;
       }
 
       .profile-card {
@@ -1649,6 +1651,19 @@
         width: 4px;
         height: 8px;
       }
+
+      .robot-visual .robot-overlay .sub {
+        font-size: 0.8rem;
+      }
+      .robot-visual .robot-overlay .title {
+        font-size: 0.6rem;
+      }
+      .robot-visual .robot-overlay .customer {
+        font-size: 0.6rem;
+      }
+      .robot-visual .robot-overlay .status {
+        font-size: 0.6rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1675,7 +1690,7 @@
         font-size: 1.4rem;
       }
       .robot-visual {
-        height: 200px;
+        height: 250px;
       }
       .flip-card {
         height: 220px;
@@ -1733,6 +1748,16 @@
         width: 3px;
         height: 6px;
         top: 4px;
+      }
+
+      .robot-visual .robot-overlay {
+        padding: 10px 14px;
+      }
+      .robot-visual .robot-overlay .sub {
+        font-size: 0.7rem;
+      }
+      .robot-visual .robot-overlay .title {
+        font-size: 0.5rem;
       }
     }
 
@@ -1852,22 +1877,22 @@
       </div>
     </section>
 
-    <!-- ===== ABOUT HERO ===== -->
+    <!-- ===== ABOUT HERO - EXACT MATCH TO YOUR IMAGE ===== -->
     <section id="about-hero" class="about-hero-section">
       <div class="about-hero-grid">
         <div class="about-hero-content">
-          <span class="badge">✦ About Me</span>
+          <span class="badge">✦ ABOUT ME</span>
           <h2>Who I Am &amp; <span>What I Do</span></h2>
           <p>
             I'm a passionate <strong>Mechanical Design and Simulation Engineer</strong> with expertise in
             <strong>powertrain engineering, BIW design, and advanced CAD/CAE</strong>. I transform complex
             engineering challenges into innovative, production-ready solutions.
           </p>
-          <p style="margin-top: 12px;">
+          <p style="margin-top: 14px;">
             My work spans <strong>concept development, detailed design, FEA validation, and manufacturing support</strong>
             — ensuring every product meets the highest standards of performance, safety, and efficiency.
           </p>
-          <div class="stats-row">
+          <div class="stats-row" style="margin-top: 24px;">
             <div class="stat-item">
               <div class="number">100+</div>
               <div class="label">CAD Models</div>
@@ -1886,8 +1911,8 @@
           <div class="robot-visual" id="robotVisual">
             <canvas id="robot-canvas"></canvas>
             <div class="robot-overlay">
-              <div class="title">🤖 Robotic Deburring Station</div>
-              <div class="sub">Cummins KV/QSK60 Cylinder Block</div>
+              <div class="title">🤖 ROBOTIC DEBURRING STATION</div>
+              <div class="sub"> KV12/kv16/QSK60 Cylinder Block</div>
               <div class="customer">Customer: Cummins India Ltd. — Chropynska India Pvt. Ltd.</div>
               <div class="status"><span class="dot"></span> Active • Deburring in Progress</div>
             </div>
@@ -2296,25 +2321,21 @@
       var loadingScreen = document.getElementById('loading-screen');
       if (!loadingScreen) return;
 
-      // Hide on load (or after a maximum of 800ms)
       function hideLoading() {
         loadingScreen.classList.add('hidden');
       }
 
-      // If the page is already loaded, hide immediately
       if (document.readyState === 'complete') {
         hideLoading();
       } else {
         window.addEventListener('load', hideLoading);
-        // Fallback: hide after 800ms even if load hasn't fired (e.g., slow assets)
         setTimeout(hideLoading, 800);
       }
     })();
 
     // ============================================================
-    //   CONTACT FORM - FIXED VERSION WITH EMAILJS v4
+    //   CONTACT FORM - WITH EMAILJS v4
     // ============================================================
-    // Service and Template IDs
     const SERVICE_ID = "service_3n7lhrd";
     const TEMPLATE_ID = "template_0f74wlr";
 
@@ -2325,11 +2346,9 @@
       const status = document.getElementById('formStatus');
       if (!status) return;
       
-      // Show sending status
       status.textContent = "Sending message...";
       status.style.color = "#ff7a00";
       
-      // Get form data
       const formData = new FormData(form);
       const data = {
         first_name: formData.get('first_name'),
@@ -2339,7 +2358,6 @@
         message: formData.get('message'),
       };
       
-      // Check if EmailJS is available
       if (typeof emailjs === 'undefined') {
         status.textContent = "❌ Email service not available. Please try again later.";
         status.style.color = "#ef4444";
@@ -2347,15 +2365,12 @@
         return;
       }
       
-      // Send using EmailJS v4
       emailjs.send(SERVICE_ID, TEMPLATE_ID, data)
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
           status.textContent = "✅ Message sent successfully!";
           status.style.color = "#22c55e";
-          form.reset(); // Clear the form
-          
-          // Clear status after 5 seconds
+          form.reset();
           setTimeout(function() {
             status.textContent = "";
           }, 5000);
@@ -2364,15 +2379,12 @@
           console.error('FAILED...', error);
           status.textContent = "❌ Failed to send. Error: " + (error.text || "Please try again.");
           status.style.color = "#ef4444";
-          
-          // Clear status after 5 seconds
           setTimeout(function() {
             status.textContent = "";
           }, 5000);
         });
     }
 
-    // Make the function globally accessible
     window.handleFormSubmit = handleFormSubmit;
 
     // ============================================================
