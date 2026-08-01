@@ -1,164 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>UdayKumar Borale | Mechanical Design Engineer | R&D Engineer | Portfolio</title>
-  <meta name="description" content="Experienced Mechanical Design and Simulation Engineer specializing in 3D modeling, simulation, and product development.">
-
-<!-- Favicon -->
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-
-
-
-<script type="application/ld+json">
-{
- "@context":"https://schema.org",
- "@type":"Person",
- "name":"Uday Kumar Borale",
- "url":"https://udaykumarborale.in",
- "jobTitle":"Mechanical Design Engineer",
- "worksFor":{
-   "@type":"Organization",
-   "name":"Chropynska India Private Ltd"
- },
- "sameAs":[
-   "https://www.linkedin.com/in/udaykumarborale"
- ]
-}
-</script>
-
   
-  
-<link rel="canonical" href="https://udaykumarborale.in/">
-<meta property="og:title" content="Uday Kumar Borale | Mechanical Design Engineer">
-<meta property="og:description" content="Mechanical Design Engineer, R&D Engineer and FEA Specialist.">
-<meta property="og:url" content="https://udaykumarborale.in/">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://udaykumarborale.in/image.jpg.png">
-
-
-
-
-
-
-  
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.156.0/build/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    // Initialize EmailJS
-    (function() {
-      emailjs.init("5muRzVJinIh6V4qiL");  // Public Key
-    })();
-  </script>
+
+  <style>
+    /* ============================================================
+       BASE RESET & GLOBAL STYLES
+    ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ===== GOLD CUSTOM CURSOR ===== */
+    * {
+      cursor: none !important;
+    }
+
+    .custom-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      mix-blend-mode: normal;
+    }
+
+    .cursor-dot {
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #ffbb33, #ff7a00);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      box-shadow: 0 0 30px rgba(255, 122, 0, 0.6), 0 0 60px rgba(255, 122, 0, 0.3), 0 0 100px rgba(255, 122, 0, 0.1);
+      transition: transform 0.08s ease, width 0.3s ease, height 0.3s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-ring {
+      width: 50px;
+      height: 50px;
+      border: 2px solid rgba(255, 187, 51, 0.6);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 99998;
+      box-shadow: 0 0 40px rgba(255, 187, 51, 0.2), inset 0 0 40px rgba(255, 187, 51, 0.05);
+      transition: transform 0.15s ease, width 0.4s ease, height 0.4s ease, border-color 0.3s ease;
+      transform: translate(-50%, -50%);
+      animation: ringPulse 2s ease-in-out infinite;
+    }
+
+    .cursor-ring.hover {
+      width: 70px;
+      height: 70px;
+      border-color: #ffbb33;
+      box-shadow: 0 0 60px rgba(255, 187, 51, 0.4), inset 0 0 60px rgba(255, 187, 51, 0.1);
+    }
+
+    .cursor-ring.click {
+      width: 30px;
+      height: 30px;
+      border-color: #ff7a00;
+      box-shadow: 0 0 80px rgba(255, 122, 0, 0.6);
+    }
+
+    @keyframes ringPulse {
+      0%,
+      100% {
+        border-color: rgba(255, 187, 51, 0.4);
+      }
+      50% {
+        border-color: rgba(255, 187, 51, 0.8);
+      }
+    }
+
+    .cursor-trail {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99997;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffbb33, #ff7a00);
+      opacity: 0.6;
+      transform: translate(-50%, -50%);
+      animation: trailFade 0.8s ease forwards;
+    }
+
+    @keyframes trailFade {
+      0% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.1);
+      }
+    }
+
+    /* ===== BODY ===== */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #020314;
+      color: #fff;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    /* ===== 3D BACKGROUND CANVAS ===== */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      touch-action: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== LOADING SCREEN ===== */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #020314;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      transition: opacity 0.8s ease;
+    }
+    #loading-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.05);
+      border-top-color: #ff7a00;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ===== SCROLL PROGRESS ===== */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .scroll-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff7a00, #ffbb33, #f5b301);
+      transition: width 0.1s ease;
+    }
+
+    /* ===== SCROLL INDICATOR - RIGHT SIDE - ULTRA VISIBLE ===== */
+    .scroll-indicator-right {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      opacity: 0.9;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      animation: indicatorPulse 2.5s ease-in-out infinite;
+    }
+
+    .scroll-indicator-right .line {
+      width: 3px;
+      height: 80px;
+      background: linear-gradient(180deg, #ff7a00, #ffbb33, transparent);
+      border-radius: 4px;
+      animation: scrollLineAnim 2s ease-in-out infinite;
+      box-shadow: 0 0 15px rgba(255, 122, 0, 0.3);
+    }
+
+    .scroll-indicator-right .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffbb33, #ff7a00);
+      animation: scrollDotAnim 2s ease-in-out infinite;
+      box-shadow: 0 0 25px rgba(255, 122, 0, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .scroll-indicator-right .label {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.6);
+      writing-mode: vertical-rl;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      text-shadow: 0 0 20px rgba(255, 122, 0, 0.2);
+    }
+
+    .scroll-indicator-right .mouse-icon {
+      width: 20px;
+      height: 32px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      position: relative;
+      animation: mouseBounce 2s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(255, 122, 0, 0.1);
+    }
+
+    .scroll-indicator-right .mouse-icon .wheel {
+      width: 4px;
+      height: 8px;
+      background: linear-gradient(180deg, #ff7a00, #ffbb33);
+      border-radius: 4px;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: wheelScroll 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollLineAnim {
+      0%,
+      100% {
+        transform: scaleY(0.3);
+        opacity: 0.3;
+      }
+      50% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes scrollDotAnim {
+      0%,
+      100% {
+        transform: translateY(-15px);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateY(15px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes indicatorPulse {
+      0%,
+      100% {
+        opacity: 0.7;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes mouseBounce {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(5px);
+      }
+    }
+
+    @keyframes wheelScroll {
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateX(-50%) translateY(6px);
+        opacity: 1;
+      }
+    }
+
+    .scroll-indicator-right:hover {
+      opacity: 1 !important;
+      transform: translateY(-50%) scale(1.1);
+      transition: all 0.3s ease;
+    }
+
+    /* ===== 3D FLIP CARDS ===== */
+    .flip-card {
+      perspective: 1000px;
+      height: 280px;
+      cursor: pointer;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .flip-card-front {
+      background: #f8fafc;
+      color: #0b1220;
+      border: 1px solid rgba(10, 24, 40, 0.04);
+    }
+    .flip-card-front .card-icon {
+      font-size: 2.8rem;
+      color: #ff7a00;
+      margin-bottom: 12px;
+    }
+    .flip-card-front .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .flip-card-front .card-hint {
+      font-size: 0.7rem;
+      color: #6b7280;
+      margin-top: 8px;
+      animation: pulseHint 2s ease-in-out infinite;
+    }
+    .flip-card-back {
+      background: linear-gradient(135deg, #ff7a00, #ffbb33);
+      color: #fff;
+      transform: rotateY(180deg);
+    }
+    .flip-card-back .back-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+    .flip-card-back p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 90%;
+    }
+    .flip-card-back .back-hint {
+      font-size: 0.65rem;
+      opacity: 0.7;
+      margin-top: 12px;
+      animation: pulseHint 2s ease-in-out infinite;
+    }
+    @keyframes pulseHint {
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 80;
+      padding: 12px 16px;
+      background: rgba(2, 3, 10, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+    .site-header.scrolled {
+      background: rgba(2, 3, 10, 0.95);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    .brand .name {
+      font-size: 1rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ff7a00, #ffbb33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand .subtitle {
+      font-size: 0.6rem;
+      color: #6b7280;
+    }
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #ff7a00, #ffbb33);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    .nav-links a:hover {
+      color: #fff;
+    }
+    .nav-links a:hover::after {
+      width: 60%;
+    }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .nav-toggle .bar {
+      width: 26px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-toggle.active .bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-toggle.active .bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 100px 16px 40px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .hero-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 30px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-subtitle {
+      color: #6b7280;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .hero-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin: 6px 0;
+      background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-role {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .typing {
+      background: linear-gradient(90deg, #ff7a00, #ffbb33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: #ff7a00;
+      margin-left: 4px;
+      animation: blink 1s steps(2) infinite;
+    }
+    @keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
+    .hero-desc {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      max-width: 500px;
+    }
+    .hero-desc strong {
+      color: #ffbb33;
+    }
+
+    .contact-quick {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .quick-link {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+    .quick-link:hover {
+      color: #ffbb33;
+      background: rgba(255, 122, 0, 0.1);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn:active {
+      transform: scale(0.95);
+    }
+    .btn-projects {
+      background: #0077b6;
+      color: #fff;
+    }
+    .btn-projects:hover {
+      background: #005f8a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 119, 182, 0.3);
+    }
+    .btn-contact {
+      background: #ff6f61;
+      color: #fff;
+    }
+    .btn-contact:hover {
+      background: #e65b50;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 111, 97, 0.3);
+    }
+    .btn-resume {
+      background: #28a745;
+      color: #fff;
+    }
+    .btn-resume:hover {
+      background: #218838;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(40, 167, 69, 0.3);
+    }
+    .btn-linkedin {
+      background: #0a66c2;
+      color: #fff;
+    }
+    .btn-linkedin:hover {
+      background: #084a99;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(10, 102, 194, 0.3);
+    }
+    .btn-pdf {
+      background: #dc3545;
+      color: #fff;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+    }
+    .btn-pdf:hover {
+      background: #c82333;
+      transform: translateY(-2px);
+    }
+
+    .hero-metrics {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .metric-card {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      min-width: 80px;
+    }
+    .metric-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff7a00, #ffbb33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .metric-label {
+      font-size: 0.65rem;
+      color: #6b7280;
+    }
+
+    /* ===== HERO 3D ===== */
+    .hero-3d {
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #02031a, #05102a);
+      height: 250px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+      touch-action: none;
+    }
+    .hero-3d canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+      touch-action: none;
+    }
+    .hero-3d-overlay {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .overlay-title {
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .overlay-sub {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* ===== PROFILE CARD ===== */
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      margin-top: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+    .profile-image-wrap {
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #0b2340, #0d3f60);
+    }
+    .profile-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .profile-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+    .profile-name {
+      font-weight: 700;
+      font-size: 1rem;
+      background: linear-gradient(90deg, #ff7a00, #ffbb33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .profile-role {
+      font-size: 0.7rem;
+      color: #6b7280;
+    }
+
+    /* ===== ABOUT HERO SECTION ===== */
+    .about-hero-section {
+      padding: 60px 16px;
+      background: linear-gradient(135deg, #020314, #0a1a3a);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 122, 0, 0.05), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .about-hero-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .about-hero-content .badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 50px;
+      background: rgba(255, 122, 0, 0.15);
+      color: #ffbb33;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .about-hero-content h2 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .about-hero-content h2 span {
+      background: linear-gradient(90deg, #ff7a00, #ffbb33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .about-hero-content p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      font-size: 0.95rem;
+      max-width: 500px;
+    }
+    .about-hero-content .stats-row {
+      display: flex;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .about-hero-content .stat-item .number {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ff7a00, #ffbb33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .about-hero-content .stat-item .label {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    /* ===== ROBOTIC DEBURRING STATION ===== */
+    .robot-visual {
+      position: relative;
+      height: 400px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #02031a, #0a1a3a);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    .robot-visual canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+    .robot-visual .robot-overlay {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .robot-visual .robot-overlay .title {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #ff7a00;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .robot-visual .robot-overlay .sub {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+      margin-top: 2px;
+    }
+    .robot-visual .robot-overlay .customer {
+      font-size: 0.6rem;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+    .robot-visual .robot-overlay .status {
+      font-size: 0.6rem;
+      color: #22c55e;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .robot-visual .robot-overlay .status .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: blinkDot 1.5s ease-in-out infinite;
+    }
+    @keyframes blinkDot {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.2;
+      }
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 50px 16px;
+    }
+    .white-section {
+      background: #fff;
+      color: #0b1220;
+    }
+    .section-header {
+      max-width: 1200px;
+      margin: 0 auto 28px;
+      padding: 0 4px;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0b1220;
+    }
+    .section-title span {
+      background: linear-gradient(90deg, #ff7a00, #ffbb33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-subtitle {
+      color: #6b7280;
+      max-width: 600px;
+      margin-top: 6px;
+      font-size: 0.95rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ===== ABOUT GRID ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    /* ===== EXPERIENCE ===== */
+    .experience-card {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(10, 24, 40, 0.04);
+      margin-bottom: 14px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateX(-30px);
+      opacity: 0;
+    }
+    .experience-card.visible {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .experience-card:hover {
+      transform: translateX(8px) scale(1.01);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      border-color: rgba(255, 122, 0, 0.15);
+    }
+    .experience-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0077b6;
+    }
+    .company-name a {
+      color: #ff7a00;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .date-info {
+      color: #6b7280;
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+    .achievement-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+    .achievement-list li {
+      padding: 3px 0;
+      padding-left: 18px;
+      position: relative;
+      color: #495057;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .achievement-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #ff7a00;
+      font-weight: 700;
+    }
+
+    /* ===== INTERNSHIPS ===== */
+    .internships-section {
+      max-width: 1200px;
+      margin: 32px auto 0;
+    }
+    .subsection-title {
+      font-size: 1.2rem;
+      color: #0096c7;
+      margin-bottom: 14px;
+    }
+    .internships-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .internship-card {
+      background: linear-gradient(135deg, #ff7a00, #ffbb33);
+      color: #fff;
+      padding: 18px;
+      border-radius: 14px;
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateY(30px) scale(0.9);
+      opacity: 0;
+    }
+    .internship-card.visible {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    .internship-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+    .internship-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 3px;
+    }
+    .internship-subtitle {
+      opacity: 0.85;
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+    .internship-date {
+      opacity: 0.7;
+      font-size: 0.75rem;
+      margin: 6px 0;
+    }
+    .internship-description {
+      font-size: 0.8rem;
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+    .skill-tag {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 500;
+    }
+    .internship-card:nth-child(2) {
+      background: linear-gradient(135deg, #0ea5a4, #06b6d4);
+    }
+    .internship-card:nth-child(3) {
+      background: linear-gradient(135deg, #8b5cf6, #c084fc);
+    }
+    .internship-card:nth-child(4) {
+      background: linear-gradient(135deg, #f43f5e, #fb7185);
+    }
+    .internship-card:nth-child(5) {
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+    }
+    .internship-card:nth-child(6) {
+      background: linear-gradient(135deg, #facc15, #f97316);
+    }
+
+    /* ===== PROJECTS ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .project-card {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(10, 24, 40, 0.04);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    .project-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+      border-color: rgba(255, 122, 0, 0.15);
+    }
+    .project-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #d9480f;
+    }
+    .project-date {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin: 6px 0;
+    }
+    .project-description {
+      color: #495057;
+      line-height: 1.5;
+      font-size: 0.85rem;
+    }
+    .project-technologies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+    .project-technologies .tech-tag {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+    .project-features {
+      list-style: none;
+      padding: 0;
+      margin-top: 6px;
+    }
+    .project-features li {
+      padding: 2px 0;
+      padding-left: 16px;
+      position: relative;
+      color: #495057;
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+    .project-features li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #ff7a00;
+    }
+    .project-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* ===== SKILLS ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .skill-block {
+      background: #f8fafc;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(10, 24, 40, 0.04);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    .skill-block.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .skill-block:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+    .skill-block h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .skill-tags.wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill {
+      background: #eef2ff;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: #07203a;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .skill:hover {
+      background: #ff7a00;
+      color: #fff;
+      transform: scale(1.05);
+    }
+    .certifications-block h4 {
+      color: #fd7e14;
+    }
+
+    /* ===== EDUCATION ===== */
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .education-card {
+      background: linear-gradient(135deg, #06b6d4, #0ea5a4);
+      color: #fff;
+      padding: 20px;
+      border-radius: 14px;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    .education-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .education-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    }
+    .education-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .education-icon {
+      font-size: 24px;
+    }
+    .degree-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .degree-field {
+      opacity: 0.85;
+      font-size: 0.85rem;
+    }
+    .education-details {
+      margin-top: 10px;
+    }
+    .education-details .institution {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .education-meta {
+      display: flex;
+      gap: 12px;
+      margin-top: 6px;
+      font-size: 0.75rem;
+      opacity: 0.8;
+      flex-wrap: wrap;
+    }
+    .education-grade {
+      font-weight: 600;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .contact-card {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px solid rgba(10, 24, 40, 0.04);
+      margin-bottom: 10px;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateX(-30px);
+      opacity: 0;
+    }
+    .contact-card.visible {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .contact-card:hover {
+      transform: translateX(6px);
+      border-color: rgba(255, 122, 0, 0.15);
+    }
+    .contact-card i {
+      font-size: 1.1rem;
+      color: #ff7a00;
+      width: 22px;
+    }
+    .contact-card strong {
+      display: block;
+      font-size: 0.8rem;
+    }
+    .contact-card .muted {
+      color: #6b7280;
+      font-size: 0.85rem;
+    }
+    .contact-card a {
+      color: #ff7a00;
+      text-decoration: none;
+    }
+
+    .contact-form {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(10, 24, 40, 0.04);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    .contact-form.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(10, 24, 40, 0.06);
+      background: #fff;
+      color: #07102a;
+      font-family: inherit;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #ff7a00;
+      box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1);
+    }
+    .contact-form .btn-primary {
+      background: linear-gradient(135deg, #ff7a00, #ffbb33);
+      color: #07102a;
+      font-weight: 700;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .contact-form .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 122, 0, 0.3);
+    }
+    .form-status {
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      padding: 24px 16px;
+      text-align: center;
+      border-top: 1px solid rgba(10, 24, 40, 0.08);
+      color: #6b7280;
+      font-size: 0.8rem;
+    }
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ===== FLOATING HIRE ME ===== */
+    .floating-hireme {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      background: linear-gradient(90deg, #ff7a00, #ffbb33);
+      padding: 10px 20px;
+      border-radius: 50px;
+      color: #07102a;
+      font-weight: 800;
+      text-decoration: none;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(255, 122, 0, 0.25);
+      transition: all 0.3s ease;
+      font-size: 0.85rem;
+    }
+    .floating-hireme:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255, 122, 0, 0.4);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .hero-3d {
+        height: 220px;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .about-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .robot-visual {
+        height: 300px;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .scroll-indicator-right {
+        right: 16px;
+      }
+      .scroll-indicator-right .line {
+        height: 60px;
+      }
+      .scroll-indicator-right .dot {
+        width: 10px;
+        height: 10px;
+      }
+      .scroll-indicator-right .label {
+        font-size: 0.6rem;
+      }
+      .scroll-indicator-right .mouse-icon {
+        width: 18px;
+        height: 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(2, 3, 10, 0.98);
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        gap: 8px;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-links a {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        width: 100%;
+        text-align: center;
+      }
+      .nav-links a::after {
+        display: none;
+      }
+      .nav-toggle {
+        display: flex;
+      }
+
+      .hero {
+        padding: 80px 14px 30px;
+        min-height: auto;
+      }
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      .hero-role {
+        font-size: 0.9rem;
+      }
+      .hero-desc {
+        font-size: 0.85rem;
+        max-width: 100%;
+      }
+      .hero-cta .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px;
+      }
+      .hero-metrics {
+        justify-content: center;
+        gap: 8px;
+      }
+      .metric-card {
+        min-width: 70px;
+        padding: 8px 12px;
+      }
+      .metric-num {
+        font-size: 1.2rem;
+      }
+
+      .about-hero-content h2 {
+        font-size: 1.8rem;
+      }
+      .about-hero-content .stats-row {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .robot-visual {
+        height: 240px;
+      }
+
+      .profile-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px;
+      }
+      .profile-image-wrap {
+        width: 100px;
+        height: 100px;
+      }
+
+      .section {
+        padding: 40px 14px;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .flip-card {
+        height: 240px;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .project-card {
+        padding: 16px;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .skill-block {
+        padding: 14px;
+      }
+      .skill-block h4 {
+        font-size: 0.85rem;
+      }
+      .skill {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+      }
+      .education-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .internships-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .footer-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+      }
+      .floating-hireme {
+        right: 12px;
+        bottom: 12px;
+        padding: 8px 16px;
+        font-size: 0.75rem;
+      }
+      .hero-3d {
+        height: 180px;
+        border-radius: 12px;
+      }
+      .hero-3d-overlay {
+        bottom: 8px;
+        left: 8px;
+        padding: 6px 12px;
+      }
+      .overlay-sub {
+        font-size: 0.7rem;
+      }
+      .contact-card {
+        padding: 12px;
+      }
+      .contact-form {
+        padding: 16px;
+      }
+
+      .scroll-indicator-right {
+        right: 10px;
+        gap: 8px;
+      }
+      .scroll-indicator-right .line {
+        height: 45px;
+        width: 2px;
+      }
+      .scroll-indicator-right .dot {
+        width: 8px;
+        height: 8px;
+      }
+      .scroll-indicator-right .label {
+        font-size: 0.5rem;
+        letter-spacing: 2px;
+      }
+      .scroll-indicator-right .mouse-icon {
+        width: 16px;
+        height: 24px;
+        border-width: 1.5px;
+      }
+      .scroll-indicator-right .mouse-icon .wheel {
+        width: 3px;
+        height: 6px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.5rem;
+      }
+      .hero-role {
+        font-size: 0.8rem;
+      }
+      .hero-3d {
+        height: 150px;
+      }
+      .brand .name {
+        font-size: 0.85rem;
+      }
+      .brand .subtitle {
+        font-size: 0.5rem;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .about-hero-content h2 {
+        font-size: 1.4rem;
+      }
+      .robot-visual {
+        height: 200px;
+      }
+      .flip-card {
+        height: 220px;
+      }
+      .metric-card {
+        min-width: 60px;
+        padding: 6px 10px;
+      }
+      .metric-num {
+        font-size: 1rem;
+      }
+      .metric-label {
+        font-size: 0.55rem;
+      }
+      .btn {
+        font-size: 0.7rem;
+        padding: 6px 12px;
+      }
+
+      .scroll-indicator-right {
+        right: 6px;
+        gap: 6px;
+      }
+      .scroll-indicator-right .line {
+        height: 30px;
+        width: 2px;
+      }
+      .scroll-indicator-right .dot {
+        width: 6px;
+        height: 6px;
+      }
+      .scroll-indicator-right .label {
+        font-size: 0.4rem;
+        letter-spacing: 1px;
+      }
+      .scroll-indicator-right .mouse-icon {
+        width: 14px;
+        height: 20px;
+        border-width: 1px;
+      }
+      .scroll-indicator-right .mouse-icon .wheel {
+        width: 2px;
+        height: 4px;
+        top: 4px;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 
-
-
 <body>
-  <!-- Loading Screen -->
-  <div id="loading-screen" class="loading-screen">
-    <div class="loading-spinner" aria-hidden="true"></div>
-    <p>Loading Portfolio...</p>
+
+  <!-- ===== GOLD CUSTOM CURSOR ===== -->
+  <div class="custom-cursor">
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
   </div>
 
-  <!-- Header / Navigation -->
- <header class="site-header">
-    <div class="nav container">
-      <a href="#hero" class="brand" aria-label="Go to top">
-        <div class="brand-text">
-          <div class="name">Udaykumar Borale</div>
-          <div class="subtitle">R&D — Powertrain · BIW</div>
-        </div>
-      </a>
+  <!-- ===== 3D BACKGROUND CANVAS ===== -->
+  <canvas id="bg-canvas"></canvas>
 
-      <nav id="nav-links" class="nav-links">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#experience" class="nav-link">Experience</a>
-        <a href="#industry-projects" class="nav-link">Projects</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#education" class="nav-link">Education</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-
-      <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
+  <!-- ===== SCROLL INDICATOR ===== -->
+  <div class="scroll-indicator-right" id="scrollIndicator">
+    <div class="mouse-icon">
+      <div class="wheel"></div>
     </div>
-  </header>
- 
+    <div class="dot"></div>
+    <div class="line"></div>
+    <span class="label">SCROLL</span>
+  </div>
 
-  
+  <!-- ===== CONTENT ===== -->
+  <div class="content">
 
-  <!-- HERO -->
-  <main>
-    <section id="hero" class="hero dark-hero">
-      <div class="container hero-grid">
+    <!-- ===== LOADING SCREEN ===== -->
+    <div id="loading-screen">
+      <div class="spinner"></div>
+      <p>Loading Portfolio...</p>
+    </div>
+
+    <!-- ===== SCROLL PROGRESS ===== -->
+    <div class="scroll-progress">
+      <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header" id="siteHeader">
+      <div class="nav">
+        <a href="#hero" class="brand">
+          <span class="name">Udaykumar Borale</span>
+          <span class="subtitle">R&D — Powertrain · BIW</span>
+        </a>
+        <nav id="nav-links" class="nav-links">
+          <a href="#about-hero">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#industry-projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section id="hero" class="hero">
+      <div class="hero-grid">
         <div class="hero-left">
           <p class="hero-subtitle">Hi, I'm Udaykumar</p>
           <h1 class="hero-title">R&D Engineer — Powertrain &amp; BIW Design</h1>
-
           <h2 class="hero-role">
             <span id="role-typing" class="typing">R&D Engineer — Powertrain &amp; BIW Design</span>
-            <span class="cursor" aria-hidden="true"></span>
+            <span class="cursor"></span>
           </h2>
-
           <p class="hero-desc">
             Experienced Mechanical Design and Simulation Engineer specializing in advanced 3D modeling,
-            simulation, and full-cycle product development. Skilled in CATIA, SolidWorks, Creo, Siemens NX, Autodesk Inventor, ANSYS,
-            Abaqus, and MATLAB, with a strong focus on delivering innovative and reliable engineering solutions.
+            simulation, and full-cycle product development.
           </p>
-
           <p class="hero-desc">
-            Currently working at <strong>Chropynska India Private Ltd</strong> as an
-            <strong>R&D Engineer (Powertrain and BIW Design)</strong>, leading end-to-end design and development
-            of Powertrain and Body-in-White systems. Dedicated to driving engineering excellence through
-            automation-driven design and continuous innovation.
+            Currently at <strong>Chropynska India Private Ltd</strong> as an
+            <strong>R&D Engineer (Powertrain and BIW Design)</strong>.
           </p>
-
           <div class="contact-quick">
             <a href="tel:+918660272709" class="quick-link"><i class="fas fa-phone"></i> +91-8660272709</a>
-            <a href="mailto:udaykumarborale9@gmail.com" class="quick-link"><i class="fas fa-envelope"></i> udaykumarborale9@gmail.com</a>
+            <a href="mailto:udaykumarborale9@gmail.com" class="quick-link"><i class="fas fa-envelope"></i> Email</a>
           </div>
-
-     <div class="hero-cta">
-  <a href="#industry-projects" class="btn btn-projects">View Projects</a>
-  <a href="#contact" class="btn btn-contact">Get in Touch</a>
-  <a class="btn btn-resume" href="UDAYKUMAR-1.pdf" download>Download Resume</a>
-  <a href="https://www.linkedin.com/in/udaykumarborale" target="_blank" class="btn btn-linkedin">LinkedIn</a>
-</div>
-
-
-          <div class="hero-metrics" aria-hidden="false">
-            <div class="metric-card"><div class="metric-num">1+</div><div class="metric-label">Years Experience</div></div>
-            <div class="metric-card"><div class="metric-num">1+</div><div class="metric-label">Projects Delivered</div></div>
+          <div class="hero-cta">
+            <a href="#industry-projects" class="btn btn-projects">View Projects</a>
+            <a href="#contact" class="btn btn-contact">Get in Touch</a>
+            <a class="btn btn-resume" href="UDAYKUMAR-1.pdf" download>Resume</a>
+            <a href="https://www.linkedin.com/in/udaykumarborale" target="_blank" class="btn btn-linkedin">LinkedIn</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric-card"><div class="metric-num" data-target="2">0</div><div class="metric-label">Years</div></div>
+            <div class="metric-card"><div class="metric-num" data-target="12">0</div><div class="metric-label">Projects</div></div>
+            <div class="metric-card"><div class="metric-num" data-target="8">0</div><div class="metric-label">Certifications</div></div>
           </div>
         </div>
-
-      <div class="hero-right">
-          <div id="hero-3d" class="hero-3d">
-            <canvas id="three-canvas" aria-hidden="true"></canvas>
-            <div class="hero-3d-overlay glass">
-              <div class="overlay-title">Highlighted Project</div>
-              <div class="overlay-sub">Lightweight e-axle integration</div>
+        <div class="hero-right">
+          <div class="hero-3d" id="hero3dContainer">
+            <canvas id="three-canvas"></canvas>
+            <div class="hero-3d-overlay">
+              <div class="overlay-title">Featured Project</div>
+              <div class="overlay-sub">Robotic Deburring Station</div>
             </div>
           </div>
-
-          <div class="profile-card mobile-profile">
+          <div class="profile-card">
             <div class="profile-image-wrap">
-              <img id="profile-image" src="image.jpg.png" alt="Udaykumar Borale" onerror="showProfileFallback()">
-              <div id="profile-fallback" class="profile-fallback"><i class="fas fa-user"></i></div>
+              <img id="profile-image" src="image.jpg.png" alt="Udaykumar Borale" onerror="this.style.display='none'; document.getElementById('fallback').style.display='flex';">
+              <div id="fallback" class="profile-fallback" style="display:none;"><i class="fas fa-user"></i></div>
             </div>
-            <div class="profile-info">
+            <div>
               <div class="profile-name">Udaykumar Borale</div>
               <div class="profile-role">R&D Engineer — Powertrain &amp; BIW</div>
             </div>
@@ -167,259 +1839,177 @@
       </div>
     </section>
 
-
-    
-  </main>
-  <!-- Script -->
-  <script src="script.js" defer></script>
-</body>
-</html>
-
-  <!-- Floating Hire Me -->
-  <a href="#contact" class="floating-hireme" aria-label="Hire Me">Hire Me</a>
-
-  
-
-
-    <!-- ABOUT (white clean) -->
-    <section id="about" class="section about white-section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">About Me</h2>
-      <p class="section-subtitle">
-        Experienced Mechanical Design and Simulation Engineer with hands-on product development and PLM/PDM experience.
-      </p>
-    </div>
-
-    <div class="about-grid single-row">
-
-      <!-- Design Excellence -->
-      <div class="about-card">
-        <div class="card-icon"><i class="fas fa-wrench"></i></div>
-        <h3 class="card-title">Design Excellence</h3>
-        <p class="card-description">
-          Advanced 3D modeling and detailed design using CATIA, SolidWorks, PTC Creo, Autodesk Inventor, Siemens NX, and Solid Edge.
-          Strong application of DFM/DFA, GD&amp;T, tolerance &amp; stack-up analysis, weld and joint design, and design optimization
-          for manufacturability, weight reduction, and cost efficiency.
-        </p>
+    <!-- ===== ABOUT HERO ===== -->
+    <section id="about-hero" class="about-hero-section">
+      <div class="about-hero-grid">
+        <div class="about-hero-content">
+          <span class="badge">✦ About Me</span>
+          <h2>Who I Am &amp; <span>What I Do</span></h2>
+          <p>
+            I'm a passionate <strong>Mechanical Design and Simulation Engineer</strong> with expertise in
+            <strong>powertrain engineering, BIW design, and advanced CAD/CAE</strong>. I transform complex
+            engineering challenges into innovative, production-ready solutions.
+          </p>
+          <p style="margin-top: 12px;">
+            My work spans <strong>concept development, detailed design, FEA validation, and manufacturing support</strong>
+            — ensuring every product meets the highest standards of performance, safety, and efficiency.
+          </p>
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="number">100+</div>
+              <div class="label">CAD Models</div>
+            </div>
+            <div class="stat-item">
+              <div class="number">25%</div>
+              <div class="label">Design Time Saved</div>
+            </div>
+            <div class="stat-item">
+              <div class="number">12+</div>
+              <div class="label">Industry Projects</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="robot-visual" id="robotVisual">
+            <canvas id="robot-canvas"></canvas>
+            <div class="robot-overlay">
+              <div class="title">🤖 Robotic Deburring Station</div>
+              <div class="sub">Cummins KV/QSK60 Cylinder Block</div>
+              <div class="customer">Customer: Cummins India Ltd. — Chropynska India Pvt. Ltd.</div>
+              <div class="status"><span class="dot"></span> Active • Deburring in Progress</div>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <!-- Simulation Expertise -->
-      <div class="about-card">
-        <div class="card-icon"><i class="fas fa-bolt"></i></div>
-        <h3 class="card-title">Simulation &amp; Analysis</h3>
-        <p class="card-description">
-          Comprehensive mechanical simulation using ANSYS, Abaqus, HyperMesh, ANSA, and MATLAB including:
-          Static Structural, Contact &amp; Nonlinear, Buckling, Modal, Harmonic, Transient Dynamic, Thermal,
-          Thermo-Structural, Fatigue, Optimization (Topology/Shape/Size), Weld &amp; Joint, Tolerance Stack-up,
-          Creep, Rotor Dynamics, and Impact / Explicit analyses.
-        </p>
-      </div>
-
-      <!-- Product Development -->
-      <div class="about-card">
-        <div class="card-icon"><i class="fas fa-globe"></i></div>
-        <h3 class="card-title">Product Development</h3>
-        <p class="card-description">
-          End-to-end product development from concept to validation, including BOM management,
-          PLM/PDM workflows, cross-functional collaboration, and compliance with automotive and
-          Industry 4.0 standards (IATF 16949, ISO 26262, ISA-95, RAMI 4.0).
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section experience white-section">
+    <!-- ===== ABOUT - FLIP CARDS ===== -->
+    <section id="about" class="section white-section">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Work Experience</h2>
+          <h2 class="section-title">What I <span>Excel At</span></h2>
+          <p class="section-subtitle">Tap or click on each card to flip and discover more about my expertise</p>
+        </div>
+        <div class="about-grid">
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-icon"><i class="fas fa-wrench"></i></div>
+                <h3 class="card-title">Design Excellence</h3>
+                <p class="card-hint">👆 Tap to flip</p>
+              </div>
+              <div class="flip-card-back">
+                <div class="back-icon"><i class="fas fa-star"></i></div>
+                <p>Advanced 3D modeling using CATIA, SolidWorks, PTC Creo, Siemens NX, and Autodesk Inventor. Expert in DFM/DFA, GD&amp;T, tolerance analysis, and design optimization.</p>
+                <p class="back-hint">👆 Tap to flip back</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                <h3 class="card-title">Simulation &amp; Analysis</h3>
+                <p class="card-hint">👆 Tap to flip</p>
+              </div>
+              <div class="flip-card-back">
+                <div class="back-icon"><i class="fas fa-chart-line"></i></div>
+                <p>Comprehensive FEA using ANSYS, Abaqus, HyperMesh, and MATLAB. Specializing in Static, Modal, Thermal, Fatigue, Topology Optimization, and Structural Validation.</p>
+                <p class="back-hint">👆 Tap to flip back</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="card-icon"><i class="fas fa-robot"></i></div>
+                <h3 class="card-title">Automation &amp; R&amp;D</h3>
+                <p class="card-hint">👆 Tap to flip</p>
+              </div>
+              <div class="flip-card-back">
+                <div class="back-icon"><i class="fas fa-cogs"></i></div>
+                <p>End-to-end product development, BOM management, PLM/PDM workflows, robotic automation, and compliance with IATF 16949 and ISO 26262 standards.</p>
+                <p class="back-hint">👆 Tap to flip back</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience" class="section white-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Work <span>Experience</span></h2>
           <p class="section-subtitle">Professional journey and key achievements</p>
         </div>
-
-        <div class="experience-card main-experience fade-in">
-          <div class="experience-header">
-            <div class="experience-info">
-              <h3 class="experience-title">R&D Engineer – Powertrain &amp; BIW Design</h3>
-              <div class="company-info"><i class="fas fa-building"></i>
-                <span class="company-name"><a href="https://www.chropynska.com/en" target="_blank" rel="noopener noreferrer"> CHROPYNSKA Group </a></span>
-              </div>
-              <div class="date-info"><i class="fas fa-calendar"></i> <span>Oct 2025 – Present</span></div>
-            </div>
-          </div>
-          
-  <div class="experience-content">
-    <ul class="achievement-list">
-      <li>Advanced R&amp;D engineering in automotive and automation systems, focusing on powertrain components, concept development, detailed design, and validation.</li>
-
-      <li>Spearheaded design and development of powertrain components, improving structural integrity, performance, and manufacturability in compliance with IATF 16949.</li>
-
-      <li>Delivered 100+ CAD models and assemblies, reducing design iteration time by 25% and enabling first-time-right production using Siemens NX, CATIA V5, PTC Creo, and Autodesk Inventor.</li>
-
-      <li>Executed FEA-driven validation using ANSYS aligned with ISO 26262 (Functional Safety) and IEC 61508 standards.</li>
-
-      <li>Applied DFM/DFA principles to reduce weight, optimize cost, and enhance manufacturability.</li>
-
-      <li>Collaborated with cross-functional teams (R&amp;D, Manufacturing, Quality) to ensure compliance with global automotive and Industry 4.0 standards.</li>
-    </ul>
-
-    <h4 class="experience-subtitle">Mechanical Analysis &amp; Simulation</h4>
-    <ul class="achievement-list">
-      <li>Performed Static Structural, Contact, and Nonlinear analyses to evaluate stress, deformation, safety factors, and interface behavior in powertrain and machine components.</li>
-
-      <li>Conducted Modal, Harmonic, and Transient Dynamic analyses to predict vibration behavior, avoid resonance, and assess impact and time-dependent loading conditions.</li>
-
-      <li>Executed Thermal, Fatigue, and Optimization (Topology/Shape/Size) analyses to prevent thermal failure, predict component life, and achieve lightweight, high-stiffness designs.</li>
-    </ul>
-  </div>
-</div>
-        
-        
-        <div class="experience-card fade-in">
-          <div class="experience-header">
-            <div class="experience-info">
-              <h3 class="experience-title">Quality and Product Design Engineer</h3>
-              <div class="company-info"><i class="fas fa-building"></i>
-                <span class="company-name"><a href="https://jkfenner.com/" target="_blank" rel="noopener noreferrer">JK Fenner India Ltd, Patancheru</a></span>
-              </div>
-              <div class="date-info"><i class="fas fa-calendar"></i> <span>2021-2022</span></div>
-            </div>
-          </div>
-          <div class="experience-content">
-            <ul class="achievement-list">
-              <li>Created detailed 3D models and simulations to support product design initiatives.</li>
-              <li>Assisted QA processes to meet industry standards and improve product reliability.</li>
-              <li>Collaborated cross-functionally to improve design methodologies.</li>
-            </ul>
-          </div>
+        <div class="experience-card" data-delay="0">
+          <h3 class="experience-title">R&D Engineer – Powertrain &amp; BIW Design</h3>
+          <div class="company-name"><a href="https://www.chropynska.com/en" target="_blank">CHROPYNSKA Group</a></div>
+          <div class="date-info">Oct 2025 – Present</div>
+          <ul class="achievement-list">
+            <li>Advanced R&amp;D engineering in automotive and automation systems, focusing on powertrain components.</li>
+            <li>Spearheaded design and development of powertrain components, improving structural integrity.</li>
+            <li>Delivered 100+ CAD models and assemblies, reducing design iteration time by 25%.</li>
+            <li>Executed FEA-driven validation using ANSYS aligned with ISO 26262 standards.</li>
+          </ul>
+        </div>
+        <div class="experience-card" data-delay="150">
+          <h3 class="experience-title">Quality and Product Design Engineer</h3>
+          <div class="company-name"><a href="https://jkfenner.com/" target="_blank">JK Fenner India Ltd, Patancheru</a></div>
+          <div class="date-info">2021-2022</div>
+          <ul class="achievement-list">
+            <li>Created detailed 3D models and simulations to support product design initiatives.</li>
+            <li>Assisted QA processes to meet industry standards and improve product reliability.</li>
+          </ul>
         </div>
 
-        <!-- =========================
-     KEY INDUSTRY R&D PROJECTS
-========================== -->
-<section id="industry-projects" class="section projects white-section" data-parallax>
-
-  <div class="container">
-
-    <div class="section-header">
-      <h2 class="section-title">Key Industry R&D Projects</h2>
-
-      <p class="section-subtitle">
-        A showcase of industrial research and development projects involving mechanical product design,
-        automation systems, powertrain engineering, CAD/CAE validation, structural analysis, design
-        optimization, manufacturability, and production-ready engineering solutions developed for
-        automotive and industrial applications.
-      </p>
-    </div>
-
-    <div class="projects-grid">
-
-      <!-- ==========================
-           INDUSTRY PROJECT 1
-      =========================== -->
-
-      <div class="project-card tilt-card fade-in">
-
-        <div class="project-header">
-          <h3 class="project-title">
-            Robotic Deburring Station – Cylinder Block Machining Automation
-          </h3>
-
-          <i class="fas fa-industry project-link"></i>
-        </div>
-
-        <div class="project-date">
-          Chropynska India Pvt. Ltd. | R&D Engineer | Oct 2025 – Present
-        </div>
-
-        <p class="project-description">
-          Designed and developed a fully automated robotic deburring station for heavy-duty Cummins
-          engine cylinder blocks, integrating advanced mechanical design, robotic automation,
-          structural validation, safety engineering, and manufacturing-ready solutions to improve
-          production efficiency, reliability, and system performance.
-        </p>
-
-        <div class="project-technologies">
-          <span class="tech-tag purple">Autodesk Inventor</span>
-          <span class="tech-tag blue">ANSYS</span>
-          <span class="tech-tag green">HyperMesh</span>
-          <span class="tech-tag orange">NX Nastran</span>
-          <span class="tech-tag red">DFM / DFA</span>
-          <span class="tech-tag cyan">GD&T</span>
-        </div>
-
-        <ul class="project-features">
-          <li>Designed complete robotic deburring cell for Cummins KV/QSK60 engine cylinder blocks.</li>
-          <li>Developed 400+ component production-ready mechanical assemblies and machine layouts.</li>
-          <li>Designed conveyor systems, shuttle mechanisms, turntables, lifting units, fixtures and robotic workstations.</li>
-          <li>Performed structural FEA, stress analysis and mechanical design validation.</li>
-          <li>Executed CAD interference analysis, tolerance verification and assembly feasibility studies.</li>
-          <li>Integrated KUKA/FANUC robotic systems with automated deburring tooling.</li>
-          <li>Designed industrial safety systems including fencing, light curtains, scanners and safety doors.</li>
-          <li>Prepared manufacturing drawings, BOMs, assembly documentation and engineering release packages.</li>
-          <li>Applied DFM, DFA, GD&T and design optimization techniques to improve manufacturability and product quality.</li>
-        </ul>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-        <!-- INTERNSHIPS — now explicit card grid with boxes -->
         <div class="internships-section">
           <h3 class="subsection-title">Internship &amp; Training</h3>
-          <div class="internships-grid explicit-cards">
-            <!-- All internship cards preserved exactly -->
-            <div class="internship-card card-box">
-              <h4>Bajaj Engineering &amp; Skills Training (BEST), PES University</h4>
+          <div class="internships-grid">
+            <div class="internship-card" data-delay="0">
+              <h4>Bajaj Engineering &amp; Skills Training</h4>
               <p class="internship-subtitle">Mechatronics &amp; Automation Trainee</p>
               <div class="internship-date">Feb – Jul 2025</div>
-              <p class="internship-description">Six-month residential program focusing on motion control, robotics, sensor tech, PLCs and Industry 4.0.</p>
-              <div class="skills-tags"><span class="skill-tag">Mechatronics</span><span class="skill-tag">PLC</span><span class="skill-tag">Automation</span></div>
+              <p class="internship-description">Six-month residential program focusing on motion control, robotics, PLCs.</p>
+              <div class="skills-tags"><span class="skill-tag">Mechatronics</span><span class="skill-tag">PLC</span></div>
             </div>
-
-            <div class="internship-card card-box">
+            <div class="internship-card" data-delay="100">
               <h4>CONCEPTIA KONNECT</h4>
               <p class="internship-subtitle">Simulation &amp; Structural Analysis</p>
               <div class="internship-date">Feb – May 2025</div>
-              <p class="internship-description">Training in ANSYS, SolidWorks and PTC Creo for simulation-driven design improvements.</p>
-              <div class="skills-tags"><span class="skill-tag">ANSYS</span><span class="skill-tag">SolidWorks</span><span class="skill-tag">PTC Creo</span></div>
+              <p class="internship-description">Training in ANSYS, SolidWorks and PTC Creo.</p>
+              <div class="skills-tags"><span class="skill-tag">ANSYS</span><span class="skill-tag">SolidWorks</span></div>
             </div>
-
-            <div class="internship-card card-box">
+            <div class="internship-card" data-delay="200">
               <h4>PRIME TOOLING</h4>
               <p class="internship-subtitle">Design &amp; Structural Analysis</p>
               <div class="internship-date">Mar – Feb 2025</div>
-              <p class="internship-description">Intensive training in precision engineering, CAD/CAM and design validation.</p>
-              <div class="skills-tags"><span class="skill-tag">PTC Creo</span><span class="skill-tag">CATIA</span><span class="skill-tag">Ansys</span></div>
+              <p class="internship-description">Intensive training in precision engineering and CAD/CAM.</p>
+              <div class="skills-tags"><span class="skill-tag">PTC Creo</span><span class="skill-tag">CATIA</span></div>
             </div>
-
-            <div class="internship-card card-box">
+            <div class="internship-card" data-delay="300">
               <h4>CNC Machines – Bharat Fritz Werner</h4>
               <p class="internship-subtitle">Machining &amp; Manufacturing</p>
               <div class="internship-date">Oct – Nov 2023</div>
-              <p class="internship-description">Practical exposure to CNC machining processes and manufacturing techniques.</p>
+              <p class="internship-description">Practical exposure to CNC machining processes.</p>
               <div class="skills-tags"><span class="skill-tag">CNC</span><span class="skill-tag">CAM</span></div>
             </div>
-
-            <div class="internship-card card-box">
+            <div class="internship-card" data-delay="400">
               <h4>BELATHUR INDUSTRIES</h4>
               <p class="internship-subtitle">Machining Operations</p>
               <div class="internship-date">May – Jun 2023</div>
-              <p class="internship-description">3D modelling and technical drawings using CATIA V5; assisted in process optimization.</p>
-              <div class="skills-tags"><span class="skill-tag">CATIA V5</span><span class="skill-tag">CAD/CAM</span></div>
+              <p class="internship-description">3D modelling using CATIA V5; assisted in process optimization.</p>
+              <div class="skills-tags"><span class="skill-tag">CATIA V5</span></div>
             </div>
-
-            <div class="internship-card card-box">
+            <div class="internship-card" data-delay="500">
               <h4>Bosch – Diesel Services Division</h4>
               <p class="internship-subtitle">Intern (CFD &amp; Flow Simulation)</p>
               <div class="internship-date">Feb – Mar 2023</div>
-              <p class="internship-description">Fluid flow simulation with ANSYS Fluent and SolidWorks Flow Simulation for diesel systems.</p>
+              <p class="internship-description">Fluid flow simulation with ANSYS Fluent and SolidWorks.</p>
               <div class="skills-tags"><span class="skill-tag">ANSYS Fluent</span><span class="skill-tag">CFD</span></div>
             </div>
           </div>
@@ -427,371 +2017,1183 @@
       </div>
     </section>
 
-
-
-    <!-- PROJECTS -->
-     <section id="academic-projects" class="section projects white-section" data-parallax>
-
-    <div class="container">
-
+    <!-- ===== INDUSTRY PROJECTS ===== -->
+    <section id="industry-projects" class="section white-section">
+      <div class="container">
         <div class="section-header">
-
-            <h2 class="section-title">
-                Academic Research Projects
-            </h2>
-
-            <p class="section-subtitle">
-                Engineering research projects focused on finite element analysis (FEA), computational simulations,
-                renewable energy systems, thermal engineering, and advanced mechanical design, demonstrating
-                analytical problem-solving, research methodology, and engineering innovation.
-            </p>
-
+          <h2 class="section-title">Key Industry <span>R&amp;D Projects</span></h2>
+          <p class="section-subtitle">Industrial research projects in mechanical design, automation, and CAD/CAE validation.</p>
         </div>
-            <div class="project-date">Apr – Jul 2024</div>
+        <div class="projects-grid">
+          <div class="project-card" data-delay="0">
+            <h3 class="project-title">Robotic Deburring Station – Cylinder Block Machining Automation</h3>
+            <div class="project-date">Customer: Cummins India Ltd. — Chropynska India Pvt. Ltd. | Oct 2025 – Present</div>
             <p class="project-description">
-              Engineered and validated a lightweight electric axle (e-axle) architecture for EV applications with focus on structural durability,
-              torque density improvement, and packaging optimization. Multi-body kinematic studies, FEA, and topology optimization performed.
+              Designed and developed a robotic deburring automation system for heavy-duty engine cylinder blocks (KV/QSK60 variants),
+              integrating robotic machining, material handling, and automated manufacturing solutions.
             </p>
             <div class="project-technologies">
-              <span class="tech-tag purple">CATIA V5</span>
-              <span class="tech-tag blue">SolidWorks</span>
-              <span class="tech-tag green">ANSYS Workbench</span>
-              <span class="tech-tag orange">Topology Optimization</span>
+              <span class="tech-tag" style="background:#e9d5ff;color:#6f42c1;">Autodesk Inventor</span>
+              <span class="tech-tag" style="background:#dbeafe;color:#0077b6;">ANSYS</span>
+              <span class="tech-tag" style="background:#d1fae5;color:#198754;">HyperMesh</span>
+              <span class="tech-tag" style="background:#fed7aa;color:#d9480f;">NX Nastran</span>
+              <span class="tech-tag" style="background:#fecaca;color:#dc3545;">KUKA/FANUC</span>
             </div>
             <ul class="project-features">
-              <li>Complete e-axle housing geometry developed including motor interface, differential casing, lubrication channels, and mounting bosses.</li>
-              <li>Structural FEA for torque reaction loads, bending stiffness, bearing seat deformation, and load-path evaluation.</li>
-              <li>Topology optimization reduced ~18–25% non-load-bearing mass while maintaining strength and fatigue safety factors.</li>
-              <li>Thermal analysis verified operating temperature limits under continuous and peak loads.</li>
-              <li>NVH evaluation ensured resonance modes outside motor torque harmonics.</li>
-              <li>Optimized packaging for compact EV rear subframe integration ensuring manufacturability and assembly accessibility.</li>
+              <li>Developed 3D CAD assemblies, machine layouts, and mechanical concepts for major subsystems including loading/unloading shuttle, conveyor mechanism, turntable with lifter, robot cell structure, tooling fixtures, and safety enclosure.</li>
+              <li>Performed FEA-based structural analysis and design validation using CAE tools to evaluate component strength, identify critical stress regions, validate mechanical designs, and optimize structural performance.</li>
+              <li>Conducted design analysis activities including CAD interference checks, assembly feasibility analysis, tolerance verification, and engineering validation to ensure reliable system integration.</li>
+              <li>Supported integration of KUKA &amp; Fanuc robotic systems, dry deburring tools, brush holder mechanisms, and brush wear detection fixtures for automated surface finishing operations.</li>
+              <li>Designed mechanical solutions considering component handling, orientation, fixture design, accessibility, manufacturability, and production workflow requirements.</li>
+              <li>Worked on industrial safety integration including machine fencing, light curtains, area scanners, sliding doors, and safety locking systems.</li>
+              <li>Prepared assembly models, engineering drawings, technical documentation, and design review inputs for customer and cross-functional engineering discussions.</li>
+              <li>Applied DFM/DFA, GD&T, tolerance analysis, and design optimization principles to improve system reliability, operator safety, and manufacturing readiness.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ACADEMIC PROJECTS ===== -->
+    <section id="academic-projects" class="section white-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Academic <span>Research Projects</span></h2>
+          <p class="section-subtitle">Engineering research in FEA, simulations, renewable energy, and thermal engineering.</p>
+        </div>
+        <div class="projects-grid">
+          <div class="project-card" data-delay="0">
+            <h3 class="project-title">Lightweight E-Axle Design &amp; Optimization for EV</h3>
+            <div class="project-date">Apr – Jul 2024</div>
+            <p class="project-description">Engineered a lightweight electric axle for EV applications with focus on structural durability.</p>
+            <div class="project-technologies">
+              <span class="tech-tag" style="background:#e9d5ff;color:#6f42c1;">CATIA V5</span>
+              <span class="tech-tag" style="background:#dbeafe;color:#0077b6;">SolidWorks</span>
+              <span class="tech-tag" style="background:#d1fae5;color:#198754;">ANSYS</span>
+            </div>
+            <ul class="project-features">
+              <li>Complete e-axle housing geometry developed.</li>
+              <li>Structural FEA for torque reaction loads and bending stiffness.</li>
+              <li>Topology optimization reduced ~18–25% non-load-bearing mass.</li>
             </ul>
           </div>
 
-          <div class="project-card tilt-card fade-in">
-  <div class="project-header">
-    <h3 class="project-title">Modeling and Analysis of Vertical Axis Wind Turbine Blade</h3>
-    <i class="fas fa-external-link-alt project-link"></i>
-  </div>
-
-  <div class="project-date">Apr – Jul 2024</div>
-
-  <p class="project-description">
-    Designed and analyzed a Savonius-type Vertical Axis Wind Turbine (VAWT) blade using CATIA V5, 
-    SolidWorks, QBlade, and ANSYS. Evaluated aerodynamic forces, structural deformation, and stress 
-    distribution under varying wind conditions. Simulations confirmed that aluminium alloy blades 
-    maintain low deformation and operate within safe stress limits.
-  </p>
-
-  <div class="project-technologies">
-    <span class="tech-tag purple">CATIA V5</span>
-    <span class="tech-tag blue">SolidWorks</span>
-    <span class="tech-tag green">ANSYS</span>
-    <span class="tech-tag orange">QBlade</span>
-  </div>
-
-  <ul class="project-features">
-    <li>Developed complete 3D blade geometry focusing on aerodynamic efficiency.</li>
-    <li>Performed FEA to analyze stress, deformation, and structural safety factors.</li>
-    <li>Used QBlade for aerodynamic curve analysis and performance evaluation.</li>
-    <li>Explored composite and H-rotor (Darrieus-type) design alternatives.</li>
-    <li>Optimized blade design for improved performance and manufacturability.</li>
-  </ul>
-
-  <!-- PDF Button -->
-  <a href="Modeling and Analysis of Vertical Axis Wind Turbine Blade.pdf"
-     target="_blank"
-     class="btn btn-primary"
-     style="margin-top:10px;">
-    View Project PDF
-  </a>
-</div>
-
-
-         <div class="project-card tilt-card fade-in">
-  <div class="project-header">
-    <h3 class="project-title">Studies on Free Convection in a Trapezoidal Cavity with Porous Media</h3>
-    <i class="fas fa-external-link-alt project-link"></i>
-  </div>
-
-  <div class="project-date">Aug – Dec 2024</div>
-
-  <p class="project-description">
-    Conducted FEM-based numerical simulations to analyze natural convection in a porous trapezoidal 
-    cavity. Studied the influence of Rayleigh number, porosity, boundary conditions, and internal heat 
-    generation on heat transfer and flow behavior. MATLAB simulations were used to validate thermal and 
-    fluid flow trends for engineering thermal management applications.
-  </p>
-
-  <div class="project-technologies">
-    <span class="tech-tag red">MATLAB</span>
-    <span class="tech-tag cyan">CFD</span>
-    <span class="tech-tag yellow">Thermal Analysis</span>
-  </div>
-
-  <ul class="project-features">
-    <li>Performed FEM-based thermal and flow simulations in MATLAB.</li>
-    <li>Analyzed Rayleigh number, porosity, and geometry effects on heat transfer.</li>
-    <li>Investigated internal heat generation and flow circulation patterns.</li>
-    <li>Interpreted temperature contours, streamlines, and velocity fields.</li>
-    <li>Summarized findings for thermal management in engineering systems.</li>
-  </ul>
-
-  <!-- PDF Button -->
-  <a href="Studies on Free Convection in a Trapezoidal Cavity with Porous Media.pdf"
-     target="_blank"
-     class="btn btn-primary"
-     style="margin-top:10px;">
-    View Project PDF
-  </a>
-</div>
- </div>
-    </section>
-    
-    <!-- SKILLS: expanded, separated badges (all original items kept) -->
-    <section id="skills" class="section skills white-section" data-parallax>
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Skills &amp; Tools</h2>
-          <p class="section-subtitle">Expertise in industry-leading engineering tools and technologies</p>
-        </div>
-
-        <div class="skills-grid">
-          <div class="skill-block tilt-card fade-in">
-            <h4>3D Modeling Tools</h4>
-            <div class="skill-tags wrap">
-              <span class="skill">3D Modeling</span>
-              <span class="skill">CATIA</span>
-              <span class="skill">Siemens NX</span>
-              <span class="skill">SolidWorks</span>
-              <span class="skill">Autodesk Inventor</span>
-              <span class="skill">Auto Cad</span>
-              <span class="skill">Solid Edge</span>
-              <span class="skill">PTC Creo</span>
+          <div class="project-card" data-delay="150">
+            <h3 class="project-title">Modeling and Analysis of Vertical Axis Wind Turbine Blade</h3>
+            <div class="project-date">Apr – Jul 2024</div>
+            <p class="project-description">Designed a Savonius-type VAWT blade using CATIA V5, SolidWorks, and ANSYS.</p>
+            <div class="project-technologies">
+              <span class="tech-tag" style="background:#e9d5ff;color:#6f42c1;">CATIA V5</span>
+              <span class="tech-tag" style="background:#dbeafe;color:#0077b6;">SolidWorks</span>
+              <span class="tech-tag" style="background:#d1fae5;color:#198754;">ANSYS</span>
+            </div>
+            <ul class="project-features">
+              <li>Developed complete 3D blade geometry.</li>
+              <li>Performed FEA to analyze stress and deformation.</li>
+              <li>Used QBlade for aerodynamic curve analysis.</li>
+            </ul>
+            <div class="project-actions">
+              <a href="Modeling and Analysis of Vertical Axis Wind Turbine Blade.pdf" target="_blank" class="btn btn-pdf">
+                <i class="fas fa-file-pdf"></i> View PDF
+              </a>
             </div>
           </div>
 
-          <div class="skill-block tilt-card fade-in">
-            <h4>Simulation Software</h4>
-            <div class="skill-tags wrap">
-              <span class="skill">ANSYS</span>
-              <span class="skill">Abaqus</span>
-              <span class="skill">Hyper Mesh</span>
-              <span class="skill">ANSA</span>
-              <span class="skill">MATLAB</span>
-              <span class="skill">ANSYS Fluent</span>
-              <span class="skill">CFD</span>
+          <div class="project-card" data-delay="300">
+            <h3 class="project-title">Free Convection in a Trapezoidal Cavity with Porous Media</h3>
+            <div class="project-date">Aug – Dec 2024</div>
+            <p class="project-description">FEM-based numerical simulations to analyze natural convection in a porous trapezoidal cavity.</p>
+            <div class="project-technologies">
+              <span class="tech-tag" style="background:#fecaca;color:#dc3545;">MATLAB</span>
+              <span class="tech-tag" style="background:#cffafe;color:#0dcaf0;">CFD</span>
             </div>
-          </div>
-
-          <div class="skill-block tilt-card fade-in">
-            <h4>Product Development &amp; Tools</h4>
-            <div class="skill-tags wrap">
-              <span class="skill">Product Development</span>
-              <span class="skill">Product Design</span>
-              <span class="skill">BOM Management</span>
-              <span class="skill">PLM/PDM Tools</span>
-              <span class="skill">Design Optimization</span>
-              <span class="skill">GD&amp;T</span>
-              <span class="skill">RT Toolbox3</span>
-              <span class="skill">Microsoft Office</span>
-              <span class="skill">Technical Documentation</span>
-            </div>
-          </div>
-
-          <div class="skill-block certifications-block tilt-card fade-in">
-            <h4>Certifications</h4>
-            <div class="skill-tags">
-              <span class="skill">CATIA V5 Certification</span>
-              <span class="skill">SolidWorks CAD Design</span>
-              <span class="skill">ANSYS Workbench</span>
-              <span class="skill">Python Programming</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EDUCATION -->
-      <section id="education" class="section education white-section" data-parallax>
-  <div class="container">
-    
-    <div class="section-header">
-      <h2 class="section-title">Education</h2>
-      <p class="section-subtitle">Academic background and qualifications</p>
-    </div>
-
-    <div class="education-grid">
-
-      <!-- M.Tech -->
-      <div class="education-card tilt-card fade-in">
-        <div class="education-header">
-          <div class="education-icon purple">
-            <i class="fas fa-graduation-cap"></i>
-          </div>
-          <div class="education-info">
-            <h3 class="degree-title">Master of Technology (M.Tech)</h3>
-            <p class="degree-field">Engineering Design</p>
-          </div>
-        </div>
-        <div class="education-details">
-          <p class="institution">
-            <a href="https://www.sitpune.edu.in/" target="_blank" rel="noopener noreferrer">
-              Symbiosis Institute of Management Studies, Pune
-            </a>
-          </p>
-          <div class="education-meta">
-            <span class="education-period">2025 – 2027</span>
-            <span class="education-type">Working Professional</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- B.E -->
-      <div class="education-card tilt-card fade-in">
-        <div class="education-header">
-          <div class="education-icon purple">
-            <i class="fas fa-graduation-cap"></i>
-          </div>
-          <div class="education-info">
-            <h3 class="degree-title">Bachelor of Engineering (B.E)</h3>
-            <p class="degree-field">Mechanical Engineering</p>
-          </div>
-        </div>
-        <div class="education-details">
-          <p class="institution">
-            <a href="https://bit-bangalore.edu.in/" target="_blank" rel="noopener noreferrer">
-              Bangalore Institute of Technology, Bengaluru
-            </a>
-          </p>
-          <div class="education-meta">
-            <span class="education-period">2022 – 2025</span>
-            <span class="education-grade">CGPA: 8.5</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Diploma -->
-      <div class="education-card tilt-card fade-in">
-        <div class="education-header">
-          <div class="education-icon blue">
-            <i class="fas fa-certificate"></i>
-          </div>
-          <div class="education-info">
-            <h3 class="degree-title">Diploma</h3>
-            <p class="degree-field">Mechanical Engineering</p>
-          </div>
-        </div>
-        <div class="education-details">
-          <p class="institution">
-            Jawaharlal Nehru Polytechnic (Aided), Thana Kushnoor, Bidar
-          </p>
-          <div class="education-meta">
-            <span class="education-period">2018 – 2021</span>
-            <span class="education-grade">72%</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-    <!-- CONTACT -->
-   <section id="contact" class="section contact white-section" data-parallax>
-  <div class="container contact-grid">
-    <div class="contact-left tilt-card fade-in">
-      <div class="section-header">
-        <h2>Let's Work Together</h2>
-        <p>Ready to bring innovative engineering solutions to your next project. Let's discuss how we can collaborate.</p>
-      </div>
-
-      <div class="contact-cards">
-        <!-- Email -->
-        <div class="contact-card">
-          <i class="fas fa-envelope"></i>
-          <div>
-            <strong>Email</strong>
-            <div class="muted">
-              <a href="mailto:udaykumarborale9@gmail.com">udaykumarborale9@gmail.com</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Phone -->
-        <div class="contact-card">
-          <i class="fas fa-phone"></i>
-          <div>
-            <strong>Phone</strong>
-            <div class="muted">
-              <a href="tel:+918660272709">+91-8660272709</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- LinkedIn -->
-        <div class="contact-card">
-          <i class="fab fa-linkedin"></i>
-          <div>
-            <strong>LinkedIn</strong>
-            <div class="muted">
-              <a href="https://linkedin.com/in/udaykumarborale" target="_blank" rel="noopener noreferrer">
-                linkedin.com/in/udaykumarborale
+            <ul class="project-features">
+              <li>Performed FEM-based thermal and flow simulations.</li>
+              <li>Analyzed Rayleigh number and porosity effects.</li>
+              <li>Interpreted temperature contours and velocity fields.</li>
+            </ul>
+            <div class="project-actions">
+              <a href="Studies on Free Convection in a Trapezoidal Cavity with Porous Media.pdf" target="_blank" class="btn btn-pdf">
+                <i class="fas fa-file-pdf"></i> View PDF
               </a>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Location -->
-        <div class="contact-card">
-          <i class="fas fa-map-marker-alt"></i>
-          <div>
-            <strong>Location</strong>
-            <div class="muted">
-              Banashankari 1st Stage, Bangalore - 560050
+    <!-- ===== SKILLS ===== -->
+    <section id="skills" class="section white-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Skills &amp; <span>Tools</span></h2>
+          <p class="section-subtitle">Expertise in industry-leading engineering tools and technologies</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-block" data-delay="0">
+            <h4 style="color:#6f42c1;">3D Modeling Tools</h4>
+            <div class="skill-tags wrap">
+              <span class="skill">CATIA</span><span class="skill">Siemens NX</span>
+              <span class="skill">SolidWorks</span><span class="skill">Autodesk Inventor</span>
+              <span class="skill">PTC Creo</span>
+            </div>
+          </div>
+          <div class="skill-block" data-delay="100">
+            <h4 style="color:#0077b6;">Simulation Software</h4>
+            <div class="skill-tags wrap">
+              <span class="skill">ANSYS</span><span class="skill">Abaqus</span>
+              <span class="skill">HyperMesh</span><span class="skill">MATLAB</span>
+              <span class="skill">ANSYS Fluent</span>
+            </div>
+          </div>
+          <div class="skill-block" data-delay="200">
+            <h4 style="color:#198754;">Product Development</h4>
+            <div class="skill-tags wrap">
+              <span class="skill">Product Development</span>
+              <span class="skill">BOM Management</span>
+              <span class="skill">PLM/PDM</span>
+              <span class="skill">GD&amp;T</span>
+            </div>
+          </div>
+          <div class="skill-block certifications-block" data-delay="300">
+            <h4>Certifications</h4>
+            <div class="skill-tags wrap">
+              <span class="skill">CATIA V5</span>
+              <span class="skill">SolidWorks CAD</span>
+              <span class="skill">ANSYS Workbench</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-        <div class="contact-right tilt-card fade-in">
-    <form id="contact-form" class="contact-form" onsubmit="handleFormSubmit(event)">
-        <div class="form-row">
-            <input type="text" name="first_name" placeholder="First Name" required>
-            <input type="text" name="last_name" placeholder="Last Name" required>
-        </div>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <input type="text" name="subject" placeholder="Subject" required>
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn btn-primary">Send Message</button>
-        <p id="form-status" class="form-status" aria-live="polite"></p> <!-- Status message will appear here -->
-    </form>
-</div>
-
     </section>
 
-    <!-- FOOTER -->
-    <footer class="site-footer white-section tilt-card fade-in">
-      <div class="container footer-grid">
+    <!-- ===== EDUCATION ===== -->
+    <section id="education" class="section white-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title"><span>Education</span></h2>
+          <p class="section-subtitle">Academic background and qualifications</p>
+        </div>
+        <div class="education-grid">
+          <div class="education-card" data-delay="0">
+            <div class="education-header">
+              <div class="education-icon"><i class="fas fa-graduation-cap"></i></div>
+              <div>
+                <h3 class="degree-title">Master of Technology (M.Tech)</h3>
+                <p class="degree-field">Engineering Design</p>
+              </div>
+            </div>
+            <div class="education-details">
+              <p class="institution">Symbiosis Institute of Management Studies, Pune</p>
+              <div class="education-meta"><span>2025 – 2027</span></div>
+            </div>
+          </div>
+          <div class="education-card" data-delay="150">
+            <div class="education-header">
+              <div class="education-icon"><i class="fas fa-graduation-cap"></i></div>
+              <div>
+                <h3 class="degree-title">Bachelor of Engineering (B.E)</h3>
+                <p class="degree-field">Mechanical Engineering</p>
+              </div>
+            </div>
+            <div class="education-details">
+              <p class="institution">Bangalore Institute of Technology, Bengaluru</p>
+              <div class="education-meta"><span>2022 – 2025</span><span>CGPA: 8.5</span></div>
+            </div>
+          </div>
+          <div class="education-card" data-delay="300">
+            <div class="education-header">
+              <div class="education-icon"><i class="fas fa-certificate"></i></div>
+              <div>
+                <h3 class="degree-title">Diploma</h3>
+                <p class="degree-field">Mechanical Engineering</p>
+              </div>
+            </div>
+            <div class="education-details">
+              <p class="institution">Jawaharlal Nehru Polytechnic, Bidar</p>
+              <div class="education-meta"><span>2018 – 2021</span><span>72%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="section white-section">
+      <div class="container contact-grid">
+        <div>
+          <div class="section-header">
+            <h2 class="section-title">Let's <span>Work Together</span></h2>
+            <p class="section-subtitle">Ready to bring innovative engineering solutions to your next project.</p>
+          </div>
+          <div class="contact-card" data-delay="0">
+            <i class="fas fa-envelope"></i>
+            <div><strong>Email</strong><div class="muted"><a href="mailto:udaykumarborale9@gmail.com">udaykumarborale9@gmail.com</a></div></div>
+          </div>
+          <div class="contact-card" data-delay="100">
+            <i class="fas fa-phone"></i>
+            <div><strong>Phone</strong><div class="muted"><a href="tel:+918660272709">+91-8660272709</a></div></div>
+          </div>
+          <div class="contact-card" data-delay="200">
+            <i class="fab fa-linkedin"></i>
+            <div><strong>LinkedIn</strong><div class="muted"><a href="https://linkedin.com/in/udaykumarborale" target="_blank">linkedin.com/in/udaykumarborale</a></div></div>
+          </div>
+          <div class="contact-card" data-delay="300">
+            <i class="fas fa-map-marker-alt"></i>
+            <div><strong>Location</strong><div class="muted">Bangalore - 560050</div></div>
+          </div>
+        </div>
+        <div>
+          <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-row">
+              <input type="text" name="first_name" placeholder="First Name" required>
+              <input type="text" name="last_name" placeholder="Last Name" required>
+            </div>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn-primary">Send Message</button>
+            <p id="formStatus" class="form-status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <div class="footer-grid">
         <div>© <span id="year"></span> Udaykumar Borale. All rights reserved.</div>
-        <div>Mechanical Engineer - (R & D Engineer — Powertrain & BIW Design)| Chropynska Group, Pune / Bengaluru India </div>
+        <div>R&amp;D Engineer — Powertrain &amp; BIW Design</div>
       </div>
     </footer>
-  </main>
 
-  <!-- Floating Hire Me -->
-  <a href="#contact" class="floating-hireme" aria-label="Hire Me">Hire Me</a>
+    <!-- ===== FLOATING HIRE ME ===== -->
+    <a href="#contact" class="floating-hireme">Hire Me</a>
 
-  <script src="script.js" defer></script>
+  </div>
+
+  <!-- ============================================================
+  JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ============================================================
+    //   GOLD CUSTOM CURSOR
+    // ============================================================
+    (function goldCursor() {
+      var dot = document.getElementById('cursorDot');
+      var ring = document.getElementById('cursorRing');
+      if (!dot || !ring) return;
+
+      var mouseX = 0,
+        mouseY = 0;
+      var ringX = 0,
+        ringY = 0;
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+        createTrail(mouseX, mouseY);
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      var interactives = document.querySelectorAll('a, button, .btn, .nav-link, .flip-card, .project-card, .skill, .quick-link, .tilt-card, .experience-card, .education-card, .internship-card');
+      interactives.forEach(function(el) {
+        el.addEventListener('mouseenter', function() {
+          ring.classList.add('hover');
+          dot.style.width = '14px';
+          dot.style.height = '14px';
+        });
+        el.addEventListener('mouseleave', function() {
+          ring.classList.remove('hover');
+          dot.style.width = '10px';
+          dot.style.height = '10px';
+        });
+        el.addEventListener('mousedown', function() {
+          ring.classList.add('click');
+          dot.style.width = '6px';
+          dot.style.height = '6px';
+        });
+        el.addEventListener('mouseup', function() {
+          ring.classList.remove('click');
+          dot.style.width = '14px';
+          dot.style.height = '14px';
+          setTimeout(function() {
+            dot.style.width = '10px';
+            dot.style.height = '10px';
+          }, 200);
+        });
+      });
+
+      if ('ontouchstart' in window) {
+        dot.style.display = 'none';
+        ring.style.display = 'none';
+      }
+
+      function createTrail(x, y) {
+        var trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        trail.style.left = x + 'px';
+        trail.style.top = y + 'px';
+        trail.style.width = (2 + Math.random() * 4) + 'px';
+        trail.style.height = trail.style.width;
+        document.body.appendChild(trail);
+        setTimeout(function() {
+          trail.remove();
+        }, 800);
+      }
+
+      var trailThrottle = false;
+      var originalCreateTrail = createTrail;
+      createTrail = function(x, y) {
+        if (!trailThrottle) {
+          trailThrottle = true;
+          originalCreateTrail(x, y);
+          setTimeout(function() {
+            trailThrottle = false;
+          }, 30);
+        }
+      };
+    })();
+
+    // ============================================================
+    //   3D BACKGROUND - PARTICLES + SHAPES
+    // ============================================================
+    (function() {
+      var canvas = document.getElementById('bg-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      var renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true,
+        alpha: true
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x000000, 0);
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 35;
+
+      var particleCount = 2000;
+      var positions = new Float32Array(particleCount * 3);
+      var colors = new Float32Array(particleCount * 3);
+      var colorPalette = [new THREE.Color('#ff7a00'), new THREE.Color('#ffbb33'), new THREE.Color('#f5b301'),
+        new THREE.Color('#3bc9db'), new THREE.Color('#8b5cf6')
+      ];
+
+      for (var i = 0; i < particleCount; i++) {
+        var radius = 15 + Math.random() * 15;
+        var theta = Math.random() * Math.PI * 2;
+        var phi = Math.acos(2 * Math.random() - 1);
+        positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+        positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+        positions[i * 3 + 2] = radius * Math.cos(phi);
+        var col = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+        colors[i * 3] = col.r;
+        colors[i * 3 + 1] = col.g;
+        colors[i * 3 + 2] = col.b;
+      }
+
+      var particleGeometry = new THREE.BufferGeometry();
+      particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      var particleMaterial = new THREE.PointsMaterial({
+        size: 0.25,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending,
+        sizeAttenuation: true
+      });
+      var particles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particles);
+
+      var shapes = [];
+      var shapeGeometries = [new THREE.BoxGeometry(0.5, 0.5, 0.5), new THREE.TorusGeometry(0.35, 0.12, 8, 16),
+        new THREE.OctahedronGeometry(0.35), new THREE.DodecahedronGeometry(0.35)
+      ];
+      var shapeColors = [0xff7a00, 0xffbb33, 0x3bc9db, 0x8b5cf6];
+
+      for (var i = 0; i < 15; i++) {
+        var geo = shapeGeometries[i % shapeGeometries.length];
+        var mat = new THREE.MeshStandardMaterial({
+          color: shapeColors[i % shapeColors.length],
+          metalness: 0.3,
+          roughness: 0.4,
+          transparent: true,
+          opacity: 0.12 + Math.random() * 0.15,
+          wireframe: Math.random() > 0.7
+        });
+        var mesh = new THREE.Mesh(geo, mat);
+        var radius = 12 + Math.random() * 15;
+        var theta = Math.random() * Math.PI * 2;
+        var phi = Math.acos(2 * Math.random() - 1);
+        mesh.position.set(radius * Math.sin(phi) * Math.cos(theta), radius * Math.sin(phi) * Math.sin(theta), radius *
+          Math.cos(phi));
+        mesh.userData = {
+          rotSpeed: {
+            x: (Math.random() - 0.5) * 0.015,
+            y: (Math.random() - 0.5) * 0.015,
+            z: (Math.random() - 0.5) * 0.015
+          },
+          orbitSpeed: 0.001 + Math.random() * 0.002,
+          radius: radius,
+          theta: theta,
+          phi: phi,
+          floatSpeed: 0.5 + Math.random() * 0.5,
+          floatOffset: Math.random() * Math.PI * 2
+        };
+        scene.add(mesh);
+        shapes.push(mesh);
+      }
+
+      var ambientLight = new THREE.AmbientLight(0x404060, 0.5);
+      scene.add(ambientLight);
+      var dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      dirLight.position.set(10, 20, 10);
+      scene.add(dirLight);
+      var dirLight2 = new THREE.DirectionalLight(0xff7a00, 0.3);
+      dirLight2.position.set(-10, -5, 10);
+      scene.add(dirLight2);
+
+      var targetX = 0,
+        targetY = 0,
+        currentX = 0,
+        currentY = 0;
+
+      function handleMove(clientX, clientY) {
+        targetX = (clientX / window.innerWidth - 0.5) * 2;
+        targetY = (clientY / window.innerHeight - 0.5) * -2;
+      }
+
+      document.addEventListener('mousemove', function(e) {
+        handleMove(e.clientX, e.clientY);
+      });
+      document.addEventListener('touchmove', function(e) {
+        if (e.touches.length > 0) {
+          handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, {
+        passive: true
+      });
+
+      window.addEventListener('resize', function() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        var time = Date.now() * 0.0003;
+        currentX += (targetX - currentX) * 0.05;
+        currentY += (targetY - currentY) * 0.05;
+        particles.rotation.x += 0.0003;
+        particles.rotation.y += 0.0006;
+        particles.rotation.x += (currentY * 0.015 - particles.rotation.x) * 0.01;
+        particles.rotation.y += (currentX * 0.015 - particles.rotation.y) * 0.01;
+        shapes.forEach(function(shape) {
+          shape.rotation.x += shape.userData.rotSpeed.x;
+          shape.rotation.y += shape.userData.rotSpeed.y;
+          shape.rotation.z += shape.userData.rotSpeed.z;
+          shape.userData.theta += shape.userData.orbitSpeed;
+          var floatY = Math.sin(time * shape.userData.floatSpeed + shape.userData.floatOffset) * 0.5;
+          shape.position.x = shape.userData.radius * Math.sin(shape.userData.theta) * Math.cos(shape.userData.phi +
+            time * 0.08);
+          shape.position.y = shape.userData.radius * Math.sin(shape.userData.theta) * Math.sin(shape.userData.phi +
+            time * 0.08) + floatY;
+          shape.position.z = shape.userData.radius * Math.cos(shape.userData.theta + time * 0.05);
+        });
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+
+    // ============================================================
+    //   HERO 3D
+    // ============================================================
+    (function() {
+      function init() {
+        var canvas = document.getElementById('three-canvas');
+        if (!canvas || typeof THREE === 'undefined') return;
+
+        var renderer = new THREE.WebGLRenderer({
+          canvas: canvas,
+          antialias: true,
+          alpha: true
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x000000, 0);
+
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+        camera.position.set(0, 0.9, 3.2);
+
+        var hemi = new THREE.HemisphereLight(0xffffff, 0x111122, 0.7);
+        hemi.position.set(0, 1, 0);
+        scene.add(hemi);
+
+        var dir = new THREE.DirectionalLight(0xffffff, 0.9);
+        dir.position.set(3, 5, 2);
+        scene.add(dir);
+
+        var grp = new THREE.Group();
+
+        var boxGeo = new THREE.BoxGeometry(1.6, 0.8, 1.0);
+        var boxMat = new THREE.MeshStandardMaterial({
+          metalness: 0.9,
+          roughness: 0.25,
+          color: 0x1e293b
+        });
+        var housing = new THREE.Mesh(boxGeo, boxMat);
+        housing.rotation.y = 0.2;
+        grp.add(housing);
+
+        var cylGeo = new THREE.CylinderGeometry(0.28, 0.28, 1.05, 32);
+        var cylMat = new THREE.MeshStandardMaterial({
+          metalness: 0.95,
+          roughness: 0.15,
+          color: 0x0ea5a4
+        });
+        var rotor = new THREE.Mesh(cylGeo, cylMat);
+        rotor.rotation.z = Math.PI / 2;
+        rotor.position.set(0, 0, 0.02);
+        grp.add(rotor);
+
+        var torGeo = new THREE.TorusGeometry(0.45, 0.08, 16, 80);
+        var torMat = new THREE.MeshStandardMaterial({
+          metalness: 0.9,
+          roughness: 0.2,
+          color: 0xff8a00
+        });
+        var ring = new THREE.Mesh(torGeo, torMat);
+        ring.rotation.x = Math.PI / 2;
+        ring.position.set(0.72, 0, 0);
+        grp.add(ring);
+
+        var bracketGeo = new THREE.BoxGeometry(0.18, 0.06, 0.5);
+        var bracketMat = new THREE.MeshStandardMaterial({
+          metalness: 0.85,
+          roughness: 0.35,
+          color: 0x94a3b8
+        });
+        for (var i = 0; i < 4; i++) {
+          var b = new THREE.Mesh(bracketGeo, bracketMat);
+          var ang = i * Math.PI / 2;
+          b.position.set(Math.cos(ang) * 0.95, Math.sin(ang) * 0.12, Math.sin(ang) * 0.35);
+          b.rotation.z = ang;
+          grp.add(b);
+        }
+
+        var planeGeo = new THREE.PlaneGeometry(6, 3);
+        var planeMat = new THREE.MeshBasicMaterial({
+          color: 0x07102a,
+          side: THREE.DoubleSide
+        });
+        var plane = new THREE.Mesh(planeGeo, planeMat);
+        plane.position.set(0, -0.2, -1.1);
+        scene.add(plane);
+
+        scene.add(grp);
+
+        function resize() {
+          var rect = canvas.getBoundingClientRect();
+          var w = Math.max(32, rect.width);
+          var h = Math.max(32, rect.height);
+          if (canvas.width !== Math.floor(w * devicePixelRatio) || canvas.height !== Math.floor(h * devicePixelRatio)) {
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+          }
+        }
+
+        var mouseX = 0,
+          mouseY = 0;
+
+        function handleHeroMove(clientX, clientY) {
+          var rect = canvas.getBoundingClientRect();
+          mouseX = ((clientX - rect.left) / rect.width - 0.5) * 2;
+          mouseY = ((clientY - rect.top) / rect.height - 0.5) * -2;
+        }
+
+        window.addEventListener('mousemove', function(e) {
+          handleHeroMove(e.clientX, e.clientY);
+        });
+        window.addEventListener('touchmove', function(e) {
+          if (e.touches.length > 0) {
+            handleHeroMove(e.touches[0].clientX, e.touches[0].clientY);
+          }
+        }, {
+          passive: true
+        });
+
+        var clock = new THREE.Clock();
+
+        function animate() {
+          resize();
+          var t = clock.getElapsedTime();
+          grp.rotation.y = Math.sin(t * 0.4) * 0.26 + mouseX * 0.25;
+          grp.rotation.x = Math.sin(t * 0.12) * 0.05 + mouseY * 0.07;
+          rotor.rotation.x = t * 3.2;
+          ring.rotation.z = -t * 0.9;
+          renderer.render(scene, camera);
+          requestAnimationFrame(animate);
+        }
+        animate();
+      }
+
+      if (document.readyState === 'complete') {
+        init();
+      } else {
+        window.addEventListener('load', init);
+      }
+    })();
+
+    // ============================================================
+    //   ROBOTIC DEBURRING STATION - 3D VISUALIZATION
+    // ============================================================
+    (function() {
+      function initRobot() {
+        var canvas = document.getElementById('robot-canvas');
+        if (!canvas || typeof THREE === 'undefined') return;
+
+        var renderer = new THREE.WebGLRenderer({
+          canvas: canvas,
+          antialias: true,
+          alpha: true
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x000000, 0);
+
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+        camera.position.set(4, 3, 6);
+        camera.lookAt(0, 0.5, 0);
+
+        var hemi = new THREE.HemisphereLight(0xffffff, 0x111122, 0.7);
+        scene.add(hemi);
+        var dir = new THREE.DirectionalLight(0xffffff, 1.0);
+        dir.position.set(5, 10, 5);
+        scene.add(dir);
+        var dir2 = new THREE.DirectionalLight(0xff7a00, 0.4);
+        dir2.position.set(-5, 0, 5);
+        scene.add(dir2);
+        var pointLight = new THREE.PointLight(0xff7a00, 0.5, 8);
+        pointLight.position.set(0, 3, 0);
+        scene.add(pointLight);
+
+        var floorGeo = new THREE.PlaneGeometry(6, 6);
+        var floorMat = new THREE.MeshStandardMaterial({
+          color: 0x0a1a2a,
+          metalness: 0.3,
+          roughness: 0.8,
+          transparent: true,
+          opacity: 0.8
+        });
+        var floor = new THREE.Mesh(floorGeo, floorMat);
+        floor.rotation.x = -Math.PI / 2;
+        floor.position.y = -0.05;
+        scene.add(floor);
+
+        var gridHelper = new THREE.GridHelper(6, 12, 0xff7a00, 0x1e293b);
+        gridHelper.position.y = 0;
+        scene.add(gridHelper);
+
+        var baseGroup = new THREE.Group();
+        var baseGeo = new THREE.CylinderGeometry(0.9, 1.0, 0.4, 32);
+        var baseMat = new THREE.MeshStandardMaterial({
+          metalness: 0.8,
+          roughness: 0.3,
+          color: 0x1e293b
+        });
+        var base = new THREE.Mesh(baseGeo, baseMat);
+        base.position.y = 0.2;
+        baseGroup.add(base);
+
+        var ringLightGeo = new THREE.TorusGeometry(0.8, 0.04, 16, 32);
+        var ringLightMat = new THREE.MeshStandardMaterial({
+          color: 0xff7a00,
+          emissive: 0xff7a00,
+          emissiveIntensity: 0.3
+        });
+        var ringLight = new THREE.Mesh(ringLightGeo, ringLightMat);
+        ringLight.position.y = 0.4;
+        ringLight.rotation.x = Math.PI / 2;
+        baseGroup.add(ringLight);
+        scene.add(baseGroup);
+
+        var armGroup = new THREE.Group();
+        armGroup.position.set(0, 0.4, 0);
+
+        var joint1Geo = new THREE.SphereGeometry(0.3, 20, 20);
+        var joint1Mat = new THREE.MeshStandardMaterial({
+          metalness: 0.9,
+          roughness: 0.2,
+          color: 0xff7a00
+        });
+        var joint1 = new THREE.Mesh(joint1Geo, joint1Mat);
+        joint1.position.set(0, 0.3, 0);
+        armGroup.add(joint1);
+
+        var arm1Geo = new THREE.BoxGeometry(0.25, 1.0, 0.25);
+        var arm1Mat = new THREE.MeshStandardMaterial({
+          metalness: 0.7,
+          roughness: 0.3,
+          color: 0x0ea5a4
+        });
+        var arm1 = new THREE.Mesh(arm1Geo, arm1Mat);
+        arm1.position.set(0, 0.8, 0);
+        armGroup.add(arm1);
+
+        var joint2Geo = new THREE.SphereGeometry(0.22, 20, 20);
+        var joint2Mat = new THREE.MeshStandardMaterial({
+          metalness: 0.9,
+          roughness: 0.2,
+          color: 0xff7a00
+        });
+        var joint2 = new THREE.Mesh(joint2Geo, joint2Mat);
+        joint2.position.set(0.5, 1.3, 0);
+        armGroup.add(joint2);
+
+        var arm2Geo = new THREE.BoxGeometry(0.2, 0.9, 0.2);
+        var arm2Mat = new THREE.MeshStandardMaterial({
+          metalness: 0.7,
+          roughness: 0.3,
+          color: 0x3bc9db
+        });
+        var arm2 = new THREE.Mesh(arm2Geo, arm2Mat);
+        arm2.position.set(0.5, 1.8, 0);
+        armGroup.add(arm2);
+
+        var joint3Geo = new THREE.SphereGeometry(0.18, 20, 20);
+        var joint3Mat = new THREE.MeshStandardMaterial({
+          metalness: 0.9,
+          roughness: 0.2,
+          color: 0xff7a00
+        });
+        var joint3 = new THREE.Mesh(joint3Geo, joint3Mat);
+        joint3.position.set(0.5, 2.3, 0);
+        armGroup.add(joint3);
+
+        var toolGroup = new THREE.Group();
+        toolGroup.position.set(0.5, 2.3, 0);
+        var toolBody = new THREE.CylinderGeometry(0.06, 0.12, 0.3, 16);
+        var toolMat = new THREE.MeshStandardMaterial({
+          metalness: 0.9,
+          roughness: 0.2,
+          color: 0xf43f5e
+        });
+        var tool = new THREE.Mesh(toolBody, toolMat);
+        tool.rotation.z = 0.4;
+        tool.position.set(0.15, 0.15, 0);
+        toolGroup.add(tool);
+
+        var tipGeo = new THREE.SphereGeometry(0.04, 8, 8);
+        var tipMat = new THREE.MeshStandardMaterial({
+          color: 0xffbb33,
+          emissive: 0xffbb33,
+          emissiveIntensity: 0.5
+        });
+        var tip = new THREE.Mesh(tipGeo, tipMat);
+        tip.position.set(0.25, 0.3, 0);
+        toolGroup.add(tip);
+        armGroup.add(toolGroup);
+        scene.add(armGroup);
+
+        var partGroup = new THREE.Group();
+        partGroup.position.set(0, 0.05, 0);
+
+        var blockGeo = new THREE.BoxGeometry(0.9, 0.35, 0.7);
+        var blockMat = new THREE.MeshStandardMaterial({
+          metalness: 0.8,
+          roughness: 0.5,
+          color: 0x4a5a6a
+        });
+        var block = new THREE.Mesh(blockGeo, blockMat);
+        block.position.y = 0.175;
+        partGroup.add(block);
+
+        for (var i = 0; i < 6; i++) {
+          var holeGeo = new THREE.CylinderGeometry(0.07, 0.07, 0.4, 16);
+          var holeMat = new THREE.MeshStandardMaterial({
+            color: 0x1a2a3a,
+            metalness: 0.9,
+            roughness: 0.3
+          });
+          var hole = new THREE.Mesh(holeGeo, holeMat);
+          var xPos = -0.35 + i * 0.14;
+          var zPos = (i % 2 === 0) ? -0.15 : 0.15;
+          hole.position.set(xPos, 0.175, zPos);
+          partGroup.add(hole);
+        }
+
+        var labelGeo = new THREE.BoxGeometry(0.5, 0.04, 0.02);
+        var labelMat = new THREE.MeshStandardMaterial({
+          color: 0xff7a00,
+          emissive: 0xff7a00,
+          emissiveIntensity: 0.1
+        });
+        var label = new THREE.Mesh(labelGeo, labelMat);
+        label.position.set(0, 0.35, 0.36);
+        partGroup.add(label);
+
+        scene.add(partGroup);
+
+        var sparkCount = 100;
+        var sparkPositions = new Float32Array(sparkCount * 3);
+        var sparkVelocities = [];
+        var sparkColors = new Float32Array(sparkCount * 3);
+        for (var i = 0; i < sparkCount; i++) {
+          sparkPositions[i * 3] = (Math.random() - 0.5) * 0.6 + 0.3;
+          sparkPositions[i * 3 + 1] = Math.random() * 0.5 + 0.3;
+          sparkPositions[i * 3 + 2] = (Math.random() - 0.5) * 0.4;
+          sparkVelocities.push({
+            x: (Math.random() - 0.5) * 0.06,
+            y: Math.random() * 0.09 + 0.02,
+            z: (Math.random() - 0.5) * 0.06
+          });
+          var color = new THREE.Color().setHSL(0.08 + Math.random() * 0.08, 1, 0.5 + Math.random() * 0.3);
+          sparkColors[i * 3] = color.r;
+          sparkColors[i * 3 + 1] = color.g;
+          sparkColors[i * 3 + 2] = color.b;
+        }
+        var sparkGeo = new THREE.BufferGeometry();
+        sparkGeo.setAttribute('position', new THREE.BufferAttribute(sparkPositions, 3));
+        sparkGeo.setAttribute('color', new THREE.BufferAttribute(sparkColors, 3));
+        var sparkMat = new THREE.PointsMaterial({
+          size: 0.045,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.9,
+          blending: THREE.AdditiveBlending,
+          sizeAttenuation: true
+        });
+        var sparks = new THREE.Points(sparkGeo, sparkMat);
+        scene.add(sparks);
+
+        var debrisCount = 50;
+        var debrisPositions = new Float32Array(debrisCount * 3);
+        for (var i = 0; i < debrisCount; i++) {
+          debrisPositions[i * 3] = (Math.random() - 0.5) * 2.5;
+          debrisPositions[i * 3 + 1] = Math.random() * 0.3;
+          debrisPositions[i * 3 + 2] = (Math.random() - 0.5) * 2.5;
+        }
+        var debrisGeo = new THREE.BufferGeometry();
+        debrisGeo.setAttribute('position', new THREE.BufferAttribute(debrisPositions, 3));
+        var debrisMat = new THREE.PointsMaterial({
+          size: 0.02,
+          color: 0x6a7a8a,
+          transparent: true,
+          opacity: 0.4
+        });
+        var debris = new THREE.Points(debrisGeo, debrisMat);
+        scene.add(debris);
+
+        function resize() {
+          var rect = canvas.getBoundingClientRect();
+          var w = Math.max(32, rect.width);
+          var h = Math.max(32, rect.height);
+          if (canvas.width !== Math.floor(w * devicePixelRatio) || canvas.height !== Math.floor(h * devicePixelRatio)) {
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+          }
+        }
+
+        var clock = new THREE.Clock();
+
+        function animate() {
+          resize();
+          var t = clock.getElapsedTime();
+
+          var armSwing1 = Math.sin(t * 0.4) * 0.25;
+          var armSwing2 = Math.sin(t * 0.5 + 0.8) * 0.3;
+
+          arm1.rotation.x = armSwing1;
+          arm1.rotation.z = Math.sin(t * 0.3 + 0.5) * 0.05;
+
+          joint2.position.x = 0.5 + Math.sin(t * 0.4) * 0.05;
+          joint2.position.y = 1.3 + Math.sin(t * 0.5 + 0.8) * 0.05;
+
+          arm2.rotation.x = armSwing2;
+          arm2.position.x = 0.5 + Math.sin(t * 0.4) * 0.05;
+          arm2.position.y = 1.8 + Math.sin(t * 0.5 + 0.8) * 0.05;
+
+          joint3.position.x = 0.5 + Math.sin(t * 0.5 + 0.8) * 0.08;
+          joint3.position.y = 2.3 + Math.sin(t * 0.5 + 0.8) * 0.08;
+
+          toolGroup.position.x = 0.5 + Math.sin(t * 0.5 + 0.8) * 0.08;
+          toolGroup.position.y = 2.3 + Math.sin(t * 0.5 + 0.8) * 0.08;
+          toolGroup.rotation.z = 0.4 + Math.sin(t * 0.7) * 0.1;
+
+          tip.position.x = 0.25 + Math.sin(t * 0.5 + 0.8) * 0.05;
+          tip.position.y = 0.3 + Math.sin(t * 0.6 + 1.2) * 0.05;
+
+          var sparkPos = sparks.geometry.attributes.position.array;
+          for (var i = 0; i < sparkCount; i++) {
+            sparkPos[i * 3] += sparkVelocities[i].x;
+            sparkPos[i * 3 + 1] += sparkVelocities[i].y;
+            sparkPos[i * 3 + 2] += sparkVelocities[i].z;
+            sparkVelocities[i].y -= 0.001;
+            if (sparkPos[i * 3 + 1] < 0.05) {
+              sparkPos[i * 3] = (Math.random() - 0.5) * 0.6 + 0.3;
+              sparkPos[i * 3 + 1] = 0.3 + Math.random() * 0.3;
+              sparkPos[i * 3 + 2] = (Math.random() - 0.5) * 0.4;
+              sparkVelocities[i] = {
+                x: (Math.random() - 0.5) * 0.06,
+                y: Math.random() * 0.09 + 0.02,
+                z: (Math.random() - 0.5) * 0.06
+              };
+            }
+          }
+          sparks.geometry.attributes.position.needsUpdate = true;
+
+          partGroup.rotation.y = t * 0.2;
+
+          var camRadius = 6;
+          var camSpeed = 0.12;
+          camera.position.x = camRadius * Math.sin(t * camSpeed);
+          camera.position.z = camRadius * Math.cos(t * camSpeed);
+          camera.position.y = 2.5 + Math.sin(t * 0.1) * 0.3;
+          camera.lookAt(0, 0.8, 0);
+
+          pointLight.intensity = 0.4 + Math.sin(t * 0.5) * 0.15;
+
+          renderer.render(scene, camera);
+          requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', resize);
+      }
+
+      if (document.readyState === 'complete') {
+        initRobot();
+      } else {
+        window.addEventListener('load', initRobot);
+      }
+    })();
+
+    // ============================================================
+    //   SCROLL ANIMATIONS - REVEAL ON SCROLL
+    // ============================================================
+    (function() {
+      var animElements = document.querySelectorAll('.experience-card, .internship-card, .project-card, .skill-block, .education-card, .contact-card, .contact-form');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+            setTimeout(function() {
+              entry.target.classList.add('visible');
+            }, delay);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+      animElements.forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+
+    // ============================================================
+    //   LOADING SCREEN
+    // ============================================================
+    setTimeout(function() {
+      var load = document.getElementById('loading-screen');
+      if (load) {
+        load.classList.add('hidden');
+      }
+    }, 1500);
+
+    // ============================================================
+    //   YEAR
+    // ============================================================
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ============================================================
+    //   SCROLL PROGRESS
+    // ============================================================
+    window.addEventListener('scroll', function() {
+      var bar = document.getElementById('scrollProgressBar');
+      if (bar) {
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (scrollTop / docHeight * 100) + '%';
+      }
+    }, {
+      passive: true
+    });
+
+    // ============================================================
+    //   HEADER SCROLL
+    // ============================================================
+    window.addEventListener('scroll', function() {
+      var header = document.getElementById('siteHeader');
+      if (header) {
+        header.classList.toggle('scrolled', window.scrollY > 80);
+      }
+    }, {
+      passive: true
+    });
+
+    // ============================================================
+    //   NAVIGATION TOGGLE
+    // ============================================================
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', function() {
+        links.classList.toggle('open');
+        toggle.classList.toggle('active');
+      });
+    }
+
+    // ============================================================
+    //   SCROLL TO SECTION
+    // ============================================================
+    function scrollToSection(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var header = document.querySelector('.site-header');
+      var offset = header ? header.offsetHeight : 86;
+      window.scrollTo({
+        top: el.getBoundingClientRect().top + window.scrollY - offset,
+        behavior: 'smooth'
+      });
+      if (links) links.classList.remove('open');
+      if (toggle) toggle.classList.remove('active');
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollToSection(this.getAttribute('href').substring(1));
+      });
+    });
+
+    // ============================================================
+    //   TYPING ANIMATION
+    // ============================================================
+    (function() {
+      var roles = ['Powertrain & BIW Design Specialist', 'Heavy Machinery Design Expert',
+        'Simulation, CAE & FEA Expert', 'DFM/DFA Strategist', 'NVH & Prototype Validation'
+      ];
+      var el = document.getElementById('role-typing');
+      if (!el) return;
+      var idx = 0,
+        ch = 0,
+        forward = true,
+        speed = 60,
+        pause = 900;
+
+      function step() {
+        var word = roles[idx];
+        if (forward) {
+          ch++;
+          el.textContent = word.slice(0, ch);
+          if (ch === word.length) {
+            forward = false;
+            setTimeout(step, pause);
+            return;
+          }
+        } else {
+          ch--;
+          el.textContent = word.slice(0, ch);
+          if (ch === 0) {
+            forward = true;
+            idx = (idx + 1) % roles.length;
+          }
+        }
+        setTimeout(step, speed);
+      }
+      setTimeout(step, 400);
+    })();
+
+    // ============================================================
+    //   COUNTERS
+    // ============================================================
+    (function() {
+      var counters = document.querySelectorAll('.metric-num[data-target]');
+      if (!counters.length) return;
+      var animated = false;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            counters.forEach(function(counter) {
+              var target = parseInt(counter.getAttribute('data-target'));
+              var current = 0;
+              var increment = target / 60;
+
+              function update() {
+                current += increment;
+                if (current >= target) {
+                  counter.textContent = target + '+';
+                  return;
+                }
+                counter.textContent = Math.floor(current) + '+';
+                requestAnimationFrame(update);
+              }
+              setTimeout(update, 300);
+            });
+          }
+        });
+      }, {
+        threshold: 0.3
+      });
+      observer.observe(document.getElementById('hero'));
+    })();
+
+    // ============================================================
+    //   CONTACT FORM
+    // ============================================================
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      var status = document.getElementById('formStatus');
+      if (!status) return;
+      status.textContent = "Sending...";
+      status.style.color = "#ff7a00";
+      emailjs.sendForm("service_3n7lhrd", "template_0f74wlr", e.target)
+        .then(function() {
+          status.textContent = "✅ Message sent successfully!";
+          status.style.color = "#22c55e";
+          e.target.reset();
+          setTimeout(function() {
+            status.textContent = "";
+          }, 5000);
+        })
+        .catch(function() {
+          status.textContent = "❌ Failed to send. Try again.";
+          status.style.color = "#ef4444";
+          setTimeout(function() {
+            status.textContent = "";
+          }, 5000);
+        });
+    }
+    window.handleFormSubmit = handleFormSubmit;
+
+    // ============================================================
+    //   FLOATING HIRE ME
+    // ============================================================
+    document.querySelector('.floating-hireme').addEventListener('click', function(e) {
+      e.preventDefault();
+      scrollToSection('contact');
+    });
+
+    console.log('🚀 Ultimate 3D Portfolio with Gold Cursor Loaded!');
+  </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
