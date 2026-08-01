@@ -44,9 +44,6 @@
       box-sizing: border-box;
     }
 
-    /* ===== STANDARD MOUSE CURSOR RESTORED ===== */
-    /* Custom golden cursor has been completely removed */
-
     /* ===== BODY ===== */
     body {
       font-family: 'Inter', sans-serif;
@@ -55,7 +52,7 @@
       overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
-      cursor: auto; /* Ensures standard white arrow */
+      cursor: auto;
     }
 
     /* ===== 3D BACKGROUND CANVAS ===== */
@@ -123,7 +120,7 @@
       transition: width 0.1s ease;
     }
 
-    /* ===== SCROLL INDICATOR - RIGHT SIDE - BOLDER & COLORFUL ===== */
+    /* ===== SCROLL INDICATOR - RIGHT SIDE ===== */
     .scroll-indicator-right {
       position: fixed;
       right: 24px;
@@ -214,7 +211,6 @@
       box-shadow: 0 0 15px rgba(212, 175, 55, 0.5) !important;
     }
 
-    /* SCROLL PROGRESS FILL - SIDE */
     .scroll-indicator-right .scroll-progress-fill {
       width: 4px;
       height: 100px;
@@ -236,66 +232,30 @@
       box-shadow: 0 0 25px rgba(255, 122, 0, 0.4);
     }
 
-    /* ANIMATIONS - ENHANCED */
     @keyframes scrollLineAnim {
-      0%, 100% {
-        transform: scaleY(0.4);
-        opacity: 0.4;
-      }
-      50% {
-        transform: scaleY(1);
-        opacity: 1;
-      }
+      0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+      50% { transform: scaleY(1); opacity: 1; }
     }
 
     @keyframes scrollDotAnim {
-      0%, 100% {
-        transform: translateY(-20px);
-        opacity: 0.2;
-        box-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
-      }
-      50% {
-        transform: translateY(20px);
-        opacity: 1;
-        box-shadow: 0 0 50px rgba(255, 122, 0, 0.8), 0 0 80px rgba(255, 122, 0, 0.4);
-      }
+      0%, 100% { transform: translateY(-20px); opacity: 0.2; box-shadow: 0 0 20px rgba(255, 122, 0, 0.3); }
+      50% { transform: translateY(20px); opacity: 1; box-shadow: 0 0 50px rgba(255, 122, 0, 0.8), 0 0 80px rgba(255, 122, 0, 0.4); }
     }
 
     @keyframes mouseBounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(8px);
-      }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
     }
 
     @keyframes wheelScroll {
-      0%, 100% {
-        transform: translateX(-50%) translateY(0);
-        opacity: 0.3;
-        height: 8px;
-      }
-      50% {
-        transform: translateX(-50%) translateY(10px);
-        opacity: 1;
-        height: 14px;
-      }
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.3; height: 8px; }
+      50% { transform: translateX(-50%) translateY(10px); opacity: 1; height: 14px; }
     }
 
     .scroll-indicator-right:hover {
       opacity: 1 !important;
       transform: translateY(-50%) scale(1.15);
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .scroll-indicator-right:hover .dot {
-      box-shadow: 0 0 50px rgba(255, 122, 0, 0.9), 0 0 100px rgba(255, 122, 0, 0.5);
-      transform: scale(1.2);
-    }
-
-    .scroll-indicator-right:hover .line {
-      box-shadow: 0 0 40px rgba(255, 122, 0, 0.7), 0 0 80px rgba(255, 122, 0, 0.3);
     }
 
     /* ===== 3D FLIP CARDS ===== */
@@ -333,52 +293,20 @@
       color: #0b1220;
       border: 1px solid rgba(10, 24, 40, 0.04);
     }
-    .flip-card-front .card-icon {
-      font-size: 2.8rem;
-      color: #ff7a00;
-      margin-bottom: 12px;
-    }
-    .flip-card-front .card-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .flip-card-front .card-hint {
-      font-size: 0.7rem;
-      color: #6b7280;
-      margin-top: 8px;
-      animation: pulseHint 2s ease-in-out infinite;
-    }
+    .flip-card-front .card-icon { font-size: 2.8rem; color: #ff7a00; margin-bottom: 12px; }
+    .flip-card-front .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+    .flip-card-front .card-hint { font-size: 0.7rem; color: #6b7280; margin-top: 8px; animation: pulseHint 2s ease-in-out infinite; }
     .flip-card-back {
       background: linear-gradient(135deg, #ff7a00, #ffbb33);
       color: #fff;
       transform: rotateY(180deg);
     }
-    .flip-card-back .back-icon {
-      font-size: 2.5rem;
-      margin-bottom: 12px;
-    }
-    .flip-card-back p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      max-width: 90%;
-    }
-    .flip-card-back .back-hint {
-      font-size: 0.65rem;
-      opacity: 0.7;
-      margin-top: 12px;
-      animation: pulseHint 2s ease-in-out infinite;
-    }
+    .flip-card-back .back-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .flip-card-back p { font-size: 0.9rem; line-height: 1.6; max-width: 90%; }
+    .flip-card-back .back-hint { font-size: 0.65rem; opacity: 0.7; margin-top: 12px; animation: pulseHint 2s ease-in-out infinite; }
     @keyframes pulseHint {
-      0%,
-      100% {
-        opacity: 0.5;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.05);
-      }
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
     }
 
     /* ===== HEADER ===== */
@@ -419,10 +347,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .brand .subtitle {
-      font-size: 0.6rem;
-      color: #6b7280;
-    }
+    .brand .subtitle { font-size: 0.6rem; color: #6b7280; }
     .nav-links {
       display: flex;
       gap: 6px;
@@ -449,12 +374,8 @@
       transition: all 0.3s ease;
       transform: translateX(-50%);
     }
-    .nav-links a:hover {
-      color: #fff;
-    }
-    .nav-links a:hover::after {
-      width: 60%;
-    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 60%; }
     .nav-toggle {
       display: none;
       background: none;
@@ -471,15 +392,9 @@
       border-radius: 2px;
       transition: all 0.3s ease;
     }
-    .nav-toggle.active .bar:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .nav-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .nav-toggle.active .bar:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
+    .nav-toggle.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .nav-toggle.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ===== HERO ===== */
     .hero {
@@ -498,11 +413,7 @@
       align-items: center;
       width: 100%;
     }
-    .hero-subtitle {
-      color: #6b7280;
-      font-weight: 600;
-      font-size: 0.85rem;
-    }
+    .hero-subtitle { color: #6b7280; font-weight: 600; font-size: 0.85rem; }
     .hero-title {
       font-size: 2.4rem;
       font-weight: 900;
@@ -512,11 +423,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .hero-role {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
+    .hero-role { font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
     .typing {
       background: linear-gradient(90deg, #ff7a00, #ffbb33);
       -webkit-background-clip: text;
@@ -530,11 +437,7 @@
       margin-left: 4px;
       animation: blink 1s steps(2) infinite;
     }
-    @keyframes blink {
-      to {
-        visibility: hidden;
-      }
-    }
+    @keyframes blink { to { visibility: hidden; } }
     .hero-desc {
       color: rgba(255, 255, 255, 0.7);
       line-height: 1.6;
@@ -542,10 +445,7 @@
       font-size: 0.95rem;
       max-width: 500px;
     }
-    .hero-desc strong {
-      color: #ffbb33;
-    }
-
+    .hero-desc strong { color: #ffbb33; }
     .contact-quick {
       display: flex;
       gap: 12px;
@@ -561,11 +461,7 @@
       font-size: 0.8rem;
       transition: all 0.3s ease;
     }
-    .quick-link:hover {
-      color: #ffbb33;
-      background: rgba(255, 122, 0, 0.1);
-    }
-
+    .quick-link:hover { color: #ffbb33; background: rgba(255, 122, 0, 0.1); }
     .hero-cta {
       display: flex;
       gap: 10px;
@@ -585,55 +481,17 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
-    .btn:active {
-      transform: scale(0.95);
-    }
-    .btn-projects {
-      background: #0077b6;
-      color: #fff;
-    }
-    .btn-projects:hover {
-      background: #005f8a;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0, 119, 182, 0.3);
-    }
-    .btn-contact {
-      background: #ff6f61;
-      color: #fff;
-    }
-    .btn-contact:hover {
-      background: #e65b50;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(255, 111, 97, 0.3);
-    }
-    .btn-resume {
-      background: #28a745;
-      color: #fff;
-    }
-    .btn-resume:hover {
-      background: #218838;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(40, 167, 69, 0.3);
-    }
-    .btn-linkedin {
-      background: #0a66c2;
-      color: #fff;
-    }
-    .btn-linkedin:hover {
-      background: #084a99;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(10, 102, 194, 0.3);
-    }
-    .btn-pdf {
-      background: #dc3545;
-      color: #fff;
-      padding: 5px 12px;
-      font-size: 0.75rem;
-    }
-    .btn-pdf:hover {
-      background: #c82333;
-      transform: translateY(-2px);
-    }
+    .btn:active { transform: scale(0.95); }
+    .btn-projects { background: #0077b6; color: #fff; }
+    .btn-projects:hover { background: #005f8a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 119, 182, 0.3); }
+    .btn-contact { background: #ff6f61; color: #fff; }
+    .btn-contact:hover { background: #e65b50; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 111, 97, 0.3); }
+    .btn-resume { background: #28a745; color: #fff; }
+    .btn-resume:hover { background: #218838; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(40, 167, 69, 0.3); }
+    .btn-linkedin { background: #0a66c2; color: #fff; }
+    .btn-linkedin:hover { background: #084a99; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(10, 102, 194, 0.3); }
+    .btn-pdf { background: #dc3545; color: #fff; padding: 5px 12px; font-size: 0.75rem; }
+    .btn-pdf:hover { background: #c82333; transform: translateY(-2px); }
 
     .hero-metrics {
       display: flex;
@@ -658,10 +516,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .metric-label {
-      font-size: 0.65rem;
-      color: #6b7280;
-    }
+    .metric-label { font-size: 0.65rem; color: #6b7280; }
 
     /* ===== HERO 3D ===== */
     .hero-3d {
@@ -689,18 +544,8 @@
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .overlay-title {
-      font-size: 0.55rem;
-      font-weight: 600;
-      color: #6b7280;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .overlay-sub {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #fff;
-    }
+    .overlay-title { font-size: 0.55rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 1px; }
+    .overlay-sub { font-size: 0.75rem; font-weight: 600; color: #fff; }
 
     /* ===== PROFILE CARD ===== */
     .profile-card {
@@ -744,12 +589,9 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .profile-role {
-      font-size: 0.7rem;
-      color: #6b7280;
-    }
+    .profile-role { font-size: 0.7rem; color: #6b7280; }
 
-    /* ===== ABOUT HERO SECTION - UPDATED ===== */
+    /* ===== ABOUT HERO SECTION ===== */
     .about-hero-section {
       padding: 60px 16px;
       background: linear-gradient(135deg, #020314, #0a1a3a);
@@ -818,9 +660,87 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .about-hero-content .stat-item .label {
-      font-size: 0.8rem;
-      color: #6b7280;
+    .about-hero-content .stat-item .label { font-size: 0.8rem; color: #6b7280; }
+
+    /* ===== ENGINEERING APPROACH SECTION - NEW ===== */
+    .engineering-approach-section {
+      padding: 60px 16px;
+      background: #fff;
+      color: #0b1220;
+    }
+    .engineering-approach-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .approach-content h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: #0b1220;
+    }
+    .approach-content h2 span {
+      background: linear-gradient(90deg, #ff7a00, #ffbb33);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .approach-content p {
+      color: #4b5563;
+      line-height: 1.8;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+    .approach-content p strong { color: #0b1220; }
+    .approach-highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .highlight-item {
+      background: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border-left: 3px solid #ff7a00;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .highlight-item i { color: #ff7a00; font-size: 1.1rem; width: 24px; }
+    .highlight-item span { font-size: 0.85rem; font-weight: 500; color: #1f2937; }
+    .approach-tools {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 14px;
+      border: 1px solid rgba(10, 24, 40, 0.04);
+    }
+    .approach-tools h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0b1220;
+      margin-bottom: 12px;
+    }
+    .approach-tools .tool-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .approach-tools .tool-tag {
+      background: #eef2ff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1f2937;
+      transition: all 0.3s ease;
+    }
+    .approach-tools .tool-tag:hover {
+      background: #ff7a00;
+      color: #fff;
+      transform: scale(1.05);
     }
 
     /* ===== ROBOTIC DEBURRING STATION ===== */
@@ -884,14 +804,8 @@
       animation: blinkDot 1.5s ease-in-out infinite;
     }
     @keyframes blinkDot {
-      0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.2;
-        transform: scale(0.8);
-      }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.2; transform: scale(0.8); }
     }
 
     /* ===== SECTIONS ===== */
@@ -935,13 +849,13 @@
       gap: 24px;
     }
 
-    /* ===== EXPERIENCE ===== */
+    /* ===== EXPERIENCE - ENHANCED ===== */
     .experience-card {
       background: #f8fafc;
-      padding: 20px;
+      padding: 24px;
       border-radius: 14px;
       border: 1px solid rgba(10, 24, 40, 0.04);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
@@ -958,41 +872,59 @@
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
       border-color: rgba(255, 122, 0, 0.15);
     }
-    .experience-title {
-      font-size: 1.1rem;
+    .experience-card .company-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .experience-card .company-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #0b1220;
+    }
+    .experience-card .company-name a {
+      color: #ff7a00;
+      text-decoration: none;
+    }
+    .experience-card .company-name a:hover { text-decoration: underline; }
+    .experience-card .role-title {
+      font-size: 1rem;
       font-weight: 700;
       color: #0077b6;
     }
-    .company-name a {
-      color: #ff7a00;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .date-info {
+    .experience-card .date-info {
       color: #6b7280;
       font-size: 0.8rem;
-      margin-top: 4px;
+      font-weight: 500;
+      background: rgba(255, 122, 0, 0.08);
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
     }
-    .achievement-list {
+    .experience-card .achievement-list {
       list-style: none;
       padding: 0;
-      margin-top: 10px;
+      margin-top: 12px;
     }
-    .achievement-list li {
-      padding: 3px 0;
-      padding-left: 18px;
+    .experience-card .achievement-list li {
+      padding: 4px 0;
+      padding-left: 22px;
       position: relative;
-      color: #495057;
+      color: #374151;
       font-size: 0.85rem;
-      line-height: 1.5;
+      line-height: 1.6;
     }
-    .achievement-list li::before {
+    .experience-card .achievement-list li::before {
       content: '▸';
       position: absolute;
       left: 0;
       color: #ff7a00;
       font-weight: 700;
     }
+    .experience-card .achievement-list li strong { color: #0b1220; }
 
     /* ===== INTERNSHIPS ===== */
     .internships-section {
@@ -1026,25 +958,10 @@
       transform: translateY(-6px) scale(1.03);
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
     }
-    .internship-card h4 {
-      font-size: 0.95rem;
-      margin-bottom: 3px;
-    }
-    .internship-subtitle {
-      opacity: 0.85;
-      font-weight: 500;
-      font-size: 0.85rem;
-    }
-    .internship-date {
-      opacity: 0.7;
-      font-size: 0.75rem;
-      margin: 6px 0;
-    }
-    .internship-description {
-      font-size: 0.8rem;
-      opacity: 0.9;
-      line-height: 1.4;
-    }
+    .internship-card h4 { font-size: 0.95rem; margin-bottom: 3px; }
+    .internship-subtitle { opacity: 0.85; font-weight: 500; font-size: 0.85rem; }
+    .internship-date { opacity: 0.7; font-size: 0.75rem; margin: 6px 0; }
+    .internship-description { font-size: 0.8rem; opacity: 0.9; line-height: 1.4; }
     .skills-tags {
       display: flex;
       flex-wrap: wrap;
@@ -1058,21 +975,11 @@
       font-size: 0.65rem;
       font-weight: 500;
     }
-    .internship-card:nth-child(2) {
-      background: linear-gradient(135deg, #0ea5a4, #06b6d4);
-    }
-    .internship-card:nth-child(3) {
-      background: linear-gradient(135deg, #8b5cf6, #c084fc);
-    }
-    .internship-card:nth-child(4) {
-      background: linear-gradient(135deg, #f43f5e, #fb7185);
-    }
-    .internship-card:nth-child(5) {
-      background: linear-gradient(135deg, #10b981, #06b6d4);
-    }
-    .internship-card:nth-child(6) {
-      background: linear-gradient(135deg, #facc15, #f97316);
-    }
+    .internship-card:nth-child(2) { background: linear-gradient(135deg, #0ea5a4, #06b6d4); }
+    .internship-card:nth-child(3) { background: linear-gradient(135deg, #8b5cf6, #c084fc); }
+    .internship-card:nth-child(4) { background: linear-gradient(135deg, #f43f5e, #fb7185); }
+    .internship-card:nth-child(5) { background: linear-gradient(135deg, #10b981, #06b6d4); }
+    .internship-card:nth-child(6) { background: linear-gradient(135deg, #facc15, #f97316); }
 
     /* ===== PROJECTS ===== */
     .projects-grid {
@@ -1100,21 +1007,9 @@
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
       border-color: rgba(255, 122, 0, 0.15);
     }
-    .project-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #d9480f;
-    }
-    .project-date {
-      font-size: 0.75rem;
-      color: #6b7280;
-      margin: 6px 0;
-    }
-    .project-description {
-      color: #495057;
-      line-height: 1.5;
-      font-size: 0.85rem;
-    }
+    .project-title { font-size: 1rem; font-weight: 700; color: #d9480f; }
+    .project-date { font-size: 0.75rem; color: #6b7280; margin: 6px 0; }
+    .project-description { color: #495057; line-height: 1.5; font-size: 0.85rem; }
     .project-technologies {
       display: flex;
       flex-wrap: wrap;
@@ -1178,11 +1073,7 @@
       transform: translateY(-4px);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
     }
-    .skill-block h4 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
+    .skill-block h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
     .skill-tags.wrap {
       display: flex;
       flex-wrap: wrap;
@@ -1202,9 +1093,7 @@
       color: #fff;
       transform: scale(1.05);
     }
-    .certifications-block h4 {
-      color: #fd7e14;
-    }
+    .certifications-block h4 { color: #fd7e14; }
 
     /* ===== EDUCATION ===== */
     .education-grid {
@@ -1236,24 +1125,11 @@
       align-items: center;
       gap: 10px;
     }
-    .education-icon {
-      font-size: 24px;
-    }
-    .degree-title {
-      font-size: 1rem;
-      font-weight: 700;
-    }
-    .degree-field {
-      opacity: 0.85;
-      font-size: 0.85rem;
-    }
-    .education-details {
-      margin-top: 10px;
-    }
-    .education-details .institution {
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
+    .education-icon { font-size: 24px; }
+    .degree-title { font-size: 1rem; font-weight: 700; }
+    .degree-field { opacity: 0.85; font-size: 0.85rem; }
+    .education-details { margin-top: 10px; }
+    .education-details .institution { font-weight: 600; font-size: 0.9rem; }
     .education-meta {
       display: flex;
       gap: 12px;
@@ -1261,9 +1137,6 @@
       font-size: 0.75rem;
       opacity: 0.8;
       flex-wrap: wrap;
-    }
-    .education-grade {
-      font-weight: 600;
     }
 
     /* ===== CONTACT ===== */
@@ -1295,23 +1168,10 @@
       transform: translateX(6px);
       border-color: rgba(255, 122, 0, 0.15);
     }
-    .contact-card i {
-      font-size: 1.1rem;
-      color: #ff7a00;
-      width: 22px;
-    }
-    .contact-card strong {
-      display: block;
-      font-size: 0.8rem;
-    }
-    .contact-card .muted {
-      color: #6b7280;
-      font-size: 0.85rem;
-    }
-    .contact-card a {
-      color: #ff7a00;
-      text-decoration: none;
-    }
+    .contact-card i { font-size: 1.1rem; color: #ff7a00; width: 22px; }
+    .contact-card strong { display: block; font-size: 0.8rem; }
+    .contact-card .muted { color: #6b7280; font-size: 0.85rem; }
+    .contact-card a { color: #ff7a00; text-decoration: none; }
 
     .contact-form {
       background: #f8fafc;
@@ -1412,47 +1272,20 @@
        RESPONSIVE
     ============================================================ */
     @media (max-width: 992px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .hero-3d {
-        height: 220px;
-      }
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .about-hero-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .robot-visual {
-        height: 350px;
-      }
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-      .scroll-indicator-right {
-        right: 16px;
-      }
-      .scroll-indicator-right .line {
-        height: 80px;
-      }
-      .scroll-indicator-right .scroll-progress-fill {
-        height: 80px;
-      }
-      .scroll-indicator-right .dot {
-        width: 14px;
-        height: 14px;
-      }
-      .scroll-indicator-right .label {
-        font-size: 0.7rem;
-      }
-      .scroll-indicator-right .mouse-icon {
-        width: 20px;
-        height: 32px;
-      }
+      .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+      .hero-3d { height: 220px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+      .about-hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .engineering-approach-grid { grid-template-columns: 1fr; gap: 30px; }
+      .robot-visual { height: 350px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .approach-highlights { grid-template-columns: 1fr; }
+      .scroll-indicator-right { right: 16px; }
+      .scroll-indicator-right .line { height: 80px; }
+      .scroll-indicator-right .scroll-progress-fill { height: 80px; }
+      .scroll-indicator-right .dot { width: 14px; height: 14px; }
+      .scroll-indicator-right .label { font-size: 0.7rem; }
+      .scroll-indicator-right .mouse-icon { width: 20px; height: 32px; }
     }
 
     @media (max-width: 768px) {
@@ -1468,41 +1301,21 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         gap: 8px;
       }
-      .nav-links.open {
-        display: flex;
-      }
+      .nav-links.open { display: flex; }
       .nav-links a {
         padding: 10px 14px;
         font-size: 0.9rem;
         width: 100%;
         text-align: center;
       }
-      .nav-links a::after {
-        display: none;
-      }
-      .nav-toggle {
-        display: flex;
-      }
+      .nav-links a::after { display: none; }
+      .nav-toggle { display: flex; }
 
-      .hero {
-        padding: 80px 14px 30px;
-        min-height: auto;
-      }
-      .hero-title {
-        font-size: 1.8rem;
-      }
-      .hero-role {
-        font-size: 0.9rem;
-      }
-      .hero-desc {
-        font-size: 0.85rem;
-        max-width: 100%;
-      }
-
-      .hero-cta {
-        flex-wrap: nowrap;
-        gap: 6px;
-      }
+      .hero { padding: 80px 14px 30px; min-height: auto; }
+      .hero-title { font-size: 1.8rem; }
+      .hero-role { font-size: 0.9rem; }
+      .hero-desc { font-size: 0.85rem; max-width: 100%; }
+      .hero-cta { flex-wrap: nowrap; gap: 6px; }
       .hero-cta .btn {
         width: auto;
         justify-content: center;
@@ -1512,258 +1325,90 @@
         min-width: 0;
         text-align: center;
       }
+      .hero-metrics { justify-content: center; gap: 8px; }
+      .metric-card { min-width: 70px; padding: 8px 12px; }
+      .metric-num { font-size: 1.2rem; }
 
-      .hero-metrics {
-        justify-content: center;
-        gap: 8px;
-      }
-      .metric-card {
-        min-width: 70px;
-        padding: 8px 12px;
-      }
-      .metric-num {
-        font-size: 1.2rem;
-      }
+      .about-hero-content h2 { font-size: 1.8rem; }
+      .about-hero-content .stats-row { flex-wrap: wrap; gap: 16px; }
+      .robot-visual { height: 300px; }
 
-      .about-hero-content h2 {
-        font-size: 1.8rem;
-      }
-      .about-hero-content .stats-row {
-        flex-wrap: wrap;
-        gap: 16px;
-      }
-      .robot-visual {
-        height: 300px;
-      }
+      .approach-content h2 { font-size: 1.6rem; }
+      .approach-highlights { grid-template-columns: 1fr; }
 
-      .profile-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 16px;
-      }
-      .profile-image-wrap {
-        width: 140px;
-        height: 140px;
-      }
+      .profile-card { flex-direction: column; text-align: center; padding: 16px; }
+      .profile-image-wrap { width: 140px; height: 140px; }
 
-      .section {
-        padding: 40px 14px;
-      }
-      .section-title {
-        font-size: 1.5rem;
-      }
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .flip-card {
-        height: 240px;
-      }
-      .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .project-card {
-        padding: 16px;
-      }
-      .skills-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-      .skill-block {
-        padding: 14px;
-      }
-      .skill-block h4 {
-        font-size: 0.85rem;
-      }
-      .skill {
-        font-size: 0.7rem;
-        padding: 4px 10px;
-      }
-      .education-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .internships-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-      }
-      .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-      .footer-grid {
-        flex-direction: column;
-        text-align: center;
-        gap: 6px;
-      }
-      .floating-hireme {
-        right: 12px;
-        bottom: 12px;
-        padding: 8px 16px;
-        font-size: 0.75rem;
-      }
-      .hero-3d {
-        height: 180px;
-        border-radius: 12px;
-      }
-      .hero-3d-overlay {
-        bottom: 8px;
-        left: 8px;
-        padding: 6px 12px;
-      }
-      .overlay-sub {
-        font-size: 0.7rem;
-      }
-      .contact-card {
-        padding: 12px;
-      }
-      .contact-form {
-        padding: 16px;
-      }
+      .section { padding: 40px 14px; }
+      .section-title { font-size: 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 16px; }
+      .flip-card { height: 240px; }
+      .projects-grid { grid-template-columns: 1fr; gap: 16px; }
+      .project-card { padding: 16px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .skill-block { padding: 14px; }
+      .skill-block h4 { font-size: 0.85rem; }
+      .skill { font-size: 0.7rem; padding: 4px 10px; }
+      .education-grid { grid-template-columns: 1fr; gap: 16px; }
+      .internships-grid { grid-template-columns: 1fr; gap: 14px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .footer-grid { flex-direction: column; text-align: center; gap: 6px; }
+      .floating-hireme { right: 12px; bottom: 12px; padding: 8px 16px; font-size: 0.75rem; }
+      .hero-3d { height: 180px; border-radius: 12px; }
+      .hero-3d-overlay { bottom: 8px; left: 8px; padding: 6px 12px; }
+      .overlay-sub { font-size: 0.7rem; }
+      .contact-card { padding: 12px; }
+      .contact-form { padding: 16px; }
 
-      .scroll-indicator-right {
-        right: 10px;
-        gap: 8px;
-      }
-      .scroll-indicator-right .line {
-        height: 60px;
-        width: 3px;
-      }
-      .scroll-indicator-right .scroll-progress-fill {
-        height: 60px;
-        width: 3px;
-      }
-      .scroll-indicator-right .dot {
-        width: 12px;
-        height: 12px;
-      }
-      .scroll-indicator-right .label {
-        font-size: 0.6rem;
-        letter-spacing: 4px;
-      }
-      .scroll-indicator-right .mouse-icon {
-        width: 18px;
-        height: 28px;
-        border-width: 2px;
-      }
-      .scroll-indicator-right .mouse-icon .wheel {
-        width: 4px;
-        height: 8px;
-      }
+      .scroll-indicator-right { right: 10px; gap: 8px; }
+      .scroll-indicator-right .line { height: 60px; width: 3px; }
+      .scroll-indicator-right .scroll-progress-fill { height: 60px; width: 3px; }
+      .scroll-indicator-right .dot { width: 12px; height: 12px; }
+      .scroll-indicator-right .label { font-size: 0.6rem; letter-spacing: 4px; }
+      .scroll-indicator-right .mouse-icon { width: 18px; height: 28px; border-width: 2px; }
+      .scroll-indicator-right .mouse-icon .wheel { width: 4px; height: 8px; }
 
-      .robot-visual .robot-overlay .sub {
-        font-size: 0.8rem;
-      }
-      .robot-visual .robot-overlay .title {
-        font-size: 0.6rem;
-      }
-      .robot-visual .robot-overlay .customer {
-        font-size: 0.6rem;
-      }
-      .robot-visual .robot-overlay .status {
-        font-size: 0.6rem;
-      }
+      .experience-card .company-header { flex-direction: column; }
+      .experience-card .date-info { white-space: normal; }
+
+      .robot-visual .robot-overlay .sub { font-size: 0.8rem; }
+      .robot-visual .robot-overlay .title { font-size: 0.6rem; }
+      .robot-visual .robot-overlay .customer { font-size: 0.6rem; }
+      .robot-visual .robot-overlay .status { font-size: 0.6rem; }
     }
 
     @media (max-width: 480px) {
-      .hero-title {
-        font-size: 1.5rem;
-      }
-      .hero-role {
-        font-size: 0.8rem;
-      }
-      .hero-3d {
-        height: 150px;
-      }
-      .brand .name {
-        font-size: 0.85rem;
-      }
-      .brand .subtitle {
-        font-size: 0.5rem;
-      }
-      .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .about-hero-content h2 {
-        font-size: 1.4rem;
-      }
-      .robot-visual {
-        height: 250px;
-      }
-      .flip-card {
-        height: 220px;
-      }
-      .metric-card {
-        min-width: 60px;
-        padding: 6px 10px;
-      }
-      .metric-num {
-        font-size: 1rem;
-      }
-      .metric-label {
-        font-size: 0.55rem;
-      }
-      .btn {
-        font-size: 0.7rem;
-        padding: 6px 12px;
-      }
+      .hero-title { font-size: 1.5rem; }
+      .hero-role { font-size: 0.8rem; }
+      .hero-3d { height: 150px; }
+      .brand .name { font-size: 0.85rem; }
+      .brand .subtitle { font-size: 0.5rem; }
+      .skills-grid { grid-template-columns: 1fr; gap: 12px; }
+      .about-hero-content h2 { font-size: 1.4rem; }
+      .approach-content h2 { font-size: 1.3rem; }
+      .robot-visual { height: 250px; }
+      .flip-card { height: 220px; }
+      .metric-card { min-width: 60px; padding: 6px 10px; }
+      .metric-num { font-size: 1rem; }
+      .metric-label { font-size: 0.55rem; }
+      .btn { font-size: 0.7rem; padding: 6px 12px; }
+      .hero-cta { gap: 4px; }
+      .hero-cta .btn { padding: 4px 6px; font-size: 0.55rem; gap: 4px; }
 
-      .hero-cta {
-        gap: 4px;
-      }
-      .hero-cta .btn {
-        padding: 4px 6px;
-        font-size: 0.55rem;
-        gap: 4px;
-      }
+      .scroll-indicator-right { right: 6px; gap: 6px; }
+      .scroll-indicator-right .line { height: 40px; width: 3px; }
+      .scroll-indicator-right .scroll-progress-fill { height: 40px; width: 3px; }
+      .scroll-indicator-right .dot { width: 10px; height: 10px; }
+      .scroll-indicator-right .label { font-size: 0.5rem; letter-spacing: 2px; }
+      .scroll-indicator-right .mouse-icon { width: 16px; height: 24px; border-width: 1.5px; }
+      .scroll-indicator-right .mouse-icon .wheel { width: 3px; height: 6px; top: 4px; }
 
-      .scroll-indicator-right {
-        right: 6px;
-        gap: 6px;
-      }
-      .scroll-indicator-right .line {
-        height: 40px;
-        width: 3px;
-      }
-      .scroll-indicator-right .scroll-progress-fill {
-        height: 40px;
-        width: 3px;
-      }
-      .scroll-indicator-right .dot {
-        width: 10px;
-        height: 10px;
-      }
-      .scroll-indicator-right .label {
-        font-size: 0.5rem;
-        letter-spacing: 2px;
-      }
-      .scroll-indicator-right .mouse-icon {
-        width: 16px;
-        height: 24px;
-        border-width: 1.5px;
-      }
-      .scroll-indicator-right .mouse-icon .wheel {
-        width: 3px;
-        height: 6px;
-        top: 4px;
-      }
-
-      .robot-visual .robot-overlay {
-        padding: 10px 14px;
-      }
-      .robot-visual .robot-overlay .sub {
-        font-size: 0.7rem;
-      }
-      .robot-visual .robot-overlay .title {
-        font-size: 0.5rem;
-      }
+      .robot-visual .robot-overlay { padding: 10px 14px; }
+      .robot-visual .robot-overlay .sub { font-size: 0.7rem; }
+      .robot-visual .robot-overlay .title { font-size: 0.5rem; }
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
   </style>
 </head>
 
@@ -1851,7 +1496,7 @@
           </div>
           <div class="hero-metrics">
             <div class="metric-card"><div class="metric-num" data-target="2">0</div><div class="metric-label">Years</div></div>
-            <div class="metric-card"><div class="metric-num" data-target="12">0</div><div class="metric-label">Projects</div></div>
+            <div class="metric-card"><div class="metric-num" data-target="6">0</div><div class="metric-label">Projects</div></div>
             <div class="metric-card"><div class="metric-num" data-target="8">0</div><div class="metric-label">Certifications</div></div>
           </div>
         </div>
@@ -1877,7 +1522,7 @@
       </div>
     </section>
 
-    <!-- ===== ABOUT HERO - EXACT MATCH TO YOUR IMAGE ===== -->
+    <!-- ===== ABOUT HERO ===== -->
     <section id="about-hero" class="about-hero-section">
       <div class="about-hero-grid">
         <div class="about-hero-content">
@@ -1921,6 +1566,67 @@
       </div>
     </section>
 
+    <!-- ===== ENGINEERING APPROACH & CORE STRENGTHS - NEW SECTION ===== -->
+    <section id="engineering-approach" class="engineering-approach-section">
+      <div class="engineering-approach-grid">
+        <div class="approach-content">
+          <span class="badge" style="display:inline-block;padding:4px 14px;border-radius:50px;background:rgba(255,122,0,0.12);color:#ff7a00;font-size:0.7rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">
+            ⚡ Engineering Approach
+          </span>
+          <h2>Research-Driven <span>Engineering &amp; Design Optimization</span></h2>
+          <p>
+            <strong>Results-driven R&amp;D Mechanical Engineer</strong> with expertise in the automotive and industrial automation sectors, specializing in <strong>mechanical product design, powertrain systems, and engineering development</strong>. Proven ability to translate complex engineering concepts and research insights into reliable, manufacturable, and cost-effective solutions aligned with global industry standards.
+          </p>
+          <p>
+            Experienced in managing the <strong>complete product development lifecycle</strong>, from concept generation and design validation to prototype development and production readiness. Skilled in delivering lightweight, optimized, and high-performance components that satisfy stringent requirements for durability, efficiency, quality, and manufacturability.
+          </p>
+          <p>
+            Strong background in <strong>research-driven engineering and design optimization</strong>, leveraging advanced simulation and modeling techniques to improve product performance, reliability, and process efficiency. Expertise in <strong>3D CAD modeling, FEA, design validation, and system integration</strong> for automotive, industrial, and automation applications.
+          </p>
+          <div class="approach-highlights">
+            <div class="highlight-item"><i class="fas fa-cogs"></i><span>Product Development Lifecycle</span></div>
+            <div class="highlight-item"><i class="fas fa-weight-hanging"></i><span>Lightweight Design &amp; Optimization</span></div>
+            <div class="highlight-item"><i class="fas fa-microchip"></i><span>System Integration</span></div>
+            <div class="highlight-item"><i class="fas fa-chart-line"></i><span>FEA &amp; Design Validation</span></div>
+            <div class="highlight-item"><i class="fas fa-industry"></i><span>Manufacturing Readiness</span></div>
+            <div class="highlight-item"><i class="fas fa-robot"></i><span>Industrial Automation</span></div>
+          </div>
+        </div>
+        <div class="approach-tools">
+          <h3><i class="fas fa-tools" style="color:#ff7a00;margin-right:8px;"></i>Engineering Tools &amp; Technologies</h3>
+          <p style="color:#6b7280;font-size:0.85rem;margin-bottom:14px;">
+            Proficient in industry-leading software for design, simulation, and analysis.
+          </p>
+          <div class="tool-tags">
+            <span class="tool-tag">Autodesk Inventor</span>
+            <span class="tool-tag">HyperMesh</span>
+            <span class="tool-tag">ANSA</span>
+            <span class="tool-tag">MATLAB</span>
+            <span class="tool-tag">Siemens NX</span>
+            <span class="tool-tag">CATIA V5</span>
+            <span class="tool-tag">PTC Creo</span>
+            <span class="tool-tag">ANSYS</span>
+            <span class="tool-tag">NX Nastran</span>
+            <span class="tool-tag">SolidWorks</span>
+          </div>
+          <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(10,24,40,0.06);">
+            <p style="font-size:0.85rem;color:#4b5563;">
+              <i class="fas fa-check-circle" style="color:#22c55e;margin-right:6px;"></i>
+              <strong>1000+</strong> production-ready CAD models delivered
+            </p>
+            <p style="font-size:0.85rem;color:#4b5563;margin-top:4px;">
+              <i class="fas fa-check-circle" style="color:#22c55e;margin-right:6px;"></i>
+              <strong>15%</strong> assembly time reduction through DFM/DFA optimization
+            </p>
+            <p style="font-size:0.85rem;color:#4b5563;margin-top:4px;">
+              <i class="fas fa-check-circle" style="color:#22c55e;margin-right:6px;"></i>
+              <strong>10%</strong> weight reduction via lightweight design strategies
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== ABOUT - FLIP CARDS ===== -->
     <section id="about" class="section white-section">
       <div class="container">
@@ -1953,7 +1659,7 @@
               </div>
               <div class="flip-card-back">
                 <div class="back-icon"><i class="fas fa-chart-line"></i></div>
-                <p>Comprehensive FEA using ANSYS, Abaqus, HyperMesh, and MATLAB. Specializing in Static, Modal, Thermal, Fatigue, Topology Optimization, and Structural Validation.</p>
+                <p>Comprehensive FEA using ANSYS, ansa, HyperMesh, and MATLAB. Specializing in Static, Modal, Thermal, Fatigue, Topology Optimization, and Structural Validation.</p>
                 <p class="back-hint">👆 Tap to flip back</p>
               </div>
             </div>
@@ -1977,34 +1683,53 @@
       </div>
     </section>
 
-    <!-- ===== EXPERIENCE ===== -->
+    <!-- ===== EXPERIENCE - ENHANCED ===== -->
     <section id="experience" class="section white-section">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Work <span>Experience</span></h2>
           <p class="section-subtitle">Professional journey and key achievements</p>
         </div>
+
+        <!-- CHROPYNSKA - ENHANCED -->
         <div class="experience-card" data-delay="0">
-          <h3 class="experience-title">R&D Engineer – Powertrain &amp; BIW Design</h3>
-          <div class="company-name"><a href="https://www.chropynska.com/en" target="_blank">CHROPYNSKA Group</a></div>
-          <div class="date-info">Oct 2025 – Present</div>
+          <div class="company-header">
+            <div>
+              <div class="company-name"><a href="https://www.chropynska.com/en" target="_blank">Chropynska India Private Limited</a></div>
+              <div class="role-title">R&D Engineer – Trainee in Powertrain Design</div>
+            </div>
+            <span class="date-info">Oct 2025 – Present</span>
+          </div>
           <ul class="achievement-list">
-            <li>Advanced R&amp;D engineering in automotive and automation systems, focusing on powertrain components.</li>
-            <li>Spearheaded design and development of powertrain components, improving structural integrity.</li>
-            <li>Delivered 100+ CAD models and assemblies, reducing design iteration time by 25%.</li>
-            <li>Executed FEA-driven validation using ANSYS aligned with ISO 26262 standards.</li>
+            <li><strong>Advanced engineering and R&amp;D company</strong> focused on automotive and automation systems, specializing in Powertrain &amp; BIW components, product concept development, detailed design, and validation.</li>
+            <li><strong>Spearheaded the design and development of Powertrain components</strong>, significantly enhancing structural integrity, performance, and manufacturability.</li>
+            <li><strong>Developed 100+ production-ready 3D CAD models</strong> and large-scale robotic deburring station assemblies (400–500 components) using <strong>Autodesk Inventor</strong>, integrating mechanical subsystems and optimizing designs for manufacturing and assembly.</li>
+            <li><strong>Optimized mechanical assembly design</strong> using <strong>DFM/DFA principles</strong>, reducing assembly time by <strong>15%</strong> and improving manufacturing efficiency.</li>
+            <li><strong>Implemented lightweight design strategies</strong> through CAD optimization and structural analysis, achieving <strong>10% reduction in component weight</strong> while maintaining performance requirements.</li>
+            <li><strong>Improved engineering workflow efficiency</strong> by optimizing CAD modeling, design validation, and documentation processes, reducing overall design cycle time by <strong>20%</strong>.</li>
+            <li><strong>Conducted FEA simulations</strong> using ANSYS, Autodesk Nastran, NX Nastran, and HyperMesh for structural validation, stress analysis, failure identification, and component performance optimization.</li>
+            <li><strong>Applied DFM/DFA principles</strong> to reduce weight, minimize cost, and enhance manufacturability.</li>
+            <li><strong>Collaborated with manufacturing, quality, procurement, and engineering teams</strong> to deliver first-pass approved designs aligned with manufacturability, quality standards, and production requirements.</li>
+            <li><strong>Ensured compliance with global automotive standards</strong> and embraced Industry 4.0 practices to optimize manufacturing processes.</li>
           </ul>
         </div>
+
+        <!-- JK FENNER -->
         <div class="experience-card" data-delay="150">
-          <h3 class="experience-title">Quality and Product Design Engineer</h3>
-          <div class="company-name"><a href="https://jkfenner.com/" target="_blank">JK Fenner India Ltd, Patancheru</a></div>
-          <div class="date-info">2021-2022</div>
+          <div class="company-header">
+            <div>
+              <div class="company-name"><a href="https://jkfenner.com/" target="_blank">JK Fenner India Ltd, Patancheru</a></div>
+              <div class="role-title">Quality and Product Design Engineer</div>
+            </div>
+            <span class="date-info">2021 – 2022</span>
+          </div>
           <ul class="achievement-list">
             <li>Created detailed 3D models and simulations to support product design initiatives.</li>
             <li>Assisted QA processes to meet industry standards and improve product reliability.</li>
           </ul>
         </div>
 
+        <!-- INTERNSHIPS -->
         <div class="internships-section">
           <h3 class="subsection-title">Internship &amp; Training</h3>
           <div class="internships-grid">
@@ -2314,41 +2039,28 @@
   JAVASCRIPT
   ============================================================ -->
   <script>
-    // ============================================================
-    //   LOADING SCREEN - HIDE AS SOON AS THE PAGE IS READY
-    // ============================================================
+    // ===== LOADING SCREEN =====
     (function() {
       var loadingScreen = document.getElementById('loading-screen');
       if (!loadingScreen) return;
-
-      function hideLoading() {
-        loadingScreen.classList.add('hidden');
-      }
-
-      if (document.readyState === 'complete') {
-        hideLoading();
-      } else {
+      function hideLoading() { loadingScreen.classList.add('hidden'); }
+      if (document.readyState === 'complete') { hideLoading(); } else {
         window.addEventListener('load', hideLoading);
         setTimeout(hideLoading, 800);
       }
     })();
 
-    // ============================================================
-    //   CONTACT FORM - WITH EMAILJS v4
-    // ============================================================
+    // ===== CONTACT FORM =====
     const SERVICE_ID = "service_3n7lhrd";
     const TEMPLATE_ID = "template_0f74wlr";
 
     function handleFormSubmit(e) {
       e.preventDefault();
-      
       const form = e.target;
       const status = document.getElementById('formStatus');
       if (!status) return;
-      
       status.textContent = "Sending message...";
       status.style.color = "#ff7a00";
-      
       const formData = new FormData(form);
       const data = {
         first_name: formData.get('first_name'),
@@ -2357,62 +2069,45 @@
         subject: formData.get('subject'),
         message: formData.get('message'),
       };
-      
       if (typeof emailjs === 'undefined') {
         status.textContent = "❌ Email service not available. Please try again later.";
         status.style.color = "#ef4444";
         console.error("EmailJS is not loaded!");
         return;
       }
-      
       emailjs.send(SERVICE_ID, TEMPLATE_ID, data)
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
           status.textContent = "✅ Message sent successfully!";
           status.style.color = "#22c55e";
           form.reset();
-          setTimeout(function() {
-            status.textContent = "";
-          }, 5000);
+          setTimeout(function() { status.textContent = ""; }, 5000);
         })
         .catch(function(error) {
           console.error('FAILED...', error);
           status.textContent = "❌ Failed to send. Error: " + (error.text || "Please try again.");
           status.style.color = "#ef4444";
-          setTimeout(function() {
-            status.textContent = "";
-          }, 5000);
+          setTimeout(function() { status.textContent = ""; }, 5000);
         });
     }
-
     window.handleFormSubmit = handleFormSubmit;
 
-    // ============================================================
-    //   3D BACKGROUND - PARTICLES + SHAPES
-    // ============================================================
+    // ===== 3D BACKGROUND =====
     (function() {
       var canvas = document.getElementById('bg-canvas');
       if (!canvas || typeof THREE === 'undefined') return;
-
-      var renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        antialias: true,
-        alpha: true
-      });
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setClearColor(0x000000, 0);
-
       var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.z = 35;
-
       var particleCount = 2000;
       var positions = new Float32Array(particleCount * 3);
       var colors = new Float32Array(particleCount * 3);
       var colorPalette = [new THREE.Color('#ff7a00'), new THREE.Color('#ffbb33'), new THREE.Color('#f5b301'),
         new THREE.Color('#3bc9db'), new THREE.Color('#8b5cf6')
       ];
-
       for (var i = 0; i < particleCount; i++) {
         var radius = 15 + Math.random() * 15;
         var theta = Math.random() * Math.PI * 2;
@@ -2425,7 +2120,6 @@
         colors[i * 3 + 1] = col.g;
         colors[i * 3 + 2] = col.b;
       }
-
       var particleGeometry = new THREE.BufferGeometry();
       particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
@@ -2439,13 +2133,11 @@
       });
       var particles = new THREE.Points(particleGeometry, particleMaterial);
       scene.add(particles);
-
       var shapes = [];
       var shapeGeometries = [new THREE.BoxGeometry(0.5, 0.5, 0.5), new THREE.TorusGeometry(0.35, 0.12, 8, 16),
         new THREE.OctahedronGeometry(0.35), new THREE.DodecahedronGeometry(0.35)
       ];
       var shapeColors = [0xff7a00, 0xffbb33, 0x3bc9db, 0x8b5cf6];
-
       for (var i = 0; i < 15; i++) {
         var geo = shapeGeometries[i % shapeGeometries.length];
         var mat = new THREE.MeshStandardMaterial({
@@ -2463,11 +2155,8 @@
         mesh.position.set(radius * Math.sin(phi) * Math.cos(theta), radius * Math.sin(phi) * Math.sin(theta), radius *
           Math.cos(phi));
         mesh.userData = {
-          rotSpeed: {
-            x: (Math.random() - 0.5) * 0.015,
-            y: (Math.random() - 0.5) * 0.015,
-            z: (Math.random() - 0.5) * 0.015
-          },
+          rotSpeed: { x: (Math.random() - 0.5) * 0.015, y: (Math.random() - 0.5) * 0.015, z: (Math.random() - 0.5) *
+              0.015 },
           orbitSpeed: 0.001 + Math.random() * 0.002,
           radius: radius,
           theta: theta,
@@ -2478,7 +2167,6 @@
         scene.add(mesh);
         shapes.push(mesh);
       }
-
       var ambientLight = new THREE.AmbientLight(0x404060, 0.5);
       scene.add(ambientLight);
       var dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -2487,7 +2175,6 @@
       var dirLight2 = new THREE.DirectionalLight(0xff7a00, 0.3);
       dirLight2.position.set(-10, -5, 10);
       scene.add(dirLight2);
-
       var targetX = 0,
         targetY = 0,
         currentX = 0,
@@ -2497,18 +2184,10 @@
         targetX = (clientX / window.innerWidth - 0.5) * 2;
         targetY = (clientY / window.innerHeight - 0.5) * -2;
       }
-
-      document.addEventListener('mousemove', function(e) {
-        handleMove(e.clientX, e.clientY);
-      });
+      document.addEventListener('mousemove', function(e) { handleMove(e.clientX, e.clientY); });
       document.addEventListener('touchmove', function(e) {
-        if (e.touches.length > 0) {
-          handleMove(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      }, {
-        passive: true
-      });
-
+        if (e.touches.length > 0) { handleMove(e.touches[0].clientX, e.touches[0].clientY); }
+      }, { passive: true });
       window.addEventListener('resize', function() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
@@ -2541,74 +2220,43 @@
       animate();
     })();
 
-    // ============================================================
-    //   HERO 3D
-    // ============================================================
+    // ===== HERO 3D =====
     (function() {
       function init() {
         var canvas = document.getElementById('three-canvas');
         if (!canvas || typeof THREE === 'undefined') return;
-
-        var renderer = new THREE.WebGLRenderer({
-          canvas: canvas,
-          antialias: true,
-          alpha: true
-        });
+        var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 0);
-
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
         camera.position.set(0, 0.9, 3.2);
-
         var hemi = new THREE.HemisphereLight(0xffffff, 0x111122, 0.7);
         hemi.position.set(0, 1, 0);
         scene.add(hemi);
-
         var dir = new THREE.DirectionalLight(0xffffff, 0.9);
         dir.position.set(3, 5, 2);
         scene.add(dir);
-
         var grp = new THREE.Group();
-
         var boxGeo = new THREE.BoxGeometry(1.6, 0.8, 1.0);
-        var boxMat = new THREE.MeshStandardMaterial({
-          metalness: 0.9,
-          roughness: 0.25,
-          color: 0x1e293b
-        });
+        var boxMat = new THREE.MeshStandardMaterial({ metalness: 0.9, roughness: 0.25, color: 0x1e293b });
         var housing = new THREE.Mesh(boxGeo, boxMat);
         housing.rotation.y = 0.2;
         grp.add(housing);
-
         var cylGeo = new THREE.CylinderGeometry(0.28, 0.28, 1.05, 32);
-        var cylMat = new THREE.MeshStandardMaterial({
-          metalness: 0.95,
-          roughness: 0.15,
-          color: 0x0ea5a4
-        });
+        var cylMat = new THREE.MeshStandardMaterial({ metalness: 0.95, roughness: 0.15, color: 0x0ea5a4 });
         var rotor = new THREE.Mesh(cylGeo, cylMat);
         rotor.rotation.z = Math.PI / 2;
         rotor.position.set(0, 0, 0.02);
         grp.add(rotor);
-
         var torGeo = new THREE.TorusGeometry(0.45, 0.08, 16, 80);
-        var torMat = new THREE.MeshStandardMaterial({
-          metalness: 0.9,
-          roughness: 0.2,
-          color: 0xff8a00
-        });
+        var torMat = new THREE.MeshStandardMaterial({ metalness: 0.9, roughness: 0.2, color: 0xff8a00 });
         var ring = new THREE.Mesh(torGeo, torMat);
         ring.rotation.x = Math.PI / 2;
         ring.position.set(0.72, 0, 0);
         grp.add(ring);
-
         var bracketGeo = new THREE.BoxGeometry(0.18, 0.06, 0.5);
-        var bracketMat = new THREE.MeshStandardMaterial({
-          metalness: 0.85,
-          roughness: 0.35,
-          color: 0x94a3b8
-        });
+        var bracketMat = new THREE.MeshStandardMaterial({ metalness: 0.85, roughness: 0.35, color: 0x94a3b8 });
         for (var i = 0; i < 4; i++) {
           var b = new THREE.Mesh(bracketGeo, bracketMat);
           var ang = i * Math.PI / 2;
@@ -2616,16 +2264,11 @@
           b.rotation.z = ang;
           grp.add(b);
         }
-
         var planeGeo = new THREE.PlaneGeometry(6, 3);
-        var planeMat = new THREE.MeshBasicMaterial({
-          color: 0x07102a,
-          side: THREE.DoubleSide
-        });
+        var planeMat = new THREE.MeshBasicMaterial({ color: 0x07102a, side: THREE.DoubleSide });
         var plane = new THREE.Mesh(planeGeo, planeMat);
         plane.position.set(0, -0.2, -1.1);
         scene.add(plane);
-
         scene.add(grp);
 
         function resize() {
@@ -2638,7 +2281,6 @@
             camera.updateProjectionMatrix();
           }
         }
-
         var mouseX = 0,
           mouseY = 0;
 
@@ -2647,18 +2289,10 @@
           mouseX = ((clientX - rect.left) / rect.width - 0.5) * 2;
           mouseY = ((clientY - rect.top) / rect.height - 0.5) * -2;
         }
-
-        window.addEventListener('mousemove', function(e) {
-          handleHeroMove(e.clientX, e.clientY);
-        });
+        window.addEventListener('mousemove', function(e) { handleHeroMove(e.clientX, e.clientY); });
         window.addEventListener('touchmove', function(e) {
-          if (e.touches.length > 0) {
-            handleHeroMove(e.touches[0].clientX, e.touches[0].clientY);
-          }
-        }, {
-          passive: true
-        });
-
+          if (e.touches.length > 0) { handleHeroMove(e.touches[0].clientX, e.touches[0].clientY); }
+        }, { passive: true });
         var clock = new THREE.Clock();
 
         function animate() {
@@ -2673,35 +2307,21 @@
         }
         animate();
       }
-
-      if (document.readyState === 'complete') {
-        init();
-      } else {
-        window.addEventListener('load', init);
-      }
+      if (document.readyState === 'complete') { init(); } else { window.addEventListener('load', init); }
     })();
 
-    // ============================================================
-    //   ROBOTIC DEBURRING STATION - 3D VISUALIZATION
-    // ============================================================
+    // ===== ROBOTIC DEBURRING STATION - 3D VISUALIZATION =====
     (function() {
       function initRobot() {
         var canvas = document.getElementById('robot-canvas');
         if (!canvas || typeof THREE === 'undefined') return;
-
-        var renderer = new THREE.WebGLRenderer({
-          canvas: canvas,
-          antialias: true,
-          alpha: true
-        });
+        var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 0);
-
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
         camera.position.set(4, 3, 6);
         camera.lookAt(0, 0.5, 0);
-
         var hemi = new THREE.HemisphereLight(0xffffff, 0x111122, 0.7);
         scene.add(hemi);
         var dir = new THREE.DirectionalLight(0xffffff, 1.0);
@@ -2713,164 +2333,93 @@
         var pointLight = new THREE.PointLight(0xff7a00, 0.5, 8);
         pointLight.position.set(0, 3, 0);
         scene.add(pointLight);
-
         var floorGeo = new THREE.PlaneGeometry(6, 6);
-        var floorMat = new THREE.MeshStandardMaterial({
-          color: 0x0a1a2a,
-          metalness: 0.3,
-          roughness: 0.8,
-          transparent: true,
-          opacity: 0.8
-        });
+        var floorMat = new THREE.MeshStandardMaterial({ color: 0x0a1a2a, metalness: 0.3, roughness: 0.8, transparent: true,
+          opacity: 0.8 });
         var floor = new THREE.Mesh(floorGeo, floorMat);
         floor.rotation.x = -Math.PI / 2;
         floor.position.y = -0.05;
         scene.add(floor);
-
         var gridHelper = new THREE.GridHelper(6, 12, 0xff7a00, 0x1e293b);
         gridHelper.position.y = 0;
         scene.add(gridHelper);
-
         var baseGroup = new THREE.Group();
         var baseGeo = new THREE.CylinderGeometry(0.9, 1.0, 0.4, 32);
-        var baseMat = new THREE.MeshStandardMaterial({
-          metalness: 0.8,
-          roughness: 0.3,
-          color: 0x1e293b
-        });
+        var baseMat = new THREE.MeshStandardMaterial({ metalness: 0.8, roughness: 0.3, color: 0x1e293b });
         var base = new THREE.Mesh(baseGeo, baseMat);
         base.position.y = 0.2;
         baseGroup.add(base);
-
         var ringLightGeo = new THREE.TorusGeometry(0.8, 0.04, 16, 32);
-        var ringLightMat = new THREE.MeshStandardMaterial({
-          color: 0xff7a00,
-          emissive: 0xff7a00,
-          emissiveIntensity: 0.3
-        });
+        var ringLightMat = new THREE.MeshStandardMaterial({ color: 0xff7a00, emissive: 0xff7a00, emissiveIntensity: 0.3 });
         var ringLight = new THREE.Mesh(ringLightGeo, ringLightMat);
         ringLight.position.y = 0.4;
         ringLight.rotation.x = Math.PI / 2;
         baseGroup.add(ringLight);
         scene.add(baseGroup);
-
         var armGroup = new THREE.Group();
         armGroup.position.set(0, 0.4, 0);
-
         var joint1Geo = new THREE.SphereGeometry(0.3, 20, 20);
-        var joint1Mat = new THREE.MeshStandardMaterial({
-          metalness: 0.9,
-          roughness: 0.2,
-          color: 0xff7a00
-        });
+        var joint1Mat = new THREE.MeshStandardMaterial({ metalness: 0.9, roughness: 0.2, color: 0xff7a00 });
         var joint1 = new THREE.Mesh(joint1Geo, joint1Mat);
         joint1.position.set(0, 0.3, 0);
         armGroup.add(joint1);
-
         var arm1Geo = new THREE.BoxGeometry(0.25, 1.0, 0.25);
-        var arm1Mat = new THREE.MeshStandardMaterial({
-          metalness: 0.7,
-          roughness: 0.3,
-          color: 0x0ea5a4
-        });
+        var arm1Mat = new THREE.MeshStandardMaterial({ metalness: 0.7, roughness: 0.3, color: 0x0ea5a4 });
         var arm1 = new THREE.Mesh(arm1Geo, arm1Mat);
         arm1.position.set(0, 0.8, 0);
         armGroup.add(arm1);
-
         var joint2Geo = new THREE.SphereGeometry(0.22, 20, 20);
-        var joint2Mat = new THREE.MeshStandardMaterial({
-          metalness: 0.9,
-          roughness: 0.2,
-          color: 0xff7a00
-        });
+        var joint2Mat = new THREE.MeshStandardMaterial({ metalness: 0.9, roughness: 0.2, color: 0xff7a00 });
         var joint2 = new THREE.Mesh(joint2Geo, joint2Mat);
         joint2.position.set(0.5, 1.3, 0);
         armGroup.add(joint2);
-
         var arm2Geo = new THREE.BoxGeometry(0.2, 0.9, 0.2);
-        var arm2Mat = new THREE.MeshStandardMaterial({
-          metalness: 0.7,
-          roughness: 0.3,
-          color: 0x3bc9db
-        });
+        var arm2Mat = new THREE.MeshStandardMaterial({ metalness: 0.7, roughness: 0.3, color: 0x3bc9db });
         var arm2 = new THREE.Mesh(arm2Geo, arm2Mat);
         arm2.position.set(0.5, 1.8, 0);
         armGroup.add(arm2);
-
         var joint3Geo = new THREE.SphereGeometry(0.18, 20, 20);
-        var joint3Mat = new THREE.MeshStandardMaterial({
-          metalness: 0.9,
-          roughness: 0.2,
-          color: 0xff7a00
-        });
+        var joint3Mat = new THREE.MeshStandardMaterial({ metalness: 0.9, roughness: 0.2, color: 0xff7a00 });
         var joint3 = new THREE.Mesh(joint3Geo, joint3Mat);
         joint3.position.set(0.5, 2.3, 0);
         armGroup.add(joint3);
-
         var toolGroup = new THREE.Group();
         toolGroup.position.set(0.5, 2.3, 0);
         var toolBody = new THREE.CylinderGeometry(0.06, 0.12, 0.3, 16);
-        var toolMat = new THREE.MeshStandardMaterial({
-          metalness: 0.9,
-          roughness: 0.2,
-          color: 0xf43f5e
-        });
+        var toolMat = new THREE.MeshStandardMaterial({ metalness: 0.9, roughness: 0.2, color: 0xf43f5e });
         var tool = new THREE.Mesh(toolBody, toolMat);
         tool.rotation.z = 0.4;
         tool.position.set(0.15, 0.15, 0);
         toolGroup.add(tool);
-
         var tipGeo = new THREE.SphereGeometry(0.04, 8, 8);
-        var tipMat = new THREE.MeshStandardMaterial({
-          color: 0xffbb33,
-          emissive: 0xffbb33,
-          emissiveIntensity: 0.5
-        });
+        var tipMat = new THREE.MeshStandardMaterial({ color: 0xffbb33, emissive: 0xffbb33, emissiveIntensity: 0.5 });
         var tip = new THREE.Mesh(tipGeo, tipMat);
         tip.position.set(0.25, 0.3, 0);
         toolGroup.add(tip);
         armGroup.add(toolGroup);
         scene.add(armGroup);
-
         var partGroup = new THREE.Group();
         partGroup.position.set(0, 0.05, 0);
-
         var blockGeo = new THREE.BoxGeometry(0.9, 0.35, 0.7);
-        var blockMat = new THREE.MeshStandardMaterial({
-          metalness: 0.8,
-          roughness: 0.5,
-          color: 0x4a5a6a
-        });
+        var blockMat = new THREE.MeshStandardMaterial({ metalness: 0.8, roughness: 0.5, color: 0x4a5a6a });
         var block = new THREE.Mesh(blockGeo, blockMat);
         block.position.y = 0.175;
         partGroup.add(block);
-
         for (var i = 0; i < 6; i++) {
           var holeGeo = new THREE.CylinderGeometry(0.07, 0.07, 0.4, 16);
-          var holeMat = new THREE.MeshStandardMaterial({
-            color: 0x1a2a3a,
-            metalness: 0.9,
-            roughness: 0.3
-          });
+          var holeMat = new THREE.MeshStandardMaterial({ color: 0x1a2a3a, metalness: 0.9, roughness: 0.3 });
           var hole = new THREE.Mesh(holeGeo, holeMat);
           var xPos = -0.35 + i * 0.14;
           var zPos = (i % 2 === 0) ? -0.15 : 0.15;
           hole.position.set(xPos, 0.175, zPos);
           partGroup.add(hole);
         }
-
         var labelGeo = new THREE.BoxGeometry(0.5, 0.04, 0.02);
-        var labelMat = new THREE.MeshStandardMaterial({
-          color: 0xff7a00,
-          emissive: 0xff7a00,
-          emissiveIntensity: 0.1
-        });
+        var labelMat = new THREE.MeshStandardMaterial({ color: 0xff7a00, emissive: 0xff7a00, emissiveIntensity: 0.1 });
         var label = new THREE.Mesh(labelGeo, labelMat);
         label.position.set(0, 0.35, 0.36);
         partGroup.add(label);
-
         scene.add(partGroup);
-
         var sparkCount = 100;
         var sparkPositions = new Float32Array(sparkCount * 3);
         var sparkVelocities = [];
@@ -2879,11 +2428,8 @@
           sparkPositions[i * 3] = (Math.random() - 0.5) * 0.6 + 0.3;
           sparkPositions[i * 3 + 1] = Math.random() * 0.5 + 0.3;
           sparkPositions[i * 3 + 2] = (Math.random() - 0.5) * 0.4;
-          sparkVelocities.push({
-            x: (Math.random() - 0.5) * 0.06,
-            y: Math.random() * 0.09 + 0.02,
-            z: (Math.random() - 0.5) * 0.06
-          });
+          sparkVelocities.push({ x: (Math.random() - 0.5) * 0.06, y: Math.random() * 0.09 + 0.02, z: (Math.random() - 0.5) *
+              0.06 });
           var color = new THREE.Color().setHSL(0.08 + Math.random() * 0.08, 1, 0.5 + Math.random() * 0.3);
           sparkColors[i * 3] = color.r;
           sparkColors[i * 3 + 1] = color.g;
@@ -2902,7 +2448,6 @@
         });
         var sparks = new THREE.Points(sparkGeo, sparkMat);
         scene.add(sparks);
-
         var debrisCount = 50;
         var debrisPositions = new Float32Array(debrisCount * 3);
         for (var i = 0; i < debrisCount; i++) {
@@ -2912,12 +2457,7 @@
         }
         var debrisGeo = new THREE.BufferGeometry();
         debrisGeo.setAttribute('position', new THREE.BufferAttribute(debrisPositions, 3));
-        var debrisMat = new THREE.PointsMaterial({
-          size: 0.02,
-          color: 0x6a7a8a,
-          transparent: true,
-          opacity: 0.4
-        });
+        var debrisMat = new THREE.PointsMaterial({ size: 0.02, color: 0x6a7a8a, transparent: true, opacity: 0.4 });
         var debris = new THREE.Points(debrisGeo, debrisMat);
         scene.add(debris);
 
@@ -2931,36 +2471,27 @@
             camera.updateProjectionMatrix();
           }
         }
-
         var clock = new THREE.Clock();
 
         function animate() {
           resize();
           var t = clock.getElapsedTime();
-
           var armSwing1 = Math.sin(t * 0.4) * 0.25;
           var armSwing2 = Math.sin(t * 0.5 + 0.8) * 0.3;
-
           arm1.rotation.x = armSwing1;
           arm1.rotation.z = Math.sin(t * 0.3 + 0.5) * 0.05;
-
           joint2.position.x = 0.5 + Math.sin(t * 0.4) * 0.05;
           joint2.position.y = 1.3 + Math.sin(t * 0.5 + 0.8) * 0.05;
-
           arm2.rotation.x = armSwing2;
           arm2.position.x = 0.5 + Math.sin(t * 0.4) * 0.05;
           arm2.position.y = 1.8 + Math.sin(t * 0.5 + 0.8) * 0.05;
-
           joint3.position.x = 0.5 + Math.sin(t * 0.5 + 0.8) * 0.08;
           joint3.position.y = 2.3 + Math.sin(t * 0.5 + 0.8) * 0.08;
-
           toolGroup.position.x = 0.5 + Math.sin(t * 0.5 + 0.8) * 0.08;
           toolGroup.position.y = 2.3 + Math.sin(t * 0.5 + 0.8) * 0.08;
           toolGroup.rotation.z = 0.4 + Math.sin(t * 0.7) * 0.1;
-
           tip.position.x = 0.25 + Math.sin(t * 0.5 + 0.8) * 0.05;
           tip.position.y = 0.3 + Math.sin(t * 0.6 + 1.2) * 0.05;
-
           var sparkPos = sparks.geometry.attributes.position.array;
           for (var i = 0; i < sparkCount; i++) {
             sparkPos[i * 3] += sparkVelocities[i].x;
@@ -2971,72 +2502,46 @@
               sparkPos[i * 3] = (Math.random() - 0.5) * 0.6 + 0.3;
               sparkPos[i * 3 + 1] = 0.3 + Math.random() * 0.3;
               sparkPos[i * 3 + 2] = (Math.random() - 0.5) * 0.4;
-              sparkVelocities[i] = {
-                x: (Math.random() - 0.5) * 0.06,
-                y: Math.random() * 0.09 + 0.02,
-                z: (Math.random() - 0.5) * 0.06
-              };
+              sparkVelocities[i] = { x: (Math.random() - 0.5) * 0.06, y: Math.random() * 0.09 + 0.02, z: (Math.random() -
+                  0.5) * 0.06 };
             }
           }
           sparks.geometry.attributes.position.needsUpdate = true;
-
           partGroup.rotation.y = t * 0.2;
-
           var camRadius = 6;
           var camSpeed = 0.12;
           camera.position.x = camRadius * Math.sin(t * camSpeed);
           camera.position.z = camRadius * Math.cos(t * camSpeed);
           camera.position.y = 2.5 + Math.sin(t * 0.1) * 0.3;
           camera.lookAt(0, 0.8, 0);
-
           pointLight.intensity = 0.4 + Math.sin(t * 0.5) * 0.15;
-
           renderer.render(scene, camera);
           requestAnimationFrame(animate);
         }
         animate();
-
         window.addEventListener('resize', resize);
       }
-
-      if (document.readyState === 'complete') {
-        initRobot();
-      } else {
-        window.addEventListener('load', initRobot);
-      }
+      if (document.readyState === 'complete') { initRobot(); } else { window.addEventListener('load', initRobot); }
     })();
 
-    // ============================================================
-    //   SCROLL ANIMATIONS - REVEAL ON SCROLL
-    // ============================================================
+    // ===== SCROLL ANIMATIONS =====
     (function() {
       var animElements = document.querySelectorAll('.experience-card, .internship-card, .project-card, .skill-block, .education-card, .contact-card, .contact-form');
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             var delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
-            setTimeout(function() {
-              entry.target.classList.add('visible');
-            }, delay);
+            setTimeout(function() { entry.target.classList.add('visible'); }, delay);
           }
         });
-      }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
-      });
-      animElements.forEach(function(el) {
-        observer.observe(el);
-      });
+      }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+      animElements.forEach(function(el) { observer.observe(el); });
     })();
 
-    // ============================================================
-    //   YEAR
-    // ============================================================
+    // ===== YEAR =====
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ============================================================
-    //   SCROLL PROGRESS - TOP BAR
-    // ============================================================
+    // ===== SCROLL PROGRESS =====
     window.addEventListener('scroll', function() {
       var bar = document.getElementById('scrollProgressBar');
       if (bar) {
@@ -3044,23 +2549,17 @@
         var docHeight = document.documentElement.scrollHeight - window.innerHeight;
         bar.style.width = (scrollTop / docHeight * 100) + '%';
       }
-    }, {
-      passive: true
-    });
+    }, { passive: true });
 
-    // ============================================================
-    //   SCROLL PROGRESS - SIDE INDICATOR
-    // ============================================================
+    // ===== SCROLL PROGRESS - SIDE =====
     (function() {
       var fill = document.getElementById('scrollFill');
       if (!fill) return;
-      
       window.addEventListener('scroll', function() {
         var scrollTop = window.scrollY;
         var docHeight = document.documentElement.scrollHeight - window.innerHeight;
         var progress = (scrollTop / docHeight) * 100;
         fill.style.height = progress + '%';
-        
         if (progress > 0 && progress < 100) {
           fill.style.boxShadow = '0 0 30px rgba(255, 122, 0, 0.6), 0 0 60px rgba(255, 122, 0, 0.3)';
         } else {
@@ -3069,21 +2568,13 @@
       }, { passive: true });
     })();
 
-    // ============================================================
-    //   HEADER SCROLL
-    // ============================================================
+    // ===== HEADER SCROLL =====
     window.addEventListener('scroll', function() {
       var header = document.getElementById('siteHeader');
-      if (header) {
-        header.classList.toggle('scrolled', window.scrollY > 80);
-      }
-    }, {
-      passive: true
-    });
+      if (header) { header.classList.toggle('scrolled', window.scrollY > 80); }
+    }, { passive: true });
 
-    // ============================================================
-    //   NAVIGATION TOGGLE
-    // ============================================================
+    // ===== NAVIGATION TOGGLE =====
     var toggle = document.getElementById('navToggle');
     var links = document.getElementById('nav-links');
     if (toggle && links) {
@@ -3093,9 +2584,7 @@
       });
     }
 
-    // ============================================================
-    //   SCROLL TO SECTION
-    // ============================================================
+    // ===== SCROLL TO SECTION =====
     function scrollToSection(id) {
       var el = document.getElementById(id);
       if (!el) return;
@@ -3108,7 +2597,6 @@
       if (links) links.classList.remove('open');
       if (toggle) toggle.classList.remove('active');
     }
-
     document.querySelectorAll('.nav-links a').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
@@ -3116,9 +2604,7 @@
       });
     });
 
-    // ============================================================
-    //   TYPING ANIMATION
-    // ============================================================
+    // ===== TYPING ANIMATION =====
     (function() {
       var roles = ['Powertrain & BIW Design Specialist', 'Heavy Machinery Design Expert',
         'Simulation, CAE & FEA Expert', 'DFM/DFA Strategist', 'NVH & Prototype Validation'
@@ -3136,27 +2622,20 @@
         if (forward) {
           ch++;
           el.textContent = word.slice(0, ch);
-          if (ch === word.length) {
-            forward = false;
-            setTimeout(step, pause);
-            return;
-          }
+          if (ch === word.length) { forward = false;
+            setTimeout(step, pause); return; }
         } else {
           ch--;
           el.textContent = word.slice(0, ch);
-          if (ch === 0) {
-            forward = true;
-            idx = (idx + 1) % roles.length;
-          }
+          if (ch === 0) { forward = true;
+            idx = (idx + 1) % roles.length; }
         }
         setTimeout(step, speed);
       }
       setTimeout(step, 400);
     })();
 
-    // ============================================================
-    //   COUNTERS
-    // ============================================================
+    // ===== COUNTERS =====
     (function() {
       var counters = document.querySelectorAll('.metric-num[data-target]');
       if (!counters.length) return;
@@ -3172,10 +2651,7 @@
 
               function update() {
                 current += increment;
-                if (current >= target) {
-                  counter.textContent = target + '+';
-                  return;
-                }
+                if (current >= target) { counter.textContent = target + '+'; return; }
                 counter.textContent = Math.floor(current) + '+';
                 requestAnimationFrame(update);
               }
@@ -3183,15 +2659,11 @@
             });
           }
         });
-      }, {
-        threshold: 0.3
-      });
+      }, { threshold: 0.3 });
       observer.observe(document.getElementById('hero'));
     })();
 
-    // ============================================================
-    //   FLOATING HIRE ME
-    // ============================================================
+    // ===== FLOATING HIRE ME =====
     document.querySelector('.floating-hireme').addEventListener('click', function(e) {
       e.preventDefault();
       scrollToSection('contact');
