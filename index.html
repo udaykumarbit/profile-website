@@ -1479,11 +1479,22 @@
         font-size: 0.85rem;
         max-width: 100%;
       }
-      .hero-cta .btn {
-        width: 100%;
-        justify-content: center;
-        padding: 10px;
+
+      /* ✅ FIX: Mobile buttons in ONE LINE */
+      .hero-cta {
+        flex-wrap: nowrap;
+        gap: 6px;
       }
+      .hero-cta .btn {
+        width: auto;
+        justify-content: center;
+        padding: 6px 8px;
+        font-size: 0.65rem;
+        flex: 1 1 0;
+        min-width: 0;
+        text-align: center;
+      }
+
       .hero-metrics {
         justify-content: center;
         gap: 8px;
@@ -1666,6 +1677,16 @@
       .btn {
         font-size: 0.7rem;
         padding: 6px 12px;
+      }
+
+      /* Even tighter for very small screens */
+      .hero-cta {
+        gap: 4px;
+      }
+      .hero-cta .btn {
+        padding: 4px 6px;
+        font-size: 0.55rem;
+        gap: 4px;
       }
 
       .scroll-indicator-right {
