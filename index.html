@@ -1889,7 +1889,7 @@
                     <div class="hero-metrics">
                         <div class="metric-card">
                             <div class="metric-num" data-target="1000">0</div>
-                            <div class="metric-label">CAD Models</div>
+                            <div class="metric-label">+CAD Models</div>
                         </div>
                         <div class="metric-card">
                             <div class="metric-num" data-target="25%">0</div>
@@ -1901,7 +1901,7 @@
                         </div>
                         <div class="metric-card">
                             <div class="metric-num" data-target="6">0</div>
-                            <div class="metric-label">Industry Projects</div>
+                            <div class="metric-label">+Industry Projects</div>
                         </div>
                     </div>
                     <div class="hero-cta">
@@ -3348,7 +3348,7 @@
                             function update() {
                                 current += increment;
                                 if (current >= target) {
-                                    counter.textContent = target + '+';
+                                    counter.textContent = target + '';
                                     return;
                                 }
                                 counter.textContent = Math.floor(current) + '+';
