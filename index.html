@@ -434,6 +434,299 @@
             .profile-card { flex-direction: column; text-align: center; }
             .profile-stats { justify-content: center; }
         }
+    
+        /* ===== SCROLL INDICATOR (LEFT SIDE) ===== */
+        .scroll-indicator {
+            position: fixed;
+            left: 32px;
+            bottom: 40px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: fadeUp 1s ease 1s forwards;
+            opacity: 0;
+        }
+        .scroll-mouse {
+            width: 22px;
+            height: 36px;
+            border: 2px solid rgba(255,122,0,0.4);
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            padding-top: 8px;
+        }
+        .scroll-wheel {
+            width: 3px;
+            height: 6px;
+            background: linear-gradient(180deg, var(--primary), var(--primary-light));
+            border-radius: 2px;
+            animation: scrollWheel 2s ease-in-out infinite;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(180deg, rgba(255,122,0,0.4), transparent);
+            position: relative;
+            overflow: hidden;
+        }
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--primary), transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+        .scroll-text {
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            margin-bottom: 8px;
+        }
+        @keyframes scrollWheel {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(8px); opacity: 0.3; }
+        }
+        @keyframes scrollLine {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        /* ===== COMPREHENSIVE RESPONSIVE ===== */
+        /* Large Desktop 1400px+ */
+        @media (min-width: 1400px) {
+            .hero-grid { gap: 100px; }
+            .hero-visual { height: 300px; }
+            .profile-card { padding: 32px 40px; }
+            .profile-img-wrap { width: 120px; height: 120px; }
+            .profile-name { font-size: 1.5rem; }
+            .section { padding: 120px 48px; }
+            .about-hero { padding: 100px 48px; }
+            .container { max-width: 1320px; }
+            .about-grid, .approach-grid, .contact-grid { max-width: 1320px; }
+            .hero { padding: 140px 48px 80px; }
+        }
+        /* Desktop 1200px - 1399px */
+        @media (max-width: 1399px) and (min-width: 1200px) {
+            .hero-grid { gap: 60px; }
+            .section { padding: 90px 40px; }
+            .hero { padding: 120px 40px 60px; }
+        }
+        /* Tablet Landscape 992px - 1199px */
+        @media (max-width: 1199px) and (min-width: 992px) {
+            .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 50px; }
+            .about-grid { gap: 50px; }
+            .approach-grid { gap: 50px; }
+            .contact-grid { grid-template-columns: 1fr 380px; gap: 40px; }
+            .hero-visual { height: 240px; }
+            .robot-visual { height: 400px; }
+            .section { padding: 80px 32px; }
+            .flip-grid { grid-template-columns: repeat(3, 1fr); }
+            .internships-grid { grid-template-columns: repeat(3, 1fr); }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+            .education-grid { grid-template-columns: repeat(3, 1fr); }
+            .scroll-indicator { left: 20px; }
+        }
+        /* Tablet Portrait 768px - 991px */
+        @media (max-width: 991px) and (min-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 50px; }
+            .about-grid { grid-template-columns: 1fr; gap: 50px; }
+            .approach-grid { grid-template-columns: 1fr; gap: 50px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+            .hero-visual { height: 320px; }
+            .robot-visual { height: 380px; }
+            .section { padding: 70px 28px; }
+            .about-hero { padding: 70px 28px; }
+            .flip-grid { grid-template-columns: repeat(2, 1fr); }
+            .internships-grid { grid-template-columns: repeat(2, 1fr); }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+            .education-grid { grid-template-columns: repeat(2, 1fr); }
+            .profile-card { max-width: 500px; }
+            .scroll-indicator { left: 16px; bottom: 30px; }
+            .scroll-text { font-size: 0.5rem; }
+        }
+        /* Large Mobile 576px - 767px */
+        @media (max-width: 767px) and (min-width: 576px) {
+            .site-header { padding: 12px 20px; }
+            .site-header.scrolled { padding: 10px 20px; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(3,4,10,0.98); padding: 20px; gap: 4px; border-bottom: 1px solid var(--glass-border); backdrop-filter: blur(20px); }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 12px 16px; font-size: 0.9rem; width: 100%; text-align: center; }
+            .nav-toggle { display: flex; }
+            .hero { padding: 100px 20px 40px; min-height: auto; }
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-visual { height: 260px; }
+            .section { padding: 60px 20px; }
+            .about-hero { padding: 60px 20px; }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .approach-grid { grid-template-columns: 1fr; gap: 40px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-stats { gap: 24px; }
+            .about-stat .num { font-size: 2rem; }
+            .approach-highlights { grid-template-columns: 1fr; }
+            .flip-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .education-grid { grid-template-columns: 1fr; }
+            .internships-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .robot-info { grid-template-columns: repeat(2, 1fr); }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .floating-cta { right: 16px; bottom: 16px; padding: 12px 20px; font-size: 0.75rem; }
+            .profile-card { padding: 20px; gap: 16px; }
+            .profile-img-wrap { width: 90px; height: 90px; }
+            .profile-name { font-size: 1.2rem; }
+            .robot-visual { height: 350px; }
+            .scroll-indicator { display: none; }
+        }
+        /* Small Mobile 480px - 575px */
+        @media (max-width: 575px) and (min-width: 481px) {
+            .site-header { padding: 10px 16px; }
+            .site-header.scrolled { padding: 8px 16px; }
+            .hero { padding: 90px 16px 30px; }
+            .hero-grid { gap: 30px; }
+            .hero-visual { height: 220px; }
+            .hero-badge { font-size: 0.6rem; padding: 6px 14px; }
+            .hero-metrics { gap: 10px; }
+            .metric { min-width: 70px; padding: 10px 14px; }
+            .metric-num { font-size: 1.3rem; }
+            .btn { padding: 10px 18px; font-size: 0.75rem; }
+            .hero-cta { gap: 8px; }
+            .section { padding: 50px 16px; }
+            .about-hero { padding: 50px 16px; }
+            .flip-card { height: 240px; }
+            .flip-card-front, .flip-card-back { padding: 20px; }
+            .experience-card { padding: 20px; }
+            .exp-header { flex-direction: column; }
+            .project-card { padding: 20px; }
+            .contact-form { padding: 20px; }
+            .contact-card { padding: 14px 16px; }
+            .robot-visual { height: 320px; }
+            .robot-overlay { padding: 12px 14px; }
+            .robot-info { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .profile-card { padding: 18px; gap: 14px; }
+            .profile-img-wrap { width: 80px; height: 80px; }
+            .profile-name { font-size: 1.1rem; }
+            .profile-stats { gap: 14px; }
+            .profile-stats span { font-size: 0.75rem; }
+            .scroll-indicator { display: none; }
+        }
+        /* Extra Small Mobile <= 480px */
+        @media (max-width: 480px) {
+            .site-header { padding: 10px 14px; }
+            .site-header.scrolled { padding: 8px 14px; }
+            .brand .name { font-size: 0.95rem; }
+            .brand .tag { font-size: 0.5rem; letter-spacing: 2px; }
+            .hero { padding: 80px 14px 30px; min-height: auto; }
+            .hero-grid { gap: 28px; }
+            .hero-visual { height: 180px; border-radius: 14px; }
+            .hero-visual-overlay { bottom: 8px; left: 8px; right: 8px; padding: 10px 12px; border-radius: 10px; }
+            .hero-visual-overlay .label { font-size: 0.5rem; letter-spacing: 1px; }
+            .hero-visual-overlay .title { font-size: 0.7rem; }
+            .hero-badge { font-size: 0.55rem; padding: 6px 12px; letter-spacing: 1px; }
+            .hero-title { letter-spacing: -1px; }
+            .hero-subtitle { font-size: 0.9rem; }
+            .hero-metrics { gap: 8px; }
+            .metric { min-width: 60px; padding: 8px 10px; border-radius: 8px; }
+            .metric-num { font-size: 1.2rem; }
+            .metric-label { font-size: 0.55rem; letter-spacing: 0.5px; }
+            .btn { padding: 8px 14px; font-size: 0.7rem; border-radius: 8px; }
+            .hero-cta { gap: 6px; }
+            .section { padding: 40px 14px; }
+            .about-hero { padding: 40px 14px; }
+            .section-header { margin-bottom: 32px; }
+            .section-label { font-size: 0.6rem; letter-spacing: 2px; }
+            .section-title { letter-spacing: -0.5px; }
+            .section-subtitle { font-size: 0.9rem; }
+            .flip-card { height: 220px; }
+            .flip-card-front, .flip-card-back { padding: 16px; border-radius: 12px; }
+            .flip-card-front .card-icon { width: 50px; height: 50px; font-size: 1.5rem; }
+            .flip-card-front .card-title { font-size: 1rem; }
+            .flip-card-back p { font-size: 0.8rem; }
+            .experience-card { padding: 16px; border-radius: 12px; margin-bottom: 16px; }
+            .exp-header { flex-direction: column; gap: 8px; }
+            .exp-company { font-size: 1rem; }
+            .exp-role { font-size: 0.85rem; }
+            .exp-date { font-size: 0.7rem; padding: 4px 12px; }
+            .exp-list li { font-size: 0.82rem; padding-left: 22px; }
+            .project-card { padding: 16px; border-radius: 12px; }
+            .project-title { font-size: 0.95rem; }
+            .project-desc { font-size: 0.82rem; }
+            .project-features li { font-size: 0.78rem; }
+            .contact-form { padding: 16px; border-radius: 12px; }
+            .contact-form input, .contact-form textarea { padding: 10px 12px; font-size: 0.85rem; margin-bottom: 10px; }
+            .contact-card { padding: 12px 14px; gap: 12px; }
+            .contact-card .icon-wrap { width: 40px; height: 40px; }
+            .contact-card strong { font-size: 0.85rem; }
+            .contact-card .muted { font-size: 0.8rem; }
+            .robot-visual { height: 280px; border-radius: 14px; }
+            .robot-overlay { padding: 10px 12px; border-radius: 10px; }
+            .robot-overlay .title { font-size: 0.65rem; }
+            .robot-overlay .sub { font-size: 0.8rem; }
+            .robot-info { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .robot-info-item .info-label { font-size: 0.5rem; }
+            .robot-info-item .info-value { font-size: 0.65rem; }
+            .profile-card { flex-direction: column; text-align: center; padding: 16px; gap: 12px; margin-top: 14px; }
+            .profile-img-wrap { width: 90px; height: 90px; border-radius: 14px; }
+            .profile-name { font-size: 1.15rem; }
+            .profile-role { font-size: 0.8rem; }
+            .profile-stats { justify-content: center; gap: 16px; }
+            .profile-stats span { font-size: 0.75rem; }
+            .about-stats { gap: 20px; }
+            .about-stat .num { font-size: 1.8rem; }
+            .about-stat .lbl { font-size: 0.75rem; }
+            .approach-tools { padding: 20px; }
+            .tool-tags { gap: 6px; }
+            .tool-tag { padding: 6px 12px; font-size: 0.7rem; }
+            .highlight-item { padding: 10px 14px; font-size: 0.8rem; }
+            .internship-card { padding: 18px; }
+            .internship-card h4 { font-size: 0.9rem; }
+            .internship-subtitle { font-size: 0.8rem; }
+            .internship-desc { font-size: 0.75rem; }
+            .education-card { padding: 20px; }
+            .edu-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+            .edu-title { font-size: 0.95rem; }
+            .edu-field { font-size: 0.8rem; }
+            .edu-institution { font-size: 0.85rem; }
+            .edu-meta { font-size: 0.75rem; }
+            .floating-cta { right: 12px; bottom: 12px; padding: 10px 16px; font-size: 0.7rem; }
+            .footer-inner { gap: 8px; font-size: 0.75rem; }
+            .site-footer { padding: 30px 14px; }
+            .scroll-indicator { display: none; }
+        }
+        /* Extra Extra Small <= 360px */
+        @media (max-width: 360px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 0.85rem; }
+            .hero-desc { font-size: 0.9rem; }
+            .btn { padding: 8px 12px; font-size: 0.65rem; }
+            .hero-cta { gap: 4px; }
+            .metric { min-width: 55px; padding: 6px 8px; }
+            .metric-num { font-size: 1.1rem; }
+            .metric-label { font-size: 0.5rem; }
+            .flip-card { height: 200px; }
+            .profile-img-wrap { width: 80px; height: 80px; }
+            .profile-name { font-size: 1rem; }
+            .hero-visual { height: 160px; }
+            .robot-visual { height: 240px; }
+        }
+
     </style>
 <base target="_blank">
 <base target="_blank">
@@ -483,6 +776,14 @@
         </header>
 
         <section id="hero" class="hero">
+            <div class="scroll-indicator" id="scrollIndicator">
+                <div class="scroll-text">Scroll</div>
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+                <div class="scroll-line"></div>
+            </div>
+
             <div class="hero-grid">
                 <div class="hero-left">
                     <div class="hero-badge">
@@ -1048,6 +1349,20 @@
     </div>
 
     <script>
+
+    // ===== HIDE SCROLL INDICATOR ON SCROLL =====
+    (function(){
+        var indicator = document.getElementById('scrollIndicator');
+        if(!indicator) return;
+        window.addEventListener('scroll', function(){
+            if(window.scrollY > 100){
+                indicator.classList.add('hidden');
+            } else {
+                indicator.classList.remove('hidden');
+            }
+        }, {passive:true});
+    })();
+
     // ===== LOADER =====
     (function(){
         var loader = document.getElementById('loader');
