@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, viewport-fit=cover">
     <title>UdayKumar Borale | R&D Engineer — Automotive & Automation Design</title>
     <meta name="description" content="R&D Mechanical Engineer specializing in Powertrain, BIW, CAD/CAE, and Industrial Automation.">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -805,6 +805,50 @@
         .scroll-btn:active { transform: scale(0.95); }
         .scroll-btn.off { opacity: 0; pointer-events: none; }
         @media (max-width: 768px) { .scroll-btns { right: 8px; gap: 12px; } .scroll-btn { font-size: 0.6rem; letter-spacing: 2px; } .scroll-btn .mouse { width: 24px; height: 38px; } }
+            .language-grid { max-width: 1200px; margin: 0 auto; }
+        .language-grid .education-card { padding: 24px; border-radius: 20px; background: #f1f5f9; color: #0b1220; border: 2px solid rgba(10,24,40,0.1); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .language-grid .education-card::before, .language-grid .education-card::after { display: none; }
+        .language-grid .education-card:hover { transform: none; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .language-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+        .language-item { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 22px 16px; border-radius: 14px; color: #fff; box-shadow: 0 6px 16px rgba(0,0,0,0.15); transition: transform .3s ease, box-shadow .3s ease; }
+        .language-item:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.2); }
+        .language-item:nth-child(1) { background: linear-gradient(135deg,#ea580c,#f97316); }
+        .language-item:nth-child(2) { background: linear-gradient(135deg,#0891b2,#0ea5a4); }
+        .language-item:nth-child(3) { background: linear-gradient(135deg,#6d4aff,#8b5cf6); }
+        .language-item:nth-child(4) { background: linear-gradient(135deg,#e11d48,#f43f5e); }
+        @media (max-width: 900px) { .language-list { grid-template-columns: repeat(2, 1fr);  } }
+        @media (max-width: 480px) { .language-list { grid-template-columns: 1fr; } .language-item { justify-content: flex-start; } }
+
+        /* ===== ALL-DEVICE POLISH: phone, tablet, laptop, desktop, TV ===== */
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        img, canvas, video, svg { max-width: 100%; }
+        h1, h2, h3, h4, p, a, li { overflow-wrap: anywhere; }
+        body { padding-left: env(safe-area-inset-left, 0); padding-right: env(safe-area-inset-right, 0); }
+        .hero { min-height: 100vh; min-height: 100dvh; }
+        @media (max-height: 520px) and (orientation: landscape) { .hero { min-height: auto; padding-top: 90px; } }
+        @media (hover: none) { .language-item:hover { transform: none; } }
+        @media (max-width: 360px) { .language-grid .education-card { padding: 14px; } .language-item { padding: 16px 12px; } }
+        /* Full HD / large TV */
+        @media (min-width: 1920px) {
+            html { font-size: 18px; }
+            .container, .section-header, .about-grid, .approach-grid, .experience-card, .internships-grid,
+            .projects-grid, .skills-grid, .education-grid, .contact-grid, .language-grid { max-width: 1600px; }
+            .section { padding: 140px 64px; }
+        }
+        /* 2K / big TV */
+        @media (min-width: 2560px) {
+            html { font-size: 24px; }
+            .container, .section-header, .about-grid, .approach-grid, .experience-card, .internships-grid,
+            .projects-grid, .skills-grid, .education-grid, .contact-grid, .language-grid { max-width: 2200px; }
+            .section { padding: 180px 96px; }
+        }
+        /* 4K TV */
+        @media (min-width: 3200px) {
+            html { font-size: 32px; }
+            .container, .section-header, .about-grid, .approach-grid, .experience-card, .internships-grid,
+            .projects-grid, .skills-grid, .education-grid, .contact-grid, .language-grid { max-width: 3000px; }
+            .section { padding: 240px 128px; }
+        }
     </style>
 <base target="_blank">
 <base target="_blank">
@@ -843,6 +887,7 @@
                     <a href="#industry-projects" data-section="industry-projects"><span>Projects</span></a>
                     <a href="#skills" data-section="skills"><span>Skills</span></a>
                     <a href="#education" data-section="education"><span>Education</span></a>
+                    <a href="#languages" data-section="languages"><span>Languages</span></a>
                     <a href="#contact" data-section="contact"><span>Contact</span></a>
                 </nav>
                 <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -1335,15 +1380,6 @@
                             <span class="skill-tag">CAD/CAE-based Product Development</span>
                         </div>
                     </div>
-                    <div class="skill-block" data-delay="0">
-                        <h4 style="color:#be123c"><i class="fas fa-language"></i> Languages</h4>
-                        <div class="skill-tags">
-                            <span class="skill-tag">English</span>
-                            <span class="skill-tag">Kannada</span>
-                            <span class="skill-tag">Hindi</span>
-                            <span class="skill-tag">Marathi</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -1393,6 +1429,38 @@
                         <div class="edu-details">
                             <p class="edu-institution">Jawaharlal Nehru Polytechnic, Bidar</p>
                             <div class="edu-meta"><span>2018 – 2021</span><span>72%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="languages" class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">Communication</div>
+                    <h2 class="section-title"><span class="accent">Languages</span></h2>
+                    <p class="section-subtitle">Languages I speak</p>
+                </div>
+                <div class="language-grid">
+                    <div class="education-card" data-delay="0">
+                        <div class="language-list">
+                            <div class="language-item">
+                                <div class="edu-icon"><i class="fas fa-language"></i></div>
+                                <h3 class="edu-title">English</h3>
+                            </div>
+                            <div class="language-item">
+                                <div class="edu-icon"><i class="fas fa-language"></i></div>
+                                <h3 class="edu-title">Kannada</h3>
+                            </div>
+                            <div class="language-item">
+                                <div class="edu-icon"><i class="fas fa-language"></i></div>
+                                <h3 class="edu-title">Hindi</h3>
+                            </div>
+                            <div class="language-item">
+                                <div class="edu-icon"><i class="fas fa-language"></i></div>
+                                <h3 class="edu-title">Marathi</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
