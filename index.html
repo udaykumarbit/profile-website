@@ -152,7 +152,7 @@
         .container { max-width: 1200px; margin: 0 auto; }
         .about-hero { padding: 80px 32px; position: relative; overflow: hidden; }
         .about-hero::before { content: ''; position: absolute; top: -30%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,122,0,0.06), transparent 70%); border-radius: 50%; pointer-events: none; }
-        .about-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+        .about-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
         .about-content p { color: var(--text-muted); line-height: 1.9; font-size: 1rem; margin-bottom: 16px; }
         .about-content p strong { color: var(--primary-light); }
         .about-stats { display: flex; gap: 40px; margin-top: 32px; flex-wrap: wrap; }
@@ -861,12 +861,12 @@
                     </p>
                     <div class="hero-metrics">
                         <div class="metric">
-                            <div class="metric-num" data-target="1000">0</div>
+                            <div class="metric-num" data-target="100">0</div>
                             <div class="metric-label">+CAD Models</div>
                         </div>
                         <div class="metric">
-                            <div class="metric-num" data-target="25">0</div>
-                            <div class="metric-label">% Time Saved</div>
+                            <div class="metric-num" data-target="20">0</div>
+                            <div class="metric-label">% Cycle Time Cut</div>
                         </div>
                         <div class="metric">
                             <div class="metric-num" data-target="10">0</div>
@@ -887,16 +887,9 @@
                     </div>
                 </div>
                 <div class="hero-right">
-                    <div class="hero-visual" id="hero3dContainer">
-                        <canvas id="three-canvas"></canvas>
-                        <div class="hero-visual-overlay">
-                            <div class="label">Featured Project</div>
-                            <div class="title">Lightweight E-Axle Design & <span>Optimization for EV</span></div>
-                        </div>
-                    </div>
                     <div class="profile-card">
                         <div class="profile-img-wrap">
-                            <img id="profileImage" src="image.webp" width="480" height="617" decoding="async" alt="Udaykumar Borale" onerror="this.style.display='none';document.getElementById('profileFallback').style.display='flex';">
+                            <img id="profileImage" src="image.webp" width="480" height="617" decoding="async" alt="Udaykumar Borale" onerror="if(this.src.indexOf('.webp')>-1){this.onerror=function(){this.style.display='none';document.getElementById('profileFallback').style.display='flex';};this.src='image.jpg.png';return;}this.style.display='none';document.getElementById('profileFallback').style.display='flex';">
                             <div id="profileFallback" class="profile-fallback" style="display:none"><i class="fas fa-user"></i></div>
                         </div>
                         <div>
@@ -904,7 +897,7 @@
                             <div class="profile-role">R&D Engineer — Powertrain & BIW Design</div>
                             <div class="profile-stats">
                                 <span><strong>2+</strong> Years Exp</span>
-                                <span><strong>6</strong> Certs</span>
+                                <span><strong>7</strong> Certs</span>
                             </div>
                         </div>
                     </div>
@@ -921,49 +914,16 @@
                     <p>My work spans <strong>concept development, detailed design, FEA validation, and manufacturing support</strong> — ensuring every product meets the highest standards of performance, safety, and efficiency.</p>
                     <div class="about-stats">
                         <div class="about-stat">
-                            <div class="num">1000+</div>
+                            <div class="num">100+</div>
                             <div class="lbl">CAD Models Delivered</div>
                         </div>
                         <div class="about-stat">
-                            <div class="num">25%</div>
-                            <div class="lbl">Design Time Saved</div>
+                            <div class="num">20%</div>
+                            <div class="lbl">Design Cycle Time Cut</div>
                         </div>
                         <div class="about-stat">
-                            <div class="num">6+</div>
-                            <div class="lbl">Industry Projects</div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="robot-visual" id="robotVisual">
-                        <canvas id="robot-canvas"></canvas>
-                        <div class="robot-overlay">
-                            <div class="robot-status-bar">
-                                <span class="status-led"></span>
-                                <span class="status-text">SYSTEM ONLINE</span>
-                                <span class="status-detail">KUKA KR 60 | FANUC M-20iA</span>
-                            </div>
-                            <div class="title">🤖 ROBOTIC DEBURRING STATION</div>
-                            <div class="sub">KV12 / KV16 / QSK60 Cylinder Block</div>
-                            <div class="customer">Customer: Cummins India Ltd. — Chropynska India Pvt. Ltd.</div>
-                            <div class="robot-info">
-                                <div class="robot-info-item">
-                                    <span class="info-label">Operation</span>
-                                    <span class="info-value">Deburring Cycle</span>
-                                </div>
-                                <div class="robot-info-item">
-                                    <span class="info-label">Components</span>
-                                    <span class="info-value">KV12 / KV16 / QSK60</span>
-                                </div>
-                                <div class="robot-info-item">
-                                    <span class="info-label">Status</span>
-                                    <span class="info-value highlight">● Active</span>
-                                </div>
-                                <div class="robot-info-item">
-                                    <span class="info-label">Robot</span>
-                                    <span class="info-value">KUKA & FANUC</span>
-                                </div>
-                            </div>
+                            <div class="num">5</div>
+                            <div class="lbl">Internships & Trainings</div>
                         </div>
                     </div>
                 </div>
@@ -977,7 +937,10 @@
                     <h2 class="section-title">Research-Driven <span class="accent">Engineering & Design Optimization</span></h2>
                     <p><strong>Results-driven R&D Mechanical Engineer</strong> with expertise in the automotive and industrial automation sectors, specializing in <strong>mechanical product design, powertrain systems, and engineering development</strong>.</p>
                     <p>Experienced in managing the <strong>complete product development lifecycle</strong>, from concept generation to production readiness.</p>
-                    <p>Strong background in <strong>research-driven engineering and design optimization</strong>, leveraging advanced simulation and modeling techniques.</p>
+                    <p>Proven ability to <strong>translate complex engineering concepts and research insights</strong> into reliable, manufacturable, and cost-effective solutions aligned with global industry standards.</p>
+                    <p>Skilled in delivering <strong>lightweight, optimized, and high-performance components</strong> that satisfy stringent requirements for durability, efficiency, quality, and manufacturability.</p>
+                    <p>Strong background in <strong>research-driven engineering and design optimization</strong>, leveraging advanced simulation and modeling techniques to improve product performance, reliability, and process efficiency.</p>
+                    <p>Expertise in <strong>3D CAD modeling, FEA, design validation, and system integration</strong> for automotive, industrial, and automation applications. Proficient in <strong>Autodesk Inventor, HyperMesh, ANSA, and MATLAB</strong>, with working knowledge of <strong>Siemens NX, CATIA, PTC Creo, and ANSYS</strong> — experienced in developing complex assemblies, performing engineering analyses, and collaborating with cross-functional teams.</p>
                     <div class="approach-highlights">
                         <div class="highlight-item"><i class="fas fa-cogs"></i><span>Product Development Lifecycle</span></div>
                         <div class="highlight-item"><i class="fas fa-weight-hanging"></i><span>Lightweight Design & Optimization</span></div>
@@ -1001,11 +964,14 @@
                         <span class="tool-tag"><i class="fas fa-cog"></i>ANSYS</span>
                         <span class="tool-tag"><i class="fas fa-cog"></i>NX Nastran</span>
                         <span class="tool-tag"><i class="fas fa-cube"></i>SolidWorks</span>
+                        <span class="tool-tag"><i class="fas fa-cube"></i>AutoCAD</span>
+                        <span class="tool-tag"><i class="fas fa-cog"></i>Autodesk Nastran</span>
                     </div>
                     <div class="approach-achievements">
-                        <p><i class="fas fa-check-circle"></i><strong>1000+</strong> production-ready CAD models delivered</p>
+                        <p><i class="fas fa-check-circle"></i><strong>100+</strong> production-ready CAD models delivered</p>
                         <p><i class="fas fa-check-circle"></i><strong>15%</strong> assembly time reduction through DFM/DFA optimization</p>
                         <p><i class="fas fa-check-circle"></i><strong>10%</strong> weight reduction via lightweight design strategies</p>
+                        <p><i class="fas fa-check-circle"></i><strong>20%</strong> shorter design cycle through optimized CAD, validation & documentation workflows</p>
                     </div>
                 </div>
             </div>
@@ -1083,7 +1049,7 @@
                     <ul class="exp-list">
                         <li><strong>Advanced engineering and R&D company</strong> focused on automotive and automation systems, specializing in Powertrain & BIW components, product concept development, detailed design, and validation.</li>
                         <li><strong>Spearheaded the design and development of Powertrain components</strong>, significantly enhancing structural integrity, performance, and manufacturability.</li>
-                        <li><strong>Developed 1000+ production-ready 3D CAD models</strong> and large-scale robotic deburring station assemblies (400–500 components) using <strong>Autodesk Inventor</strong>, integrating mechanical subsystems and optimizing designs for manufacturing and assembly.</li>
+                        <li><strong>Developed 100+ production-ready 3D CAD models</strong> and large-scale robotic deburring station assemblies (400–500 components) using <strong>Autodesk Inventor</strong>, integrating mechanical subsystems and optimizing designs for manufacturing and assembly.</li>
                         <li><strong>Optimized mechanical assembly design</strong> using <strong>DFM/DFA principles</strong>, reducing assembly time by <strong>15%</strong> and improving manufacturing efficiency.</li>
                         <li><strong>Implemented lightweight design strategies</strong> through CAD optimization and structural analysis, achieving <strong>10% reduction</strong> in component weight while maintaining performance requirements.</li>
                         <li><strong>Improved engineering workflow efficiency</strong> by optimizing CAD modeling, design validation, and documentation processes, reducing overall design cycle time by <strong>20%</strong>.</li>
@@ -1102,53 +1068,47 @@
                         <span class="exp-date">2021 – 2022</span>
                     </div>
                     <ul class="exp-list">
-                        <li>Created detailed 3D models and simulations to support product design initiatives.</li>
-                        <li>Assisted QA processes to meet industry standards and improve product reliability.</li>
+                        <li><strong>Played a pivotal role in supporting product design</strong> through advanced 3D modeling and simulation, ensuring functional and manufacturable designs.</li>
+                        <li><strong>Assisted in quality validation processes</strong>, which resulted in reduced rework and improved product reliability.</li>
+                        <li><strong>Focused on enhancing manufacturability</strong> while adhering to industry compliance standards to ensure cost-effectiveness and performance.</li>
                     </ul>
                 </div>
                 <div style="max-width:1200px;margin:40px auto 0">
                     <h3 style="font-size:1.15rem;color:#0096c7;margin-bottom:20px;font-family:var(--font-display)">Internship & Training</h3>
                     <div class="internships-grid">
                         <div class="internship-card" data-delay="0">
-                            <h4>Bajaj Engineering & Skills Training</h4>
-                            <p class="internship-subtitle">Mechatronics & Automation Trainee</p>
+                            <h4>Bajaj Engineering & Skills Training (BEST), PES University</h4>
+                            <p class="internship-subtitle">Mechatronics & Automation Training</p>
                             <div class="internship-date">Feb – Jul 2025</div>
-                            <p class="internship-desc">Six-month residential program focusing on motion control, robotics, PLCs.</p>
-                            <div class="internship-skills"><span>Mechatronics</span><span>PLC</span></div>
+                            <p class="internship-desc">Hands-on experience in industrial automation, robotics, PLC programming, sensor integration, and Industry 4.0 technologies through practical training projects.</p>
+                            <div class="internship-skills"><span>Robotics</span><span>PLC</span><span>Industry 4.0</span></div>
                         </div>
                         <div class="internship-card" data-delay="100">
-                            <h4>CONCEPTIA KONNECT</h4>
-                            <p class="internship-subtitle">Simulation & Structural Analysis</p>
+                            <h4>Conceptia Konnect / Prime Tooling</h4>
+                            <p class="internship-subtitle">CAD/FEA Trainee Intern</p>
                             <div class="internship-date">Feb – May 2025</div>
-                            <p class="internship-desc">Training in ANSYS, SolidWorks and PTC Creo.</p>
-                            <div class="internship-skills"><span>ANSYS</span><span>SolidWorks</span></div>
+                            <p class="internship-desc">Developed 3D CAD models and performed FEA simulations using SolidWorks to support mechanical design optimization and structural validation.</p>
+                            <div class="internship-skills"><span>SolidWorks</span><span>FEA</span><span>CAD</span></div>
                         </div>
                         <div class="internship-card" data-delay="200">
-                            <h4>PRIME TOOLING</h4>
-                            <p class="internship-subtitle">Design & Structural Analysis</p>
-                            <div class="internship-date">Mar – Feb 2025</div>
-                            <p class="internship-desc">Intensive training in precision engineering and CAD/CAM.</p>
-                            <div class="internship-skills"><span>PTC Creo</span><span>CATIA</span></div>
+                            <h4>Bharat Fritz Werner Ltd</h4>
+                            <p class="internship-subtitle">Industrial Trainee</p>
+                            <div class="internship-date">Oct – Nov 2023</div>
+                            <p class="internship-desc">Acquired practical knowledge of CNC machining, manufacturing processes, machine tools, and shop-floor production workflows.</p>
+                            <div class="internship-skills"><span>CNC</span><span>Machine Tools</span></div>
                         </div>
                         <div class="internship-card" data-delay="300">
-                            <h4>CNC Machines – Bharat Fritz Werner</h4>
-                            <p class="internship-subtitle">Machining & Manufacturing</p>
-                            <div class="internship-date">Oct – Nov 2023</div>
-                            <p class="internship-desc">Practical exposure to CNC machining processes.</p>
-                            <div class="internship-skills"><span>CNC</span><span>CAM</span></div>
+                            <h4>Belathur Industries</h4>
+                            <p class="internship-subtitle">Mechanical Intern</p>
+                            <div class="internship-date">May – Jun 2023</div>
+                            <p class="internship-desc">Designed mechanical components and engineering drawings using CATIA V5 while supporting machining and manufacturing activities.</p>
+                            <div class="internship-skills"><span>CATIA V5</span><span>Drawings</span></div>
                         </div>
                         <div class="internship-card" data-delay="400">
-                            <h4>BELATHUR INDUSTRIES</h4>
-                            <p class="internship-subtitle">Machining Operations</p>
-                            <div class="internship-date">May – Jun 2023</div>
-                            <p class="internship-desc">3D modelling using CATIA V5; assisted in process optimization.</p>
-                            <div class="internship-skills"><span>CATIA V5</span></div>
-                        </div>
-                        <div class="internship-card" data-delay="500">
-                            <h4>Bosch – Diesel Services Division</h4>
-                            <p class="internship-subtitle">Intern (CFD & Flow Simulation)</p>
+                            <h4>Bosch Diesel Services</h4>
+                            <p class="internship-subtitle">CFD Intern</p>
                             <div class="internship-date">Feb – Mar 2023</div>
-                            <p class="internship-desc">Fluid flow simulation with ANSYS Fluent and SolidWorks.</p>
+                            <p class="internship-desc">Performed CFD simulations using ANSYS Fluent to analyze fluid flow and thermal behavior.</p>
                             <div class="internship-skills"><span>ANSYS Fluent</span><span>CFD</span></div>
                         </div>
                     </div>
@@ -1199,48 +1159,36 @@
                 </div>
                 <div class="projects-grid">
                     <div class="project-card" data-delay="0">
-                        <h3 class="project-title">Lightweight E-Axle Design & Optimization for EV</h3>
-                        <span class="project-date">Apr – Jul 2024</span>
-                        <p class="project-desc">Engineered a lightweight electric axle for EV applications.</p>
-                        <div class="project-techs">
-                            <span style="background:#e9d5ff;color:#6f42c1">CATIA V5</span>
-                            <span style="background:#dbeafe;color:#0077b6">SolidWorks</span>
-                            <span style="background:#d1fae5;color:#198754">ANSYS</span>
-                        </div>
-                        <ul class="project-features">
-                            <li>Complete e-axle housing geometry developed.</li>
-                            <li>Structural FEA for torque reaction loads.</li>
-                            <li>Topology optimization reduced mass.</li>
-                        </ul>
-                    </div>
-                    <div class="project-card" data-delay="150">
                         <h3 class="project-title">Modeling and Analysis of Vertical Axis Wind Turbine Blade</h3>
                         <span class="project-date">Apr – Jul 2024</span>
-                        <p class="project-desc">Designed a Savonius-type VAWT blade.</p>
+                        <p class="project-desc">Designed and analyzed Savonius and Darrieus-type vertical axis wind turbine blades.</p>
                         <div class="project-techs">
                             <span style="background:#e9d5ff;color:#6f42c1">CATIA V5</span>
                             <span style="background:#dbeafe;color:#0077b6">SolidWorks</span>
                             <span style="background:#d1fae5;color:#198754">ANSYS</span>
+                            <span style="background:#fef3c7;color:#b45309">QBlade</span>
                         </div>
                         <ul class="project-features">
-                            <li>Developed complete 3D blade geometry.</li>
-                            <li>Performed FEA to analyze stress and deformation.</li>
+                            <li>Designed and analyzed Savonius and Darrieus-type VAWT blades.</li>
+                            <li>Performed FEA and aerodynamic analysis using ANSYS, QBlade, CATIA, and SolidWorks.</li>
+                            <li>Proposed design modifications to improve efficiency and structural safety.</li>
                         </ul>
                         <div class="project-actions">
                             <a href="Modeling and Analysis of Vertical Axis Wind Turbine Blade.pdf" target="_blank" class="btn-pdf"><i class="fas fa-file-pdf"></i> View PDF</a>
                         </div>
                     </div>
-                    <div class="project-card" data-delay="300">
+                    <div class="project-card" data-delay="150">
                         <h3 class="project-title">Free Convection in a Trapezoidal Cavity with Porous Media</h3>
                         <span class="project-date">Aug – Dec 2024</span>
-                        <p class="project-desc">FEM-based numerical simulations to analyze natural convection.</p>
+                        <p class="project-desc">FEM-based simulations to study natural convection and heat transfer.</p>
                         <div class="project-techs">
                             <span style="background:#fecaca;color:#dc3545">MATLAB</span>
                             <span style="background:#cffafe;color:#0dcaf0">CFD</span>
                         </div>
                         <ul class="project-features">
-                            <li>Performed FEM-based thermal and flow simulations.</li>
-                            <li>Analyzed Rayleigh number and porosity effects.</li>
+                            <li>Used FEM-based simulations to study natural convection and heat transfer.</li>
+                            <li>Analyzed Rayleigh number, porosity, and boundary conditions using MATLAB.</li>
+                            <li>Generated valuable insights for thermal management in industrial energy systems.</li>
                         </ul>
                         <div class="project-actions">
                             <a href="Studies on Free Convection in a Trapezoidal Cavity with Porous Media.pdf" target="_blank" class="btn-pdf"><i class="fas fa-file-pdf"></i> View PDF</a>
@@ -1255,45 +1203,123 @@
                 <div class="section-header">
                     <div class="section-label">Toolkit</div>
                     <h2 class="section-title">Skills & <span class="accent">Tools</span></h2>
-                    <p class="section-subtitle">Expertise in industry-leading engineering tools and technologies</p>
+                    <p class="section-subtitle">Core competencies, tools, certifications and interests</p>
                 </div>
                 <div class="skills-grid">
                     <div class="skill-block" data-delay="0">
-                        <h4 style="color:#6f42c1"><i class="fas fa-cube"></i> 3D Modeling Tools</h4>
+                        <h4 style="color:#6f42c1"><i class="fas fa-cube"></i> CAD Design & Engineering Tools</h4>
                         <div class="skill-tags">
-                            <span class="skill-tag">CATIA V5</span>
+                            <span class="skill-tag">Autodesk Inventor (Primary)</span>
                             <span class="skill-tag">Siemens NX</span>
-                            <span class="skill-tag">SolidWorks</span>
-                            <span class="skill-tag">Autodesk Inventor</span>
+                            <span class="skill-tag">CATIA V5</span>
                             <span class="skill-tag">PTC Creo</span>
+                            <span class="skill-tag">SolidWorks</span>
+                            <span class="skill-tag">AutoCAD</span>
+                            <span class="skill-tag">Parametric Modeling</span>
+                            <span class="skill-tag">Complex Assemblies</span>
+                            <span class="skill-tag">Drafting</span>
+                            <span class="skill-tag">Design Optimization</span>
                         </div>
                     </div>
                     <div class="skill-block" data-delay="100">
-                        <h4 style="color:#0077b6"><i class="fas fa-chart-bar"></i> Simulation Software</h4>
+                        <h4 style="color:#0077b6"><i class="fas fa-chart-bar"></i> Simulation & CAE Analysis</h4>
                         <div class="skill-tags">
-                            <span class="skill-tag">ANSYS</span>
+                            <span class="skill-tag">ANSYS Mechanical</span>
                             <span class="skill-tag">HyperMesh</span>
                             <span class="skill-tag">ANSA</span>
                             <span class="skill-tag">MATLAB</span>
                             <span class="skill-tag">NX Nastran</span>
+                            <span class="skill-tag">Autodesk Nastran</span>
+                            <span class="skill-tag">FEA</span>
+                            <span class="skill-tag">Preprocessing & Meshing</span>
+                            <span class="skill-tag">Structural Analysis</span>
+                            <span class="skill-tag">Design Validation</span>
+                            <span class="skill-tag">CAD/FEA Workflow Automation</span>
+                            <span class="skill-tag">DFMEA</span>
+                            <span class="skill-tag">PFMEA</span>
+                            <span class="skill-tag">Root Cause Analysis</span>
+                            <span class="skill-tag">Design Review</span>
                         </div>
                     </div>
                     <div class="skill-block" data-delay="200">
-                        <h4 style="color:#198754"><i class="fas fa-cogs"></i> Product Development</h4>
+                        <h4 style="color:#198754"><i class="fas fa-cogs"></i> Mechanical Design & Product Development</h4>
                         <div class="skill-tags">
-                            <span class="skill-tag">Product Development</span>
-                            <span class="skill-tag">BOM Management</span>
-                            <span class="skill-tag">PLM/PDM</span>
-                            <span class="skill-tag">GD&T</span>
+                            <span class="skill-tag">Powertrain Design</span>
+                            <span class="skill-tag">Heavy Machinery & Automation Systems</span>
+                            <span class="skill-tag">Precision Engineering</span>
+                            <span class="skill-tag">3D CAD Modeling</span>
+                            <span class="skill-tag">Concept Development</span>
+                            <span class="skill-tag">Prototype Validation</span>
+                            <span class="skill-tag">Research-Driven Engineering</span>
+                            <span class="skill-tag">End-to-End Product Development</span>
                         </div>
                     </div>
                     <div class="skill-block" data-delay="300">
-                        <h4 style="color:#d9480f"><i class="fas fa-certificate"></i> Certifications</h4>
+                        <h4 style="color:#d9480f"><i class="fas fa-industry"></i> Manufacturing & Design Optimization</h4>
                         <div class="skill-tags">
+                            <span class="skill-tag">DFM</span>
+                            <span class="skill-tag">DFA</span>
+                            <span class="skill-tag">GD&T</span>
+                            <span class="skill-tag">Tolerance Stack-up Analysis</span>
+                            <span class="skill-tag">Process Optimization</span>
+                            <span class="skill-tag">Engineering Documentation</span>
+                            <span class="skill-tag">2D Engineering Drawings</span>
+                            <span class="skill-tag">Manufacturing Drawings</span>
+                            <span class="skill-tag">Detail Drawings</span>
+                        </div>
+                    </div>
+                    <div class="skill-block" data-delay="0">
+                        <h4 style="color:#0f766e"><i class="fas fa-file-signature"></i> Engineering Change & Release Management</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">ECN / ECR</span>
+                            <span class="skill-tag">Change Control</span>
+                            <span class="skill-tag">Design Release Documentation</span>
+                            <span class="skill-tag">Configuration Management</span>
+                            <span class="skill-tag">BOM Updates</span>
+                            <span class="skill-tag">Revision Control</span>
+                        </div>
+                    </div>
+                    <div class="skill-block" data-delay="100">
+                        <h4 style="color:#7c3aed"><i class="fas fa-project-diagram"></i> Engineering Management & Digital Workflows</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">BOM Management</span>
+                            <span class="skill-tag">PLM/PDM Workflows</span>
+                            <span class="skill-tag">Configuration Management</span>
+                            <span class="skill-tag">CAD Data Management</span>
+                            <span class="skill-tag">Cross-Functional Collaboration</span>
+                            <span class="skill-tag">Continuous Improvement</span>
+                        </div>
+                    </div>
+                    <div class="skill-block" data-delay="200">
+                        <h4 style="color:#b45309"><i class="fas fa-certificate"></i> Certifications</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Autodesk Inventor Professional</span>
+                            <span class="skill-tag">Siemens NX Basics</span>
                             <span class="skill-tag">CATIA V5</span>
-                            <span class="skill-tag">SolidWorks CAD</span>
-                            <span class="skill-tag">ANSYS Workbench</span>
-                            <span class="skill-tag">Autodesk Inventor</span>
+                            <span class="skill-tag">ANSYS Mechanical</span>
+                            <span class="skill-tag">HyperMesh</span>
+                            <span class="skill-tag">ANSA</span>
+                            <span class="skill-tag">MATLAB</span>
+                        </div>
+                    </div>
+                    <div class="skill-block" data-delay="300">
+                        <h4 style="color:#0096c7"><i class="fas fa-compass"></i> Professional Interests</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Automotive & Automation Design</span>
+                            <span class="skill-tag">Research & Development</span>
+                            <span class="skill-tag">Powertrain Systems Engineering</span>
+                            <span class="skill-tag">Heavy Machinery Design</span>
+                            <span class="skill-tag">Industrial Automation</span>
+                            <span class="skill-tag">CAD/CAE-based Product Development</span>
+                        </div>
+                    </div>
+                    <div class="skill-block" data-delay="0">
+                        <h4 style="color:#be123c"><i class="fas fa-language"></i> Languages</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">English</span>
+                            <span class="skill-tag">Kannada</span>
+                            <span class="skill-tag">Hindi</span>
+                            <span class="skill-tag">Marathi</span>
                         </div>
                     </div>
                 </div>
@@ -1732,234 +1758,6 @@
             renderer.render(scene, camera);
         }
         animate();
-    })();
-
-    // ===== HERO 3D — E-AXLE VISUALIZATION =====
-    (function(){
-        function init(){
-            var canvas = document.getElementById('three-canvas');
-            if(!canvas || typeof THREE === 'undefined') return;
-            var renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-            renderer.setClearColor(0x000000, 0);
-            var scene = new THREE.Scene();
-            var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-            camera.position.set(0, 0.9, 3.2);
-
-            scene.add(new THREE.HemisphereLight(0xffffff, 0x111122, 0.7));
-            var dir = new THREE.DirectionalLight(0xffffff, 0.9); dir.position.set(3,5,2); scene.add(dir);
-            var orange = new THREE.PointLight(0xff7a00, 0.5, 8); orange.position.set(2,1,2); scene.add(orange);
-
-            var grp = new THREE.Group();
-            // Housing
-            var housing = new THREE.Mesh(
-                new THREE.BoxGeometry(1.6, 0.8, 1.0),
-                new THREE.MeshStandardMaterial({metalness: 0.9, roughness: 0.25, color: 0x1e293b})
-            );
-            housing.rotation.y = 0.2; grp.add(housing);
-            // Rotor
-            var rotor = new THREE.Mesh(
-                new THREE.CylinderGeometry(0.28, 0.28, 1.05, 32),
-                new THREE.MeshStandardMaterial({metalness: 0.95, roughness: 0.15, color: 0x0ea5a4})
-            );
-            rotor.rotation.z = Math.PI / 2; rotor.position.set(0, 0, 0.02); grp.add(rotor);
-            // Ring
-            var ring = new THREE.Mesh(
-                new THREE.TorusGeometry(0.45, 0.08, 16, 80),
-                new THREE.MeshStandardMaterial({metalness: 0.9, roughness: 0.2, color: 0xff8a00})
-            );
-            ring.rotation.x = Math.PI / 2; ring.position.set(0.72, 0, 0); grp.add(ring);
-            // Brackets
-            var bmat = new THREE.MeshStandardMaterial({metalness: 0.85, roughness: 0.35, color: 0x94a3b8});
-            for(var i = 0; i < 4; i++){
-                var b = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.06, 0.5), bmat);
-                var ang = i * Math.PI / 2;
-                b.position.set(Math.cos(ang)*0.95, Math.sin(ang)*0.12, Math.sin(ang)*0.35);
-                b.rotation.z = ang; grp.add(b);
-            }
-            // Glow plane
-            var plane = new THREE.Mesh(
-                new THREE.PlaneGeometry(6, 3),
-                new THREE.MeshBasicMaterial({color: 0x07102a, side: THREE.DoubleSide})
-            );
-            plane.position.set(0, -0.2, -1.1); scene.add(plane);
-            scene.add(grp);
-
-            var mx = 0, my = 0;
-            function onMove(cx, cy){
-                var rect = canvas.getBoundingClientRect();
-                mx = ((cx - rect.left) / rect.width - 0.5) * 2;
-                my = ((cy - rect.top) / rect.height - 0.5) * -2;
-            }
-            window.addEventListener('mousemove', function(e){ onMove(e.clientX, e.clientY); });
-            window.addEventListener('touchmove', function(e){ if(e.touches.length) onMove(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
-
-            function resize(){
-                var rect = canvas.getBoundingClientRect();
-                var w = Math.max(32, rect.width), h = Math.max(32, rect.height);
-                if(canvas.width !== Math.floor(w * devicePixelRatio) || canvas.height !== Math.floor(h * devicePixelRatio)){
-                    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
-                }
-            }
-            var clock = new THREE.Clock();
-            function animate(){
-                resize();
-                var t = clock.getElapsedTime();
-                grp.rotation.y = Math.sin(t * 0.4) * 0.26 + mx * 0.25;
-                grp.rotation.x = Math.sin(t * 0.12) * 0.05 + my * 0.07;
-                rotor.rotation.x = t * 3.2;
-                ring.rotation.z = -t * 0.9;
-                renderer.render(scene, camera);
-                requestAnimationFrame(animate);
-            }
-            animate();
-        }
-        if(document.readyState === 'complete') init();
-        else window.addEventListener('load', init);
-    })();
-
-    // ===== ROBOTIC DEBURRING STATION 3D =====
-    (function(){
-        function init(){
-            var canvas = document.getElementById('robot-canvas');
-            if(!canvas || typeof THREE === 'undefined') return;
-            var renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-            renderer.setClearColor(0x000000, 0);
-            var scene = new THREE.Scene();
-            var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
-            camera.position.set(4, 3, 6); camera.lookAt(0, 0.5, 0);
-
-            scene.add(new THREE.HemisphereLight(0xffffff, 0x111122, 0.7));
-            var d1 = new THREE.DirectionalLight(0xffffff, 1.0); d1.position.set(5,10,5); scene.add(d1);
-            var d2 = new THREE.DirectionalLight(0xff7a00, 0.5); d2.position.set(-5,0,5); scene.add(d2);
-            var pl = new THREE.PointLight(0xff7a00, 0.6, 8); pl.position.set(0,3,0); scene.add(pl);
-
-            // Floor
-            var floor = new THREE.Mesh(
-                new THREE.PlaneGeometry(6, 6),
-                new THREE.MeshStandardMaterial({color: 0x0a1a2a, metalness: 0.3, roughness: 0.8, transparent: true, opacity: 0.8})
-            );
-            floor.rotation.x = -Math.PI / 2; floor.position.y = -0.05; scene.add(floor);
-            scene.add(new THREE.GridHelper(6, 12, 0xff7a00, 0x1e293b));
-
-            // Base
-            var baseGrp = new THREE.Group();
-            var base = new THREE.Mesh(
-                new THREE.CylinderGeometry(0.9, 1.0, 0.4, 32),
-                new THREE.MeshStandardMaterial({metalness: 0.8, roughness: 0.3, color: 0x1e293b})
-            );
-            base.position.y = 0.2; baseGrp.add(base);
-            var ringLight = new THREE.Mesh(
-                new THREE.TorusGeometry(0.8, 0.04, 16, 32),
-                new THREE.MeshStandardMaterial({color: 0xff7a00, emissive: 0xff7a00, emissiveIntensity: 0.4})
-            );
-            ringLight.position.y = 0.4; ringLight.rotation.x = Math.PI / 2; baseGrp.add(ringLight);
-            scene.add(baseGrp);
-
-            // Arm
-            var armGrp = new THREE.Group(); armGrp.position.set(0, 0.4, 0);
-            var j1 = new THREE.Mesh(new THREE.SphereGeometry(0.3, 20, 20), new THREE.MeshStandardMaterial({metalness: 0.9, roughness: 0.2, color: 0xff7a00}));
-            j1.position.set(0, 0.3, 0); armGrp.add(j1);
-            var a1 = new THREE.Mesh(new THREE.BoxGeometry(0.25, 1.0, 0.25), new THREE.MeshStandardMaterial({metalness: 0.7, roughness: 0.3, color: 0x0ea5a4}));
-            a1.position.set(0, 0.8, 0); armGrp.add(a1);
-            var j2 = new THREE.Mesh(new THREE.SphereGeometry(0.22, 20, 20), new THREE.MeshStandardMaterial({metalness: 0.9, roughness: 0.2, color: 0xff7a00}));
-            j2.position.set(0.5, 1.3, 0); armGrp.add(j2);
-            var a2 = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.9, 0.2), new THREE.MeshStandardMaterial({metalness: 0.7, roughness: 0.3, color: 0x3bc9db}));
-            a2.position.set(0.5, 1.8, 0); armGrp.add(a2);
-            var j3 = new THREE.Mesh(new THREE.SphereGeometry(0.18, 20, 20), new THREE.MeshStandardMaterial({metalness: 0.9, roughness: 0.2, color: 0xff7a00}));
-            j3.position.set(0.5, 2.3, 0); armGrp.add(j3);
-
-            // Tool
-            var toolGrp = new THREE.Group(); toolGrp.position.set(0.5, 2.3, 0);
-            var tool = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.12, 0.3, 16), new THREE.MeshStandardMaterial({metalness: 0.9, roughness: 0.2, color: 0xf43f5e}));
-            tool.rotation.z = 0.4; tool.position.set(0.15, 0.15, 0); toolGrp.add(tool);
-            var tip = new THREE.Mesh(new THREE.SphereGeometry(0.04, 8, 8), new THREE.MeshStandardMaterial({color: 0xffbb33, emissive: 0xffbb33, emissiveIntensity: 0.6}));
-            tip.position.set(0.25, 0.3, 0); toolGrp.add(tip);
-            armGrp.add(toolGrp); scene.add(armGrp);
-
-            // Cylinder block
-            var partGrp = new THREE.Group(); partGrp.position.set(0, 0.05, 0);
-            var block = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.35, 0.7), new THREE.MeshStandardMaterial({metalness: 0.8, roughness: 0.5, color: 0x4a5a6a}));
-            block.position.y = 0.175; partGrp.add(block);
-            for(var i = 0; i < 6; i++){
-                var hole = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.4, 16), new THREE.MeshStandardMaterial({color: 0x1a2a3a, metalness: 0.9, roughness: 0.3}));
-                hole.position.set(-0.35 + i * 0.14, 0.175, (i % 2 === 0) ? -0.15 : 0.15);
-                partGrp.add(hole);
-            }
-            var label = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.04, 0.02), new THREE.MeshStandardMaterial({color: 0xff7a00, emissive: 0xff7a00, emissiveIntensity: 0.1}));
-            label.position.set(0, 0.35, 0.36); partGrp.add(label);
-            scene.add(partGrp);
-
-            // Sparks
-            var sparkCount = 150;
-            var sp = new Float32Array(sparkCount * 3);
-            var sv = [];
-            var sc = new Float32Array(sparkCount * 3);
-            for(var i = 0; i < sparkCount; i++){
-                sp[i*3] = (Math.random()-0.5)*0.6+0.3; sp[i*3+1] = Math.random()*0.5+0.3; sp[i*3+2] = (Math.random()-0.5)*0.4;
-                sv.push({x:(Math.random()-0.5)*0.08, y:Math.random()*0.12+0.03, z:(Math.random()-0.5)*0.08});
-                var col = new THREE.Color().setHSL(0.08+Math.random()*0.08, 1, 0.5+Math.random()*0.3);
-                sc[i*3] = col.r; sc[i*3+1] = col.g; sc[i*3+2] = col.b;
-            }
-            var sgeo = new THREE.BufferGeometry();
-            sgeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
-            sgeo.setAttribute('color', new THREE.BufferAttribute(sc, 3));
-            var sparks = new THREE.Points(sgeo, new THREE.PointsMaterial({size: 0.05, vertexColors: true, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, sizeAttenuation: true}));
-            scene.add(sparks);
-
-            // Debris
-            var dcount = 50;
-            var dp = new Float32Array(dcount * 3);
-            for(var i = 0; i < dcount; i++){
-                dp[i*3] = (Math.random()-0.5)*2.5; dp[i*3+1] = Math.random()*0.3; dp[i*3+2] = (Math.random()-0.5)*2.5;
-            }
-            var dgeo = new THREE.BufferGeometry();
-            dgeo.setAttribute('position', new THREE.BufferAttribute(dp, 3));
-            scene.add(new THREE.Points(dgeo, new THREE.PointsMaterial({size: 0.025, color: 0x6a7a8a, transparent: true, opacity: 0.4})));
-
-            function resize(){
-                var rect = canvas.getBoundingClientRect();
-                var w = Math.max(32, rect.width), h = Math.max(32, rect.height);
-                if(canvas.width !== Math.floor(w * devicePixelRatio) || canvas.height !== Math.floor(h * devicePixelRatio)){
-                    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
-                }
-            }
-            var clock = new THREE.Clock();
-            function animate(){
-                resize();
-                var t = clock.getElapsedTime();
-                var s1 = Math.sin(t * 0.5) * 0.3, s2 = Math.sin(t * 0.6 + 0.8) * 0.35;
-                a1.rotation.x = s1; a1.rotation.z = Math.sin(t * 0.4 + 0.5) * 0.05;
-                j2.position.x = 0.5 + Math.sin(t * 0.5) * 0.06; j2.position.y = 1.3 + Math.sin(t * 0.6 + 0.8) * 0.06;
-                a2.rotation.x = s2; a2.position.x = j2.position.x; a2.position.y = j2.position.y + 0.5;
-                j3.position.x = 0.5 + Math.sin(t * 0.6 + 0.8) * 0.1; j3.position.y = 2.3 + Math.sin(t * 0.6 + 0.8) * 0.1;
-                toolGrp.position.x = j3.position.x; toolGrp.position.y = j3.position.y;
-                toolGrp.rotation.z = 0.4 + Math.sin(t * 0.8) * 0.12;
-                tip.position.x = 0.25 + Math.sin(t * 0.6 + 0.8) * 0.06; tip.position.y = 0.3 + Math.sin(t * 0.7 + 1.2) * 0.06;
-                var spa = sparks.geometry.attributes.position.array;
-                for(var i = 0; i < sparkCount; i++){
-                    spa[i*3] += sv[i].x; spa[i*3+1] += sv[i].y; spa[i*3+2] += sv[i].z;
-                    sv[i].y -= 0.0015;
-                    if(spa[i*3+1] < 0.05){
-                        spa[i*3] = (Math.random()-0.5)*0.6+0.3; spa[i*3+1] = 0.3+Math.random()*0.3; spa[i*3+2] = (Math.random()-0.5)*0.4;
-                        sv[i] = {x:(Math.random()-0.5)*0.08, y:Math.random()*0.12+0.03, z:(Math.random()-0.5)*0.08};
-                    }
-                }
-                sparks.geometry.attributes.position.needsUpdate = true;
-                partGrp.rotation.y = t * 0.2;
-                var cr = 6;
-                camera.position.x = cr * Math.sin(t * 0.12); camera.position.z = cr * Math.cos(t * 0.12);
-                camera.position.y = 2.5 + Math.sin(t * 0.1) * 0.3; camera.lookAt(0, 0.8, 0);
-                pl.intensity = 0.4 + Math.sin(t * 0.5) * 0.15;
-                renderer.render(scene, camera);
-                requestAnimationFrame(animate);
-            }
-            animate();
-            window.addEventListener('resize', resize);
-        }
-        if(document.readyState === 'complete') init();
-        else window.addEventListener('load', init);
     })();
 
     console.log('🚀 World-Class Engineering Portfolio Loaded!');
