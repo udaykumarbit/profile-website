@@ -53,11 +53,6 @@
         }
         .scroll-track { position: fixed; top: 0; left: 0; width: 100%; height: 2px; z-index: 1000; background: rgba(255,255,255,0.02); }
         .scroll-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--accent)); box-shadow: 0 0 20px rgba(255,122,0,0.4); transition: width 0.1s linear; }
-        .cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99998; border-radius: 50%; transform: translate(-50%,-50%); transition: opacity 0.3s; }
-        .cursor-dot { width: 6px; height: 6px; background: var(--primary); box-shadow: 0 0 10px var(--primary); }
-        .cursor-ring { width: 40px; height: 40px; border: 1px solid rgba(255,122,0,0.3); transition: width 0.2s, height 0.2s, border-color 0.2s; }
-        body:hover .cursor-ring.hovered { width: 60px; height: 60px; border-color: var(--primary); background: rgba(255,122,0,0.05); }
-        @media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none; } }
         .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 16px 32px; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
         .site-header.scrolled { background: rgba(3,4,10,0.85); backdrop-filter: blur(20px) saturate(1.2); -webkit-backdrop-filter: blur(20px) saturate(1.2); border-bottom: 1px solid var(--glass-border); padding: 12px 32px; }
         .nav-wrap { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
@@ -781,6 +776,35 @@
         .flip-card .card-hint{color:var(--c);opacity:.85}
         .flip-card:hover .flip-card-front{border-color:var(--c);box-shadow:0 0 0 1px var(--c),0 26px 54px -20px color-mix(in srgb,var(--c) 75%,transparent)}
         .flip-card:hover .flip-card-front::before,.flip-card .flip-card-back::before{opacity:0}
+    
+        /* ===== Bigger section labels, tighter vertical spacing, right-side scroll buttons ===== */
+        .section-label { font-size: 1.15rem; letter-spacing: 3px; margin-bottom: 8px; }
+        .section-title { line-height: 1.1; }
+        .section-subtitle { margin-top: 8px; }
+        .section { padding: 56px 32px; }
+        .about-hero { padding: 48px 32px; }
+        .section-dark.about-hero { padding-bottom: 48px; }
+        .section-header { margin-bottom: 28px; }
+        .approach-grid { gap: 40px; }
+        .experience-card { margin-bottom: 20px; }
+        @media (max-width: 768px) {
+            .section-label { font-size: 0.95rem; letter-spacing: 2px; }
+            .section { padding: 36px 16px; }
+            .about-hero, .section-dark.about-hero { padding: 36px 16px; }
+            .section-header { margin-bottom: 20px; }
+        }
+        .scroll-btns { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 950; display: flex; flex-direction: column; gap: 18px; align-items: center; }
+        .scroll-btn { background: none; border: 0; padding: 4px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text-muted); font-family: var(--font-display); font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; text-indent: 3px; text-transform: uppercase; transition: color .2s ease, transform .2s ease, opacity .3s ease; }
+        .scroll-btn .mouse { position: relative; width: 28px; height: 44px; border: 2px solid var(--primary); border-radius: 15px; background: rgba(3,4,10,0.85); box-shadow: 0 6px 20px rgba(0,0,0,0.35), 0 0 12px rgba(255,122,0,0.2); transition: background .2s ease, box-shadow .2s ease; }
+        .scroll-btn .mouse::before { content: ''; position: absolute; left: 50%; top: 8px; width: 4px; height: 9px; margin-left: -2px; border-radius: 3px; background: var(--primary-light); animation: wheelDown 1.6s ease-in-out infinite; }
+        .scroll-btn.up .mouse::before { top: auto; bottom: 8px; animation-name: wheelUp; }
+        @keyframes wheelDown { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { transform: translateY(0); opacity: 0; } }
+        @keyframes wheelUp { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(-12px); opacity: 0; } 100% { transform: translateY(0); opacity: 0; } }
+        .scroll-btn:hover { color: var(--primary-light); transform: scale(1.08); }
+        .scroll-btn:hover .mouse { background: rgba(255,122,0,0.15); box-shadow: 0 6px 20px rgba(0,0,0,0.35), 0 0 18px rgba(255,122,0,0.5); }
+        .scroll-btn:active { transform: scale(0.95); }
+        .scroll-btn.off { opacity: 0; pointer-events: none; }
+        @media (max-width: 768px) { .scroll-btns { right: 8px; gap: 12px; } .scroll-btn { font-size: 0.6rem; letter-spacing: 2px; } .scroll-btn .mouse { width: 24px; height: 38px; } }
     </style>
 <base target="_blank">
 <base target="_blank">
@@ -803,8 +827,6 @@
         </div>
         <p class="loader-text">Loading <span>Portfolio</span></p>
     </div>
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
     <div class="scroll-track"><div class="scroll-fill" id="scrollFill"></div></div>
     <canvas id="universe-canvas"></canvas>
     <div class="content">
@@ -1450,27 +1472,6 @@
         else { setTimeout(hide, 650); }
     })();
 
-    // ===== CUSTOM CURSOR =====
-    (function(){
-        var dot = document.getElementById('cursorDot');
-        var ring = document.getElementById('cursorRing');
-        if(!dot || window.matchMedia('(pointer: coarse)').matches) return;
-        var mx = 0, my = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
-        function animate(){
-            rx += (mx - rx) * 0.15;
-            ry += (my - ry) * 0.15;
-            dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-            ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-            requestAnimationFrame(animate);
-        }
-        animate();
-        document.querySelectorAll('a, button, .flip-card, .metric, .project-card, .skill-block, .experience-card').forEach(function(el){
-            el.addEventListener('mouseenter', function(){ ring.classList.add('hovered'); });
-            el.addEventListener('mouseleave', function(){ ring.classList.remove('hovered'); });
-        });
-    })();
-
     // ===== SCROLL PROGRESS =====
     (function(){
         var fill = document.getElementById('scrollFill');
@@ -1790,6 +1791,30 @@
             if(!c) return; var r=c.getBoundingClientRect();
             c.style.setProperty('--mx',(e.clientX-r.left)+'px'); c.style.setProperty('--my',(e.clientY-r.top)+'px');
         },{passive:true});
+    })();
+    </script>
+    <div class="scroll-btns" aria-label="Page scroll controls">
+        <button type="button" class="scroll-btn up off" id="scrollUpBtn" aria-label="Scroll to top" title="Scroll to top"><span>Up</span><span class="mouse"></span></button>
+        <button type="button" class="scroll-btn down" id="scrollDownBtn" aria-label="Scroll down" title="Scroll down"><span class="mouse"></span><span>Down</span></button>
+    </div>
+    <script>
+    (function(){
+        var up=document.getElementById('scrollUpBtn'), down=document.getElementById('scrollDownBtn');
+        var smooth=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+        function go(y){ window.scrollTo({top:y,behavior:smooth?'smooth':'auto'}); }
+        function secs(){ return Array.prototype.slice.call(document.querySelectorAll('section')); }
+        up.addEventListener('click',function(){ go(0); });
+        down.addEventListener('click',function(){
+            var y=window.scrollY, next=null, list=secs();
+            for(var i=0;i<list.length;i++){ var top=list[i].getBoundingClientRect().top+y; if(top>y+20){ next=top; break; } }
+            go(next===null?document.documentElement.scrollHeight:next);
+        });
+        function upd(){
+            var y=window.scrollY, max=document.documentElement.scrollHeight-innerHeight;
+            up.classList.toggle('off', y<300);
+            down.classList.toggle('off', y>max-40);
+        }
+        addEventListener('scroll',upd,{passive:true}); addEventListener('resize',upd); upd();
     })();
     </script>
 </body>
