@@ -885,6 +885,7 @@
                     <a href="#about-hero" data-section="about-hero"><span>About</span></a>
                     <a href="#experience" data-section="experience"><span>Experience</span></a>
                     <a href="#industry-projects" data-section="industry-projects"><span>Projects</span></a>
+                    <a href="#patent-innovation" data-section="patent-innovation"><span>Patent &amp; Innovation</span></a>
                     <a href="#skills" data-section="skills"><span>Skills</span></a>
                     <a href="#education" data-section="education"><span>Education</span></a>
                     <a href="#languages" data-section="languages"><span>Languages</span></a>
@@ -1265,6 +1266,65 @@
             </div>
         </section>
 
+        <section id="patent-innovation" class="section section-light">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-label">Research &amp; Innovation</div>
+                    <h2 class="section-title">Patent &amp; <span class="accent">Innovation</span></h2>
+                    <p class="section-subtitle">Independent mechanical engineering research focused on lightweight structures, electric-vehicle powertrain systems, design optimization, and practical manufacturability.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card" data-delay="0">
+                        <h3 class="project-title">Lightweight E-Axle Housing Design &amp; Optimization for EV</h3>
+                        <span class="project-date">Independent Research &amp; Concept Development</span>
+                        <p class="project-desc">A self-developed engineering concept focused on the design and study of a lightweight electric-axle housing. The work explores structural load paths, housing architecture, bearing-support regions, material efficiency, and design considerations for manufacturing.</p>
+
+                        <div class="project-techs">
+                            <span style="background:#e9d5ff;color:#6f42c1">HyperMesh</span>
+                            <span style="background:#dbeafe;color:#0077b6">ANSA</span>
+                            <span style="background:#d1fae5;color:#198754">NX Nastran</span>
+                            <span style="background:#fef3c7;color:#b45309">Autodesk Nastran</span>
+                        </div>
+
+                        <ul class="project-features">
+                            <li>Developing the overall e-axle housing concept and component layout for an electric-vehicle powertrain application.</li>
+                            <li>Studying structural load paths, torque-reaction load considerations, mounting interfaces, and bearing-support regions.</li>
+                            <li>Exploring lightweight design approaches, including material distribution and rib-architecture concepts.</li>
+                            <li>Studying finite-element modelling and structural-analysis workflows using HyperMesh, ANSA, NX Nastran, and Autodesk Nastran.</li>
+                            <li>Reviewing topology-optimization approaches and design changes for potential mass reduction while considering structural requirements.</li>
+                            <li>Considering manufacturability, assembly access, interface requirements, and practical housing-design constraints.</li>
+                        </ul>
+
+                        <p class="project-desc"><strong>Development status:</strong> Concept development and technical study are ongoing. Numerical performance improvements, validated simulation results, and physical test results are not claimed in this portfolio.</p>
+                    </div>
+
+                    <div class="project-card" data-delay="150">
+                        <h3 class="project-title">Patent-Oriented Engineering Research</h3>
+                        <span class="project-date">Research Approach</span>
+                        <p class="project-desc">A structured approach to identifying and documenting potentially differentiating mechanical-engineering concepts. The objective is to describe the technical problem, proposed solution, working principle, design alternatives, and engineering advantages in a clear and reviewable format.</p>
+
+                        <div class="project-techs">
+                            <span style="background:#e9d5ff;color:#6f42c1">Concept Development</span>
+                            <span style="background:#dbeafe;color:#0077b6">Design Analysis</span>
+                            <span style="background:#d1fae5;color:#198754">Technical Documentation</span>
+                            <span style="background:#fef3c7;color:#b45309">Prior-Art Review</span>
+                        </div>
+
+                        <ul class="project-features">
+                            <li>Define the engineering problem, operating conditions, and limitations of existing approaches.</li>
+                            <li>Document the proposed concept, its components, interfaces, and operating sequence.</li>
+                            <li>Consider alternative embodiments and design variations without presenting unverified features as established inventions.</li>
+                            <li>Identify technical questions that may require simulation, prototype development, testing, or further research.</li>
+                            <li>Organize technical descriptions, drawings, and supporting calculations for possible future professional patentability assessment.</li>
+                        </ul>
+
+                        <p class="project-desc"><strong>Important:</strong> This portfolio describes research activity only. No patent application, patent-pending status, patent grant, or established patentability is claimed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="skills" class="section section-light">
             <div class="container">
                 <div class="section-header">
@@ -1579,7 +1639,7 @@
 
     // ===== NAV ACTIVE STATE ON SCROLL =====
     (function(){
-        var sections = ['about-hero', 'experience', 'industry-projects', 'skills', 'education', 'contact'];
+        var sections = ['about-hero', 'experience', 'industry-projects', 'patent-innovation', 'skills', 'education', 'contact'];
         var navLinks = document.querySelectorAll('.nav-links a[data-section]');
         function updateActive(){
             var scrollPos = window.scrollY + 150;
